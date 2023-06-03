@@ -1,14 +1,13 @@
-# GFG Problem Of The Day
+//{ Driver Code Starts
+//Initial Template for C++
 
-## Today - 3 June 2023
-### Que - Find Maximum Equal sum of Three Stacks
+#include <bits/stdc++.h>
+using namespace std;
 
-### My approach
-- First, save the sum of all elements by iterating from the bottom of the stack into an unordered_map. 
-- Then, check whether this sum occurs three times or not.
 
-### Code (c++)
-```
+// } Driver Code Ends
+//User function Template for C++
+
 class Solution{
 public:
     int maxEqualSum(int N1,int N2,int N3,vector<int> &S1,vector<int> &S2,vector<int> &S3){
@@ -39,4 +38,31 @@ public:
         return out;
     }
 };
-```
+
+//{ Driver Code Starts.
+
+int main(){
+    
+    int t;
+    cin>>t;
+    while(t--){
+        int n1,n2,n3;
+        cin>>n1>>n2>>n3;
+        vector<int> s1(n1),s2(n2),s3(n3);
+        for(int i=0;i<n1;i++){
+            cin>>s1[i];
+        }
+        for(int i=0;i<n2;i++){
+            cin>>s2[i];
+        }
+        for(int i=0;i<n3;i++){
+            cin>>s3[i];
+        }
+        Solution ob;
+        int ans=ob.maxEqualSum(n1,n2,n3,s1,s2,s3);
+        cout<<ans<<endl;
+    }
+    
+    return 0;
+}
+// } Driver Code Ends
