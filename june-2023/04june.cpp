@@ -1,17 +1,8 @@
-# GFG Problem Of The Day
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
 
-## Today - 4 June 2023
-### Que - Reversing the equation
-
-[Question Link](https://practice.geeksforgeeks.org/problems/reversing-the-equation2205/1)
-
-### My approach
-- Use two stacks to store the numbers and operators.
-- Update the stacks as new numbers and operators are encountered.
-- Implement a top-to-bottom traversal of the stacks to print the numbers and operators alternatively.
-
-### Code (c++)
-```
+// } Driver Code Ends
 class Solution
 {
   public:
@@ -41,4 +32,18 @@ class Solution
             return s;
         }
 };
-```
+
+//{ Driver Code Starts.
+int main()
+{
+    int t; cin >> t;
+    while (t--)
+    {
+        string s; cin >> s;
+        Solution ob;
+        cout <<ob.reverseEqn (s) << endl;
+    }
+}
+// Contributed By: Pranay Bansal
+
+// } Driver Code Ends
