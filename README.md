@@ -1,49 +1,32 @@
 # GFG Problem Of The Day
 
-## Today - 5 June 2023
-### Que - Find the Closest Element in BST
+## Today - 7 June 2023
+### Que - Least Prime Factor
 
-[Question Link](https://practice.geeksforgeeks.org/problems/find-the-closest-element-in-bst/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/least-prime-factor5216/1)
 
 ### My approach
-- Simple. traversal in binary search tree and find min different key with relative to `K` .
+- Simple brute force approach of finding prime number upto `sqrt(n)` .
 
 
 ### Code (c++)
 ```
-class Solution
-{
-    public:
-
-    void check(struct Node *node, int k, int &md,int &md_key)
-    {
-        if (node == NULL)
-            return ;
-     
-        if (node->data == k)
-        {
-            md_key = k;
-            return;
+class Solution {
+  public:
+    int findFactor(int n){
+        if(n<2) return n;
+        for(int i = 2;i<=sqrt(n);++i ){
+            if(n%i == 0)
+                return i;
         }
-     
-        if (md > abs(node->data - k))
-        {
-            md = abs(node->data - k);
-            md_key = node->data;
-        }
-     
-        if (k < node->data)
-            check(node->left, k, md, md_key);
-        else
-            check(node->right, k, md, md_key);
+        return n;
     }
-     
-    int minDiff(Node *root, int k)
-    {
-        int md = INT_MAX, md_key = -1;
-        check(root, k, md, md_key);
-     
-        return abs(md_key-k);
+    
+    vector<int> leastPrimeFactor(int n) {
+        vector<int> out(n+1);
+        for(int i = 0;i<=n;++i)
+            out[i] = findFactor(i);
+        return out;
     }
 };
 ```
