@@ -1,32 +1,48 @@
 # GFG Problem Of The Day
 
-## Today - 7 June 2023
-### Que - Least Prime Factor
+## Today - 8 June 2023
+### Que - Find Kth permutation
 
-[Question Link](https://practice.geeksforgeeks.org/problems/least-prime-factor5216/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/find-kth-permutation-0932/1)
 
 ### My approach
-- Simple brute force approach of finding prime number upto `sqrt(n)` .
+Logic to find the next permutation.
+- Start from the rightmost digit and find the first pair of adjacent digits where the `left digit` is smaller than the `right digit`.
+- After getting such a digit pair find the `just greater value` from the `left digit`.
+- Swap the `left digit` with `just greater digit`. 
+- Sort all the digits to the `right digits` in ascending order.
 
 
 ### Code (c++)
 ```
-class Solution {
-  public:
-    int findFactor(int n){
-        if(n<2) return n;
-        for(int i = 2;i<=sqrt(n);++i ){
-            if(n%i == 0)
-                return i;
+class Solution
+{
+public:
+    
+    string s = "";
+    void perm(int n){
+        int i,j;
+        for(i = n-2;i>=0;--i){
+            if(s[i]<s[i+1])
+                break;
         }
-        return n;
+        for(j = n-1; j>i;--j){
+            if(s[j]>s[i])
+                break;
+        }
+        swap(s[j],s[i]);
+        sort(s.begin()+i+1,s.end());
+    }
+
+    string kthPermutation(int n, int k)
+    {
+        for(int i = 1;i<=n;++i)
+            s += (char)('0'+i);
+        while(--k)
+            perm(n);
+            
+        return s;
     }
     
-    vector<int> leastPrimeFactor(int n) {
-        vector<int> out(n+1);
-        for(int i = 0;i<=n;++i)
-            out[i] = findFactor(i);
-        return out;
-    }
 };
 ```
