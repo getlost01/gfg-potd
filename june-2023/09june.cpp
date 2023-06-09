@@ -1,20 +1,9 @@
-# GFG Problem Of The Day
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
 
-## Today - 9 June 2023
-### Que - Permutations of a given string
+// } Driver Code Ends
 
-[Question Link](https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1)
-
-### My approach
-Logic to find the next permutation.
-- Start from the rightmost digit and find the first pair of adjacent digits where the `left digit` is smaller than the `right digit`.
-- After getting such a digit pair find the `just greater value` from the `left digit`.
-- Swap the `left digit` with `just greater digit`. 
-- Sort all the digits to the `right digits` in ascending order.
-
-
-### Code (c++)
-```
 class Solution
 {
 	public:
@@ -49,4 +38,27 @@ class Solution
 		    return out;
 		}
 };
-```
+
+
+
+
+//{ Driver Code Starts.
+int main(){
+    int t;
+    cin >> t;
+    while(t--)
+    {
+	    string S;
+	    cin >> S;
+	    Solution ob;
+	    vector<string> ans = ob.find_permutation(S);
+	    for(auto i: ans)
+	    {
+	    	cout<<i<<" ";
+	    }
+	    cout<<"\n";
+    }
+	return 0;
+}
+
+// } Driver Code Ends
