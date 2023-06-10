@@ -1,52 +1,40 @@
 # GFG Problem Of The Day
 
-## Today - 9 June 2023
-### Que - Permutations of a given string
+## Today - 10 June 2023
+### Que - Arranging the array
 
-[Question Link](https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/arranging-the-array1131/1)
 
 ### My approach
-Logic to find the next permutation.
-- Start from the rightmost digit and find the first pair of adjacent digits where the `left digit` is smaller than the `right digit`.
-- After getting such a digit pair find the `just greater value` from the `left digit`.
-- Swap the `left digit` with `just greater digit`. 
-- Sort all the digits to the `right digits` in ascending order.
+Just store positive numbers and negative numbers into new vectors named `pos` and `neg` respectively. Then, fill the `arr` array first with all negative numbers, followed by positive numbers. Hence, we obtain the required array as the result.
+
+##### Time Complexity:
+`O(n)` since we traverse the `n` sized array twice in the code.
+
+##### Space Complexity:
+`O(n)` since we only store a total of `n` numbers in the `pos` and `neg` arrays.
 
 
 ### Code (c++)
 ```
 class Solution
 {
-	public:
-	    string s = "";
-        void perm(int n){
-            int i,j;
-            for(i = n-2;i>=0;--i){
-                if(s[i]<s[i+1])
-                    break;
+    public:
+        void Rearrange(int arr[], int n)
+        {
+            vector<int> neq,pos;
+            for(int i = 0;i<n;++i){
+                if(arr[i]<0){
+                    neq.push_back(arr[i]);
+                }else{
+                    pos.push_back(arr[i]);
+                }
             }
-            for(j = n-1; j>i;--j){
-                if(s[j]>s[i])
-                    break;
-            }
-            swap(s[j],s[i]);
-            sort(s.begin()+i+1,s.end());
+            int sz = neq.size();
+            for(int i = 0;i<sz;++i)
+                arr[i] = neq[i];
+            for(int i = sz; i<n ;++i)
+                arr[i] = pos[i - sz];
         }
-		vector<string>find_permutation(string S)
-		{
-		    int n = S.size();
-		    vector<string> out;
-		    sort(S.begin(),S.end());
-		    s = S;
-		    out.push_back(s);
-		    sort(S.begin(),S.end(),greater<>());
-
-		    while(S!=s){
-		        perm(n);
-		        out.push_back(s);
-		    }
-            
-		    return out;
-		}
 };
 ```
