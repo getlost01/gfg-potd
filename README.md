@@ -1,28 +1,29 @@
 # GFG Problem Of The Day
 
-## Today - 11 June 2023
-### Que - Adding Ones
+## Today - 12 June 2023
+### Que - Rod Cutting
 
-[Question Link](https://practice.geeksforgeeks.org/problems/adding-ones3628/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/rod-cutting0840/1)
 
-### My approach
-Simply counts the occurrences of numbers in the `updates` array and calculates a `cumulative sum` to save into the `arr` array. Consequently, the `arr` array stores the cumulative counts of each number from 1 to n.
+
+### My Intuition
+By intuition it is a dp problem. For better understanding visit [this tutorial](https://iq.opengenus.org/rod-cutting-problem/).
 
 
 ### Code (c++)
 ```
 class Solution{
-    public:
-    void update(int arr[], int n, int updates[], int k)
-    {
-        vector<int> out(n+1,0);
-        for(int i = 0;i<k;++i){
-            ++out[updates[i]];
+  public:
+    int cutRod(int price[], int n) {
+        int dp[n+1];
+        dp[0] = 0;
+        for(int i = 1;i<=n;++i){
+            dp[i] = -1;
+            for(int j = 0;j<i;++j){
+                dp[i] = max(dp[i], price[j] + dp[i-j-1]);
+            }
         }
-        arr[0] = out[1];
-        for(int i = 2;i<=n;++i){
-            arr[i-1] = arr[i-2] + out[i];
-        }
+        return dp[n];
     }
 };
 ```
