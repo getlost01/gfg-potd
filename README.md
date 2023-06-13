@@ -6,7 +6,7 @@
 [Question Link](https://practice.geeksforgeeks.org/problems/rod-cutting0840/1)
 
 
-### My Intuition
+### My intutuion
 By intuition it is a dp problem. For better understanding visit [this tutorial](https://iq.opengenus.org/rod-cutting-problem/).
 
 
