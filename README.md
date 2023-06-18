@@ -1,65 +1,34 @@
 # GFG Problem Of The Day
 
-## Today - 17 June 2023
-### Que - Queue Operations
+## Today - 18 June 2023
+### Que - Ticket Counter
 
-[Question Link](https://practice.geeksforgeeks.org/problems/queue-operations/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/ticket-counter-2731/1)
 
 
-### My approach 1
-- To find the frequency of a given number `k` in the queue, you can iterate over all the elements in the queue and count the occurrences of `k`.
+### My approach
+- This logic calculates the left and right boundaries of a given number `N` after performing a maximum of `OP` equal operations. If the difference between the `right` and `left` boundaries is greater than `k`, it outputs the leftmost value from the right boundary, which is essentially `left + k + 1`. By default, the output is the rightmost value from the `left` boundary until both operations have been performed an even number of times.
 
 #### Time Complexity
-`O(1)` for `insert()` function and `O(n)` for `findFrequency` function.
+`O(constant)` just we are doing comparisions
 
 ### Code (c++) 
 ```
-class Solution{
-    public:
-    
-    void insert(queue<int> &q, int k){
-        q.push(k);
-    }
-    
-    
-    int findFrequency(queue<int> &q, int k){
-        int sz = q.size();
-        int c = 0;
-        while(sz--){
-            if(q.front() == k)
-                ++c;
-            q.push(q.front());
-            q.pop();
+class Solution {
+  public:
+        int distributeTicket(int n, int k) {
+            int op = n/k;
+            int left = (op/2)*k;
+            int right = n - (op/2)*k + 1;
+            
+            if(right - left > (k + 1))
+                return left + k + 1;
+            
+            return right - (right - left != 1);
         }
-        return c;
-    }
-    
 };
 ```
 
-### My approach 2
-- To find the frequency of a given number `k` in the queue, you can use a map or hash structure to store the frequency of each element in the queue. Then, you can return the frequency of `k` from the map and return it.
-
-#### Time Complexity
-`O(logn)` for `insert()` function and `O(logn)` for `findFrequency` function.
-
-### Code (c++) 
-```
-class Solution{
-    public:
-    
-    map<int,int> hash;
-    void insert(queue<int> &q, int k){
-        ++hash[k];
-        q.push(k);
-    }
-    
-    
-    int findFrequency(queue<int> &q, int k){
-        return hash[k];
-    }
-    
-};
-```
+#### If you like my solutions, please consider ⭐ `star` this repo.
 
 ![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
