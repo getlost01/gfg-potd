@@ -1,34 +1,50 @@
 # GFG Problem Of The Day
 
-## Today - 18 June 2023
-### Que - Ticket Counter
+## Today - 19 June 2023
+### Que - Rearrange an array with O(1) extra space
 
-[Question Link](https://practice.geeksforgeeks.org/problems/ticket-counter-2731/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/rearrange-an-array-with-o1-extra-space3142/1)
 
 
 ### My approach
-- This logic calculates the left and right boundaries of a given number `N` after performing a maximum of `OP` equal operations. If the difference between the `right` and `left` boundaries is greater than `k`, it outputs the leftmost value from the right boundary, which is essentially `left + k + 1`. By default, the output is the rightmost value from the `left` boundary until both operations have been performed an even number of times.
+- Given the constraint that the maximum value of `n` is `10^5`, along with a `long long` array called `arr`, the constraint favors us to store data in `10-digit` numbers. 
+- The first `5` digits represent the new number that needs rearranging, while the last `5` digits represent the old number. In the initial iteration, both new and old numbers are set at the same index. After this iteration, we identify the new number by the first 5 digits and obtain the desired number by dividing it by `10^5`.
 
-#### Time Complexity
-`O(constant)` just we are doing comparisions
+### Example: 
+#### Input: 
+```
+10
+2 8 4 1 9 5 3 0 7 6
+```
+so we can store array numbers as
+```
+400002 700008 900004 800001 600009 500005 100003 200000 7 300006
+```
+just divide these number by 10^5 to get our value. 
+
+#### Output:
+```
+4 7 9 8 6 5 1 2 0 3
+```
 
 ### Code (c++) 
 ```
-class Solution {
-  public:
-        int distributeTicket(int n, int k) {
-            int op = n/k;
-            int left = (op/2)*k;
-            int right = n - (op/2)*k + 1;
-            
-            if(right - left > (k + 1))
-                return left + k + 1;
-            
-            return right - (right - left != 1);
+class Solution{
+    public:
+    void arrange(long long arr[], int n) {
+        long long offset =1e5; 
+        for (int i = 0; i < n; i++) {
+            arr[i] = (arr[arr[i]] % offset) * offset + arr[i]; 
         }
+        // set the array with new value as "newValue = newvalue*offset + oldValue"
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = arr[i]/offset;
+        }
+    }
 };
 ```
 
-#### If you like my solutions, please consider ⭐ `star` this repo.
+#### If you like my solutions, please consider a ⭐ `star` to this repo.
 
 ![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
