@@ -1,54 +1,29 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
-
 // } Driver Code Ends
-    
-
-class Solution{
-    public:
-    void arrange(long long arr[], int n) {
-        long long offset =1e5; 
-        for (int i = 0; i < n; i++) {
-            arr[i] = (arr[arr[i]] % offset) * offset + arr[i]; 
-        }
-        // set the array with new value as "newValue = newvalue*offset + oldValue"
-
-        for (int i = 0; i < n; i++) {
-            arr[i] = arr[i]/offset;
-        }
+class Solution {
+  public:
+    int matchGame(long long n) {
+        if(n%5)
+            return n%5;
+        
+        return -1;
     }
 };
 
-
 //{ Driver Code Starts.
-
-int main(){
-    
+int main() {
     int t;
-    //testcases
-    cin>>t;
-    while(t--){
+    cin >> t;
+    while (t--) {
+        long long N;
         
-        int n;
-        //size of array
-        cin>>n;
-        long long A[n];
-        
-        //adding elements to the array
-        for(int i=0;i<n;i++){
-            cin>>A[i];
-        }
+        cin>>N;
+
         Solution ob;
-        //calling arrange() function
-        ob.arrange(A, n);
-        
-        //printing the elements 
-        for(int i=0;i<n;i++){
-            cout << A[i]<<" ";
-        }
-        cout<<endl;
+        cout << ob.matchGame(N) << endl;
     }
     return 0;
 }

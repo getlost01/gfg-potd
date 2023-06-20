@@ -4,41 +4,52 @@ using namespace std;
 
 
 // } Driver Code Ends
+    
 
-class Solution {
-  public:
-        int distributeTicket(int n, int k) {
-        int op = n/k;
-        int left = (op/2)*k;
-        int right = n - (op/2)*k + 1;
-        
-        if(right - left > (k + 1))
-            return left + k + 1;
-        
-        return right - (right - left != 1);
+class Solution{
+    public:
+    void arrange(long long arr[], int n) {
+        long long offset =1e5; 
+        for (int i = 0; i < n; i++) {
+            arr[i] = (arr[arr[i]] % offset) * offset + arr[i]; 
+        }
+        // set the array with new value as "newValue = newvalue*offset + oldValue"
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = arr[i]/offset;
+        }
     }
 };
+
 
 //{ Driver Code Starts.
 
 int main(){
+    
     int t;
-    scanf("%d ",&t);
+    //testcases
+    cin>>t;
     while(t--){
         
-        int N;
-        scanf("%d",&N);
+        int n;
+        //size of array
+        cin>>n;
+        long long A[n];
         
+        //adding elements to the array
+        for(int i=0;i<n;i++){
+            cin>>A[i];
+        }
+        Solution ob;
+        //calling arrange() function
+        ob.arrange(A, n);
         
-        int K;
-        scanf("%d",&K);
-        
-        Solution obj;
-        int res = obj.distributeTicket(N, K);
-        
-        cout<<res<<endl;
-        
+        //printing the elements 
+        for(int i=0;i<n;i++){
+            cout << A[i]<<" ";
+        }
+        cout<<endl;
     }
+    return 0;
 }
-
 // } Driver Code Ends
