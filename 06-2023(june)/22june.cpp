@@ -1,18 +1,9 @@
-# GFG Problem Of The Day
-
-## Today - 22 June 2023
-### Que - Lemonade Change
-
-[Question Link](https://practice.geeksforgeeks.org/problems/lemonade-change/1)
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
 
 
-### My approach
-- Iterate through each customer in the queue and greedily process their request. 
-- Firstly store the value of the note in our collection box. If needed, provide a 10-dollar bill as change then check and provide the necessary number of 5-dollar bills. If you fail in providing change bills return `false`;
-
-
-### Code (c++) 
-```
+// } Driver Code Ends
 class Solution {
   public:
     bool lemonadeChange(int n, vector<int> &bills) {
@@ -39,8 +30,26 @@ class Solution {
         return true;
     }
 };
-```
 
-#### If you like my solutions, please consider a ⭐ `star` to this repo.
+//{ Driver Code Starts.
 
-![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N;
+        cin >> N;
+
+        vector<int> bills(N);
+        for (int i = 0; i < N; i++) cin >> bills[i];
+
+        Solution obj;
+        int ans = obj.lemonadeChange(N, bills);
+        if (ans)
+            cout << "True" << endl;
+        else
+            cout << "False" << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
