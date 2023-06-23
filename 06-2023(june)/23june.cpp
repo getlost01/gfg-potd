@@ -1,20 +1,10 @@
-# GFG Problem Of The Day
-
-## Today - 23 June 2023
-### Que - Task Scheduler
-
-[Question Link](https://practice.geeksforgeeks.org/problems/task-scheduler/1)
+//{ Driver Code Starts
+#include <bits/stdc++.h>
+using namespace std;
 
 
-### My approach
-- Starting with determining the frequency of each task.
-- Next, place these tasks frequency into a priority queue.
-- Then iterate until all tasks are completed. During each iteration, find the task with the highest frequency from the `priority queue` and remove it. If the task's frequency is greater than one, calculate the time accordingly and store these tasks in a vector named `restTask`. After processing all tasks from the priority queue, check if there are any remaining tasks. If there are some remaining tasks, place them back into the priority queue and continue calculating time. Otherwise, exit the loop.
-- Also check, if there are incomplete tasks and the cooldown time for the next task `k+1th` has not been completed, add the idle time to our total time.
+// } Driver Code Ends
 
-
-### Code (c++) 
-```
 class Solution {
   public:
     int leastInterval(int n, int k, vector<char> &tasks) {
@@ -57,8 +47,23 @@ class Solution {
         return time;
     }
 };
-```
 
-#### If you like my solutions, please consider a ⭐ `star` to this repo.
 
-![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+//{ Driver Code Starts.
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        int N, K;
+        cin >> N >> K;
+
+        vector<char> tasks(N);
+        for (int i = 0; i < N; i++) cin >> tasks[i];
+
+        Solution obj;
+        cout << obj.leastInterval(N, K, tasks) << endl;
+    }
+    return 0;
+}
+// } Driver Code Ends
