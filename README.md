@@ -1,35 +1,59 @@
 # GFG Problem Of The Day
 
-## Today - 24 June 2023
-### Que - Prefix match with other strings
+## Today - 25 June 2023
+### Que - Unique rows in boolean matrix
 
-[Question Link](https://practice.geeksforgeeks.org/problems/prefix-match-with-other-strings/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1)
 
 
 ### My approach
-- The approach is to intuitively, find the prefix substring of length `k` for each string in the array `arr` and then compare these substrings with the given matching string `str`.
-- Additionally, it is important to consider the constraint that the length of the prefix substring, `k`, should not exceed the size of the given matching string, `str`.
+- An intuitive approach is followed, where two rows are compared, and if any row is found to have duplicates, it is not included in the output vector.
+- To achieve this and optimize the redundant row check, a `vis` vector is used to determine if a row is equal to any of the previous rows. If was a not unique, the row is skipped without further checking.
 
 
 ### Code (c++) 
 ```
-class Solution{   
+
+class Solution
+{
 public:
-    int klengthpref(string arr[], int n, int k, string str){    
-        if(k>str.size())
-            return 0;
+    vector<vector<int>> uniqueRow(int M[MAX][MAX], int row, int col)
+    {
+        vector<bool> vis(row, false); // Avoid redundant checks by examining the visited array for non-unique index values.
+        vector<vector<int>> out;
+        
+        for (int i = 0; i < row; ++i) {
+            if (vis[i]) // If we encounter the same row value, we continue.
+                continue;
             
-        string toSearch = str.substr(0,k); 
-        int c = 0;
-
-        for(int i = 0; i<n; ++i){
-            if(arr[i].substr(0,k) == toSearch)
-                ++c;
+            vis[i] = true; // Mark the ith index as visited.
+            vector<int> binArr(col);
+            
+            for (int j = 0; j < col; ++j) // Convert the unique row array into a vector.
+                binArr[j] = M[i][j];
+                
+            out.push_back(binArr); // Push the unique row into the output vector.
+            
+            for (int j = i + 1; j < row; ++j) {
+                bool isEqual = true;
+                
+                for (int k = 0; k < col; ++k) { // Logic to check for two equal rows.
+                    if (M[i][k] != M[j][k]) {
+                        isEqual = false;
+                        break;
+                    }
+                }
+                
+                vis[j] = isEqual | vis[j]; // If we find that this row is not unique, mark it as visited.
+            }
         }
-
-        return c;
+        
+        return out;
     }
 };
+
+
+
 ```
 
 #### If you find my solutions helpful, I would appreciate your support by considering giving a `⭐ star` to this repository.
