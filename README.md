@@ -1,61 +1,90 @@
 # GFG Problem Of The Day
 
-## Today - 25 June 2023
-### Que - Unique rows in boolean matrix
+## Today - 26 June 2023
+### Que - nCr
 
-[Question Link](https://practice.geeksforgeeks.org/problems/unique-rows-in-boolean-matrix/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/ncr1019/1)
 
+---
 
 ### My approach
-- An intuitive approach is followed, where two rows are compared, and if any row is found to have duplicates, it is not included in the output vector.
-- To achieve this and optimize the redundant row check, a `vis` vector is used to determine if a row is equal to any of the previous rows. If was a not unique, the row is skipped without further checking.
+- The simple formula for calculating combinations is `C(n, r) = n! / (r! * (n - r)!)`, which represents the number of ways to choose `r` items from a set of `n` items.
+- To optimize the calculation, we determine the maximum value between `(n - r)` and `r` and eliminate common factors from the numerator and denominator, in code `b` represents `max(n-r, r)` & `a` represents `min(n-r, r)`.
+- After eliminating common factors, the formula becomes `(n * (n - 1) * (n - 2) * ... * (b + 1)) / (a!)`.
+- Modulo multiplies these `(n * (n - 1) * (n - 2) * ... * (b + 1))` to obtain the numerator of the combination formula.
+- To obtain the final answer, we calculate the modular inverses of `(a * (a - 1) * ... * 1)` and multiply them together using the modulo operation.
 
+---
 
 ### Code (c++) 
-```
-
-class Solution
-{
+```cpp
+class Solution {
 public:
-    vector<vector<int>> uniqueRow(int M[MAX][MAX], int row, int col)
-    {
-        vector<bool> vis(row, false); // Avoid redundant checks by examining the visited array for non-unique index values.
-        vector<vector<int>> out;
-        
-        for (int i = 0; i < row; ++i) {
-            if (vis[i]) // If we encounter the same row value, we continue.
-                continue;
-            
-            vis[i] = true; // Mark the ith index as visited.
-            vector<int> binArr(col);
-            
-            for (int j = 0; j < col; ++j) // Convert the unique row array into a vector.
-                binArr[j] = M[i][j];
-                
-            out.push_back(binArr); // Push the unique row into the output vector.
-            
-            for (int j = i + 1; j < row; ++j) {
-                bool isEqual = true;
-                
-                for (int k = 0; k < col; ++k) { // Logic to check for two equal rows.
-                    if (M[i][k] != M[j][k]) {
-                        isEqual = false;
-                        break;
-                    }
-                }
-                
-                vis[j] = isEqual | vis[j]; // If we find that this row is not unique, mark it as visited.
-            }
+    int MOD = 1e9+7;
+
+    int modInverse(int num) {
+        int y = 0, x = 1;
+        int mod = MOD;
+
+        while (num > 1) {
+            int quo = num / mod;
+            int t = mod;
+
+            mod = num % mod;
+            num = t;
+            t = y;
+
+            y = x - quo * y;
+            x = t;
         }
+
+        if (x < 0)
+            x += MOD;
+
+        return x;
+    }
+
+    int modMultiply(int a, int b) {
+        a %= MOD;
+        b %= MOD;
+        return ((long long)a * b) % MOD;
+    }
+
+    int nCr(int n, int r) {
+        if (n < r)
+            return 0;
         
-        return out;
+        // Determine the smaller value between (n-r) and r
+        int a = min(n - r, r);
+        int b = max(n - r, r);
+
+        // Now we have simplify calculate (n * (n-1) * (n-2) * ... * b+1) / (a!)
+        int ans = 1;
+        for (int i = n; i > b; --i) 
+            ans = modMultiply(ans, i);
+
+        // Calculate modular inverse for (a!) and multiply it with the answer
+        for (int i = 2; i <= a; ++i) 
+            ans = modMultiply(ans, modInverse(i));
+
+        return ans;
     }
 };
-
-
-
 ```
+
+---
+
+### Contribution
+
+I always encourage contributors to participate in the discussion forum for this repository. If you have a better solution or any queries related to the `Problem of the Day` solution, please feel free to join the discussion. By sharing your insights and ideas, we can collectively enhance our coding knowledge and problem-solving skills.
+
+To access the discussion section and engage in conversations, please [click here](https://github.com/getlost01/gfg-potd/discussions). I look forward to hearing from you and bring up  a collaborative learning environment.
+
+---
 
 #### If you find my solutions helpful, I would appreciate your support by considering giving a `⭐ star` to this repository.
 
+---
+
+#### Visitors
 ![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
