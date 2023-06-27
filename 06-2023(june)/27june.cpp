@@ -1,24 +1,24 @@
-# GFG Problem Of The Day
+//{ Driver Code Starts
+#include<bits/stdc++.h>
+using namespace std;
 
-## Today - 27 June 2023
-### Que - Union of Two Linked Lists
-
-[Question Link](https://practice.geeksforgeeks.org/problems/union-of-two-linked-list/1)
-
-
-### My approach
-- Combine the heads of both list into a single list.
-- Apply merge sort to sort the linked list.
-- Eliminate duplicate elements from the sorted list.
-
----
-
-### Code (c++) 
-```cpp
-
-class Solution
+struct Node
 {
-    public:
+	int data;
+	struct Node* next;
+	
+	Node(int x){
+	    data = x;
+	    next = NULL;
+	}
+	
+};
+
+
+// } Driver Code Ends
+
+class Solution {
+public:
     Node* merge(Node* head1, Node* head2) {
         if (!head1)
             return head2;
@@ -79,21 +79,58 @@ class Solution
         return removeDuplicates(sortedList);
     }
 };
-```
 
----
 
-### Contribution
 
-I always encourage contributors to participate in the discussion forum for this repository. If you have a better solution or any queries related to the `Problem of the Day` solution, please feel free to join the discussion. By sharing your insights and ideas, we can collectively enhance our coding knowledge and problem-solving skills.
+//{ Driver Code Starts.
 
-To access the discussion section and engage in conversations, please [click here](https://github.com/getlost01/gfg-potd/discussions). I look forward to hearing from you and bring up  a collaborative learning environment.
+struct Node* buildList(int size)
+{
+    int val;
+    cin>> val;
+    
+    Node* head = new Node(val);
+    Node* tail = head;
+    
+    for(int i=0; i<size-1; i++)
+    {
+        cin>> val;
+        tail->next = new Node(val);
+        tail = tail->next;
+    }
+    
+    return head;
+}
 
----
+void printList(Node* n)
+{
+    while(n)
+    {
+        cout<< n->data << " ";
+        n = n->next;
+    }
+    cout<< endl;
+}
 
-#### If you find my solutions helpful, I would appreciate your support by considering giving a `⭐ star` to this repository.
 
----
+int main()
+{
+    int t;
+    cin>>t;
+    while(t--)
+    {
+        int n, m;
+        
+        cin>>n;
+        Node* first = buildList(n);
+        
+        cin>>m;
+        Node* second = buildList(m);
+        Solution obj;
+        Node* head = obj.makeUnion(first,second);
+        printList(head);
+    }
+    return 0;
+}
 
-#### Visitors
-![GFG](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+// } Driver Code Ends
