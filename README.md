@@ -1,59 +1,57 @@
 # GFG Problem Of The Day
 
-## Today - 29 June 2023
-### Que - Next Happy Number
+## Today - 30 June 2023
+### Que - Is Binary Number Multiple of 3
 
-[Question Link](https://practice.geeksforgeeks.org/problems/next-happy-number4538/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/is-binary-number-multiple-of-30654/1)
 
 
 ### My approach
-- The given constraints prefer us to use a brute force approach, so I iterate through all possible `next numbers` that can be considered as`happy` and return the happy number which encounters first.
-- The logic behind determining a happy number is straightforward as well: I calculate the `sum` of each `digit squared`and continue this process until the sum becomes a `single-digit` element. Through observation, it is evident that only `1` and `7` in the single-digit form are considered happy numbers. Consequently, I return a boolean answer indicating whether the given number is happy or not.
+- Through observation, it has been determined that odd powers of `2` yield a remainder of `2` when divided by `3`, while even powers yield a remainder of `1`. For instance:
+
+```txt
+- 2^0 % 3 = 1
+- 2^1 % 3 = 2
+- 2^2 % 3 = 1
+- 2^3 % 3 = 2
+.... so on
+```
+
+- For any given binary string, we can determine the final remainder by calculating the sum of remainders corresponding to each `set` bit. For example:
+
+```txt
+- 11 (3) ->   2 + 1 = 3
+- 110 (6) -> 1 + 2 = 3
+- 1111 (15) -> 2 + 1 + 2 + 1 = 6
+- 1010100 (84) -> 1 + 1 + 1 = 3
+- 10110111 (183) -> 2 + 2 + 1 + 1 + 2 + 1 = 9
+```
+
+- Therefore, through the calculation of remainders for every set bit in the provided binary string, we can ascertain the ultimate remainder. Finally, it is crucial to verify whether the `final remainder` is divisible by `3` or not.
 
 ---
 
 ### Code (c++) 
 ```cpp
 
-class Solution{
+class Solution {
 public:
-
-    bool isHappy(int n) {
-        // 7 & 1 are the only numbers which can be happy in single digit by observation
-        if (n == 1 || n == 7) 
-            return 1;
-            
-        int next, sum;
-        next = sum = n;
-
-        while (next > 9) {
-            sum = 0;
-
-            while (next > 0) {
-                int digit = next % 10;
-                next /= 10;
-                sum += digit * digit;
+    int isDivisible(string s) {
+        int rem = 0;
+        
+        for (int i = 0; i < s.size(); ++i) {
+            if (s[i] == '1') {
+                if (i % 2)
+                    rem += 2;
+                else
+                    rem++;
             }
-
-            if (sum == 1 || sum == 7)
-                return 1;
-
-            next = sum;
         }
-
-        return 0;
+        
+        return rem % 3 == 0;
     }
-
-    int nextHappy(int n) {
-        int nextNum = n + 1;
-
-        while (isHappy(nextNum) != 1)
-            nextNum++;
-
-        return nextNum;
-    }
-    
 };
+
 ```
 
 ---
