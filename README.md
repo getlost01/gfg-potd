@@ -1,62 +1,65 @@
 # GFG Problem Of The Day
 
-## Today - 1 July 2023
-### Que - Number of 1 Bits
+## Today - 2 July 2023
+### Que - Copy Set Bits in Range
 
-[Question Link](https://practice.geeksforgeeks.org/problems/set-bits0143/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/copy-set-bits-in-range0623/1)
 
 
-### My approaches
-Since this question is relatively simple and can be solved in multiple ways, I would like to present two commonly used approaches.
+### My approach
 
-#### Approach 1:
-The first approach involves iterating through the bits of the binary representation of the number and counting the set bits. Here how it works:
+This is a simple bit masking question where we need to generate a mask to filter out specific bits from `y` and then perform a bitwise OR operation (`x or y`) to copy the values of `y` into `x`.
 
-   - We repeatedly `right-shift` the number by `1 bit` and add the `rightmost` bit to the counter variable `cnt` if it is `1` counter increased . If the bit is `0`, the counter remains unchanged.
+To create the mask, follow these steps:
+- First, determine the length of the filter mask.
+- Create the mask by left-shifting `1` by the mask length.
+- Obtain the desired mask by subtracting 1 from the mask and left-shifting it by `l - 1`.
+- Once the mask is ready, apply it to filter out the relevant bits from `y`, and perform a bitwise OR operation with `x` to copy the filtered values into `x`.
    
 **Example:**
-   ```cpp
-   if [n = 18 (10010)]
-   - 10010     , cnt = 0
-   - 1001      , cnt = 1
-   - 100       , cnt = 1
-   - 10        , cnt = 1
-   - 1         , cnt = 2
-   ```
+```
+Given:
+- x = 1090 (10001000010)
+- y = 1211 (10010111011)
+- l = 2
+- r = 6
 
-- **Time complexity:** `O(log(n))`, as we iterate through all the bits of `n`, which totals to `log(n`).
-- **Space complexity:** `O(1)`
+Steps:
+
+1. Since l = 2 and r = 6 are inclusive in the range, 
+   maskLen = 5.
+
+2. Calculate the mask:
+   - Initialize mask as 1 shifted left by maskLen: mask = 1 << 5 = 32 (100000)
+
+   - Subtract 1 from mask: mask = mask - 1 = 31 (011111)
+     (We obtain a mask with the required length of 5 ones)
+
+   - Shift the mask towards the left boundary by (l - 1): mask = mask << (l - 1) = (0111110)
+     (This is our required mask)
+ 
+ 3. Filter out y value:
+    y' = y & mask = (10010111011) & (0111110) = (0111010)
+
+ 4. Copy x or y:
+    Result = x | y' = (10001000010) | (0111010) = 1146 (10001111010)
+```
 
 #### Code (C++):
 ```cpp
+
 class Solution {
-  public:
-    int setBits(int n) {
-        int cnt = 0;
-        while(n){
-            cnt += n & 1;
-            n >>= 1;
-        }
-        return cnt;
+public:
+    int setSetBit(int x, int y, int l, int r) {
+        int maskLen = r - l + 1;
+        int mask = (1 << maskLen) - 1;
+        mask = mask << (l - 1);
+        y = y & mask;
+        return (x | y);  
     }
 };
+
 ```
-
-#### Approach 2:
-The second approach utilizes the standard library function `__builtin_popcount(n)` in C++ to count the number of set bits. This approach involves a concise one-liner code using the built-in function.
-
-#### Code (C++):
-```cpp
-class Solution {
-  public:
-    int setBits(int n) {
-        return __builtin_popcount(n);
-    }
-};
-```
-
-- **Time complexity:** `O(k)`, where k is the number of bits.
-- **Space complexity:** `O(1)`
 
 ---
 
