@@ -5,31 +5,35 @@ using namespace std;
 
 // } Driver Code Ends
 
-class Solution{
+class Solution {
 public:
     int maxIndexDiff(int arr[], int n) {
         int maxDiff = 0;
-        int i = 0, j = n - 1;
-        int lastJ = 0;
-
-        while (i < j) {
-            if (arr[i] <= arr[j]) {
-                maxDiff = max(maxDiff, j - i);
-                lastJ = j;
-                j = n - 1;
-                i++;
+        vector<int> maxJ(n);
+        
+        for (int i = 0; i < n; i++)
+            maxJ[i] = i;
+            
+        for (int i = 1; i < n; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (arr[j] <= arr[i])
+                    maxJ[i] = j;
+                
+                if (maxJ[j] == j) {
+                    if (arr[j] > arr[i])
+                        break;
+                }
+                else if (arr[maxJ[j]] <= arr[i])
+                    j = maxJ[j] + 1;
             }
-            else if (j > lastJ) {
-                j--;
-            }
-            else if (j <= lastJ) {
-                j = n - 1;
-                i++;
-            }
+            
+            maxDiff = max(maxDiff, i - maxJ[i]);
         }
+        
         return maxDiff;
     }
 };
+
 
 
 //{ Driver Code Starts.

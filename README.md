@@ -6,44 +6,39 @@
 [Question Link](https://practice.geeksforgeeks.org/problems/maximum-index3307/1)
 
 
-### My approach
-
-- The approach utilizes two pointers, denoted as `i` and `j`, initially set to `i = 0` and `j = n-1` respectively.
-- The search begins by comparing the elements at positions `i` and `j` in the array.
-- If `arr[i]` is less than or equal to `arr[j]`, we calculate the difference between `i` and `j` and store it in a variable called `maxDiff`.
-- Afterwards, we increment `i` by `1` while keeping `j` unchanged at `n-1`. This process is repeated to find the next maximum difference.
-- However, during this iteration, we also store the last value of `j` encountered. We ensure that we do not go beyond this `lastJ`, which represents the previously stored value of `j`.
-
-
-
 #### Code (C++):
 ```cpp
 
-class Solution{
+
+class Solution {
 public:
     int maxIndexDiff(int arr[], int n) {
         int maxDiff = 0;
-        int i = 0, j = n - 1;
-        int lastJ = 0;
-
-        while (i < j) {
-            if (arr[i] <= arr[j]) {
-                maxDiff = max(maxDiff, j - i);
-                lastJ = j;
-                j = n - 1;
-                i++;
+        vector<int> maxJ(n);
+        
+        for (int i = 0; i < n; i++)
+            maxJ[i] = i;
+            
+        for (int i = 1; i < n; i++) {
+            for (int j = i - 1; j >= 0; j--) {
+                if (arr[j] <= arr[i])
+                    maxJ[i] = j;
+                
+                if (maxJ[j] == j) {
+                    if (arr[j] > arr[i])
+                        break;
+                }
+                else if (arr[maxJ[j]] <= arr[i])
+                    j = maxJ[j] + 1;
             }
-            else if (j > lastJ) {
-                j--;
-            }
-            else if (j <= lastJ) {
-                j = n - 1;
-                i++;
-            }
+            
+            maxDiff = max(maxDiff, i - maxJ[i]);
         }
+        
         return maxDiff;
     }
 };
+
 
 ```
 
