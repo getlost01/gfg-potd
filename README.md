@@ -1,61 +1,47 @@
 # GFG Problem Of The Day
 
-## Today - 2 July 2023
-### Que - Copy Set Bits in Range
+## Today - 3 July 2023
+### Que - Maximum Index
 
-[Question Link](https://practice.geeksforgeeks.org/problems/copy-set-bits-in-range0623/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/maximum-index3307/1)
 
 
 ### My approach
 
-This is a simple bit masking question where we need to generate a mask to filter out specific bits from `y` and then perform a bitwise OR operation (`x or y`) to copy the values of `y` into `x`.
+- The approach utilizes two pointers, denoted as `i` and `j`, initially set to `i = 0` and `j = n-1` respectively.
+- The search begins by comparing the elements at positions `i` and `j` in the array.
+- If `arr[i]` is less than or equal to `arr[j]`, we calculate the difference between `i` and `j` and store it in a variable called `maxDiff`.
+- Afterwards, we increment `i` by `1` while keeping `j` unchanged at `n-1`. This process is repeated to find the next maximum difference.
+- However, during this iteration, we also store the last value of `j` encountered. We ensure that we do not go beyond this `lastJ`, which represents the previously stored value of `j`.
 
-To create the mask, follow these steps:
-- First, determine the length of the filter mask.
-- Create the mask by left-shifting `1` by the mask length.
-- Obtain the desired mask by subtracting 1 from the mask and left-shifting it by `l - 1`.
-- Once the mask is ready, apply it to filter out the relevant bits from `y`, and perform a bitwise OR operation with `x` to copy the filtered values into `x`.
-   
-**Example:**
-```
-Given:
-- x = 1090 (10001000010)
-- y = 1211 (10010111011)
-- l = 2
-- r = 6
 
-Steps:
-
-1. Since l = 2 and r = 6 are inclusive in the range, 
-   maskLen = 5.
-
-2. Calculate the mask:
-   - Initialize mask as 1 shifted left by maskLen: mask = 1 << 5 = 32 (100000)
-
-   - Subtract 1 from mask: mask = mask - 1 = 31 (011111)
-     (We obtain a mask with the required length of 5 ones)
-
-   - Shift the mask towards the left boundary by (l - 1): mask = mask << (l - 1) = (0111110)
-     (This is our required mask)
- 
- 3. Filter out y value:
-    y' = y & mask = (10010111011) & (0111110) = (0111010)
-
- 4. Copy x or y:
-    Result = x | y' = (10001000010) | (0111010) = 1146 (10001111010)
-```
 
 #### Code (C++):
 ```cpp
 
-class Solution {
+class Solution{
 public:
-    int setSetBit(int x, int y, int l, int r) {
-        int maskLen = r - l + 1;
-        int mask = (1 << maskLen) - 1;
-        mask = mask << (l - 1);
-        y = y & mask;
-        return (x | y);  
+    int maxIndexDiff(int arr[], int n) {
+        int maxDiff = 0;
+        int i = 0, j = n - 1;
+        int lastJ = 0;
+
+        while (i < j) {
+            if (arr[i] <= arr[j]) {
+                maxDiff = max(maxDiff, j - i);
+                lastJ = j;
+                j = n - 1;
+                i++;
+            }
+            else if (j > lastJ) {
+                j--;
+            }
+            else if (j <= lastJ) {
+                j = n - 1;
+                i++;
+            }
+        }
+        return maxDiff;
     }
 };
 
