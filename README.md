@@ -18,7 +18,7 @@ For instance, if we need to store **13** and **1045** at the same index of the a
 
 #### Merge concept:
 To accomplish the merging process, 
-- we first sort both arrays individually. Subsequently, we apply the merge algorithm typically used in merge sort. 
+- We can apply the merge algorithm which typically used in merge sort. 
 - Given that the arrays are sorted, we can select the smaller value between the **ith** index of `arr1` and the **jth** index of `arr2`, and place it in the **kth** index of the combined array (arr1+arr2).
 
 The process for merging in this problem follows the standard procedure used in the merge algorithm of merge sort.
@@ -34,52 +34,52 @@ For a more comprehensive understanding of the merge and merge sort concepts, you
 
 For further clarity and understanding, please refer to the provided code.
 
+#### Time Complexity:
+**O(n + m)** because we iterate through all `n` elements of arr1 and `m` elements of arr2 in the merge function.
+####  Auxilliary Space Complexity:
+Constant, since we are not utilizing any variable space for storing data.
+
+
 
 #### Code (C++)
 ```cpp
 
+
 class Solution{
 public:
+    long long offset = 1e7;
+    
+    void newValueInArray(long long arr1[], long long arr2[], int k, int n, long long newVal){
+         if (k < n)
+            arr1[k] += offset * newVal;
+        else
+            arr2[k - n] += offset * newVal;
+    }
 
     void merge(long long arr1[], long long arr2[], int n, int m)
     {
-        sort(arr1, arr1 + n);
-        sort(arr2, arr2 + m);
         int i = 0, j = 0, k = 0;
-
-        long long offset = 1e7;
+        
         while (i < n && j < m) {
             if (arr1[i] % offset < arr2[j] % offset) {
-                if (k < n)
-                    arr1[k] += offset * (arr1[i] % offset);
-                else
-                    arr2[k - n] += offset * (arr1[i] % offset);
+                newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
                 ++i;
             }
             else {
-                if (k < n)
-                    arr1[k] += offset * (arr2[j] % offset);
-                else
-                    arr2[k - n] += offset * (arr2[j] % offset);
+                 newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
                 ++j;
             }
             ++k;
         }
 
         while (i < n) {
-            if (k < n)
-                arr1[k] += offset * (arr1[i] % offset);
-            else
-                arr2[k - n] += offset * (arr1[i] % offset);
+            newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
             ++i;
             ++k;
         }
 
         while (j < m) {
-            if (k < n)
-                arr1[k] += offset * (arr2[j] % offset);
-            else
-                arr2[k - n] += offset * (arr2[j] % offset);
+            newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
             ++j;
             ++k;
         }
@@ -90,6 +90,7 @@ public:
             arr2[i] /= offset;
     }
 };
+
 
 ```
 

@@ -4,57 +4,54 @@ using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution{
-    public:
-        //Function to merge the arrays.
-        void merge(long long arr1[], long long arr2[], int n, int m) 
-        { 
-            sort(arr1,arr1+n);
-            sort(arr2,arr2+m);
-            int i = 0, j = 0, k = 0;
-            
-            long long offset = 1e7;
-            while(i<n && j<m){
-                if(arr1[i]%offset < arr2[j%offset]){
-                    if(k<n)
-                        arr1[k] += offset*(arr1[i]%offset);
-                    else
-                        arr2[k-n] += offset*(arr1[i]%offset);
-                    ++i;
-                }else{
-                    if(k<n)
-                        arr1[k] += offset*(arr2[j]%offset);
-                    else
-                        arr2[k-n] += offset*(arr2[j]%offset);
-                    ++j;
-                }
-                ++k;
-            }
-            
-            while(i<n){
-                if(k<n)
-                        arr1[k] += offset*(arr1[i]%offset);
-                else
-                        arr2[k-n] += offset*(arr1[i]%offset);
+public:
+    long long offset = 1e7;
+    
+    void newValueInArray(long long arr1[], long long arr2[], int k, int n, long long newVal){
+         if (k < n)
+            arr1[k] += offset * newVal;
+        else
+            arr2[k - n] += offset * newVal;
+    }
+
+    void merge(long long arr1[], long long arr2[], int n, int m)
+    {
+        int i = 0, j = 0, k = 0;
+        
+        while (i < n && j < m) {
+            if (arr1[i] % offset < arr2[j] % offset) {
+                newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
                 ++i;
-                ++k;
             }
-            
-            while(j<m){
-                if(k<n)
-                        arr1[k] += offset*(arr2[j]%offset);
-                else
-                        arr2[k-n] += offset*(arr2[j]%offset);
+            else {
+                 newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
                 ++j;
-                ++k;
             }
-            
-            for(int i = 0; i<n;++i)
-                arr1[i] /= offset;
-            for(int i = 0; i<m;++i)
-                arr2[i] /= offset;
-        } 
+            ++k;
+        }
+
+        while (i < n) {
+            newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
+            ++i;
+            ++k;
+        }
+
+        while (j < m) {
+            newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
+            ++j;
+            ++k;
+        }
+
+        for (int i = 0; i < n; ++i)
+            arr1[i] /= offset;
+        for (int i = 0; i < m; ++i)
+            arr2[i] /= offset;
+    }
 };
+
+
 
 //{ Driver Code Starts.
 
