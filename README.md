@@ -1,63 +1,93 @@
 # GFG Problem Of The Day
 
-## Today - 6 July 2023
-### Que - Quick Sort
+## Today - 7 July 2023
+### Que - Merge Without Extra Space
 
-[Question Link](https://practice.geeksforgeeks.org/problems/quick-sort/1)
+[Question Link](https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays-1587115620/1)
 
 
 ### My Approach
 
-This is Standard Algorithm:
+This problem is a variation of the simple merge sort problem, with the added challenge of achieving O(1) space complexity. 
 
-#### Partitioning
-Our goal is to arrange all values smaller than or equal to the pivot value on the left side, and larger values on the right side. We follow these steps to achieve this:
+#### Storing two values at the same index concept
+To accomplish this, we can employ a technique that allows us to store two values at the same index of an array.
+- Given that the maximum value in the array is `1e7`, we can utilize a method where we store the first number in the last 8 digits of the array value and the second number in the remaining digits. 
 
-- **Step 1:** We assume the pivot value is the `last element` of the given subarray, which is stored in the variable `high`.
-- **Step 2:** We iterate through the entire subarray from the leftmost index `low` to the rightmost index `high`.
-  - During this iteration, we check whether the current index value is smaller or greater than the pivot value. If the current index value is smaller or equal to the pivot value, we swap the current index value with the partition index value and increment the partition index.
-- **Step 3:** Finally, we swap the partition index with the pivot index (which is the last or high element in our case) and return the new partition index value.
+For instance, if we need to store **13** and **1045** at the same index of the array, we would represent it as **130001045**. By **dividing** the number by 1e7, we retrieve 13, and the **remainder** gives us 1045. This approach simplifies the task while maintaining O(1) space complexity.
 
-#### QuickSort
-QuickSort is a simple algorithm that utilizes the divide and conquer approach.
+#### Merge concept:
+To accomplish the merging process, 
+- we first sort both arrays individually. Subsequently, we apply the merge algorithm typically used in merge sort. 
+- Given that the arrays are sorted, we can select the smaller value between the **ith** index of `arr1` and the **jth** index of `arr2`, and place it in the **kth** index of the combined array (arr1+arr2).
 
-- **Step 1:** We first partition the array using the partition algorithm mentioned above.
-- **Step 2:** Then, we recursively apply the QuickSort algorithm to the left partition.
-- **Step 3:** Similarly, we recursively apply the QuickSort algorithm to the right partition.
+The process for merging in this problem follows the standard procedure used in the merge algorithm of merge sort.
 
-For more detailed explanations and examples, please refer to this [link](https://www.programiz.com/dsa/quick-sort).
+For a more comprehensive understanding of the merge and merge sort concepts, you can refer to this [link](https://www.programiz.com/dsa/merge-sort).
+
+#### Storing values in sorted array and retrieval
+- To address the issue of storing values at the kth index of the combined sorted array, we can utilize the approach described earlier, where we multiply the new value by an offset (`1e7`) and add it to the index.
+
+- To store a value at the kth index of the combined array, we perform a check. If the value of k is less than n, we store the newly sorted value in `arr1[k]`. However, if `k` is greater than or equal to `n`, we store the value at `arr2[k-n]`.
+
+- Once all the merge operations are completed, we can retrieve the values from `arr1` and `arr2` by simply dividing them by the offset value (`1e7`).
+
+For further clarity and understanding, please refer to the provided code.
 
 
 #### Code (C++)
 ```cpp
 
-class Solution
-{
-    public:
-    void quickSort(int arr[], int low, int high)
-    {
-        if (low < high) {
-            int pivoit = partition(arr, low, high);
-            quickSort(arr, low, pivoit - 1);
-            quickSort(arr, pivoit + 1, high);
-        }
-    }
-    
-    public:
-    int partition (int arr[], int low, int high)
-    {
-          int pivot = arr[high];
-          int part = low;
+class Solution{
+public:
 
-          for (int j = low; j < high; ++j) {
-            if (arr[j] <= pivot) {
-              swap(arr[part], arr[j]);
-              ++part;
+    void merge(long long arr1[], long long arr2[], int n, int m)
+    {
+        sort(arr1, arr1 + n);
+        sort(arr2, arr2 + m);
+        int i = 0, j = 0, k = 0;
+
+        long long offset = 1e7;
+        while (i < n && j < m) {
+            if (arr1[i] % offset < arr2[j] % offset) {
+                if (k < n)
+                    arr1[k] += offset * (arr1[i] % offset);
+                else
+                    arr2[k - n] += offset * (arr1[i] % offset);
+                ++i;
             }
-          }
-          
-          swap(arr[part], arr[high]);
-          return (part);
+            else {
+                if (k < n)
+                    arr1[k] += offset * (arr2[j] % offset);
+                else
+                    arr2[k - n] += offset * (arr2[j] % offset);
+                ++j;
+            }
+            ++k;
+        }
+
+        while (i < n) {
+            if (k < n)
+                arr1[k] += offset * (arr1[i] % offset);
+            else
+                arr2[k - n] += offset * (arr1[i] % offset);
+            ++i;
+            ++k;
+        }
+
+        while (j < m) {
+            if (k < n)
+                arr1[k] += offset * (arr2[j] % offset);
+            else
+                arr2[k - n] += offset * (arr2[j] % offset);
+            ++j;
+            ++k;
+        }
+
+        for (int i = 0; i < n; ++i)
+            arr1[i] /= offset;
+        for (int i = 0; i < m; ++i)
+            arr2[i] /= offset;
     }
 };
 
