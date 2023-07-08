@@ -1,3 +1,7 @@
+## Contribution Template
+
+<!-- Here is the template to be used for POTD editorials. Please copy the provided structure and use it as a guide to write your editorial in a similar manner. -->
+
 ## 01. Question Name
 
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1)

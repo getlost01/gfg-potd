@@ -1,4 +1,4 @@
-## JULY - 2023 Solutions for GFG -POTD
+## JULY - 2023
 
 Welcome! to the directory that have the solutions for the GeeksforGeeks (GFG) Problem of the Day for the month of **July 2023**. 
 
