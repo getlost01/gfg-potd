@@ -1,96 +1,63 @@
 # GFG Problem Of The Day
 
-## Today - 7 July 2023
-### Que - Merge Without Extra Space
+## Today - 8 July 2023
+### Que - Find triplets with zero sum
 
-[Question Link](https://practice.geeksforgeeks.org/problems/merge-two-sorted-arrays-1587115620/1)
+
+[Question Link](https://practice.geeksforgeeks.org/problems/find-triplets-with-zero-sum/1)
 
 
 ### My Approach
 
-This problem is a variation of the simple merge sort problem, with the added challenge of achieving O(1) space complexity. 
-
-#### Storing two values at the same index concept
-To accomplish this, we can employ a technique that allows us to store two values at the same index of an array.
-- Given that the maximum value in the array is `1e7`, we can utilize a method where we store the first number in the last 8 digits of the array value and the second number in the remaining digits. 
-
-For instance, if we need to store **13** and **1045** at the same index of the array, we would represent it as **130001045**. By **dividing** the number by 1e7, we retrieve 13, and the **remainder** gives us 1045. This approach simplifies the task while maintaining O(1) space complexity.
-
-#### Merge concept:
-To accomplish the merging process, 
-- We can apply the merge algorithm which typically used in merge sort. 
-- Given that the arrays are sorted, we can select the smaller value between the **ith** index of `arr1` and the **jth** index of `arr2`, and place it in the **kth** index of the combined array (arr1+arr2).
-
-The process for merging in this problem follows the standard procedure used in the merge algorithm of merge sort.
-
-For a more comprehensive understanding of the merge and merge sort concepts, you can refer to this [link](https://www.programiz.com/dsa/merge-sort).
-
-#### Storing values in sorted array and retrieval
-- To address the issue of storing values at the kth index of the combined sorted array, we can utilize the approach described earlier, where we multiply the new value by an offset (`1e7`) and add it to the index.
-
-- To store a value at the kth index of the combined array, we perform a check. If the value of k is less than n, we store the newly sorted value in `arr1[k]`. However, if `k` is greater than or equal to `n`, we store the value at `arr2[k-n]`.
-
-- Once all the merge operations are completed, we can retrieve the values from `arr1` and `arr2` by simply dividing them by the offset value (`1e7`).
-
-For further clarity and understanding, please refer to the provided code.
-
-#### Time Complexity:
-**O(n + m)** because we iterate through all `n` elements of arr1 and `m` elements of arr2 in the merge function.
-####  Auxilliary Space Complexity:
-Constant, since we are not utilizing any variable space for storing data.
-
+Initially, by observing the given problem, we notice that the index of the triplets is not explicitly specified as a requirement or part of the question. Therefore, we can sort the array for our convenience, without affecting the solution or the desired outcome.
+- To solve the problem, we will use two pointers, denoted as `i` and `j`, which represent the first and second values of the triplet, respectively. We will utilize a for loop to iterate over `i` from `0 to n-2` and `j` from `1 to n-1`.
+- The underlying concept is straightforward: if we have `ai` and `aj` and need to find a third value `ak` such that their sum is zero, we can express it as:
+```
+ai + aj + ak = 0
+ak = -(ai+aj)
+```
+- By utilizing a nested loop, we will explore all possible combinations of `i` and `j`. Since the array is sorted, we can use binary search to determine if there exists a possibility for `ak` in our array after `jth` index.
+- In order to optimize the solution and avoid unnecessary checks, we can impose certain conditions. For instance, `ak` should be greater than `aj`, as otherwise, it would not be possible to find the desired value within the range of `(j+1, n)`.
 
 
 #### Code (C++)
 ```cpp
 
 
-class Solution{
+class Solution {
 public:
-    long long offset = 1e7;
-    
-    void newValueInArray(long long arr1[], long long arr2[], int k, int n, long long newVal){
-         if (k < n)
-            arr1[k] += offset * newVal;
-        else
-            arr2[k - n] += offset * newVal;
+    bool find(int arr[], int l, int r, int target) {
+        while (l <= r) {
+            int m = (l + r) / 2;
+            if (arr[m] == target)
+                return true;
+            
+            if (arr[m] > target)
+                r = m - 1;
+            else
+                l = m + 1;
+        }
+        return false;
     }
-
-    void merge(long long arr1[], long long arr2[], int n, int m)
-    {
-        int i = 0, j = 0, k = 0;
-        
-        while (i < n && j < m) {
-            if (arr1[i] % offset < arr2[j] % offset) {
-                newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
-                ++i;
+  
+    bool findTriplets(int arr[], int n) { 
+        sort(arr, arr + n);
+        for (int i = 0; i < n - 2; ++i) {
+            for (int j = i + 1; j < n - 1; ++j) {
+                
+                int target = arr[i] + arr[j];
+                target = -1 * target;
+                
+                if (target >= arr[j + 1]) {
+                    if (find(arr, j + 1, n - 1, target))
+                        return true;
+                }
+                
             }
-            else {
-                 newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
-                ++j;
-            }
-            ++k;
         }
-
-        while (i < n) {
-            newValueInArray(arr1, arr2, k, n, arr1[i] % offset);
-            ++i;
-            ++k;
-        }
-
-        while (j < m) {
-            newValueInArray(arr1, arr2, k, n, arr2[j] % offset);
-            ++j;
-            ++k;
-        }
-
-        for (int i = 0; i < n; ++i)
-            arr1[i] /= offset;
-        for (int i = 0; i < m; ++i)
-            arr2[i] /= offset;
+        return false;
     }
 };
-
 
 ```
 
