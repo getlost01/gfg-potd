@@ -20,6 +20,12 @@ The algorithm maintains four variables that represent the boundaries of the matr
    - Increment `jstart` to move to the next column.
 - If `kth` is equal to `k`in any step during treversing, return the corresponding element from the matrix.
 
+To gain a clearer concept of this spiral matrix algorithm, it is advisable to refer to the following image:
+
+![Concept-of-Spiral-Matrix](https://github.com/getlost01/gfg-potd/assets/79409258/43a66011-5f7e-4360-9853-3b0d588985ac)
+
+Please note that this image was not created by me; its ownership belongs to its respective owner.
+
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: `O(n*m)`, where `n` and `m` are the dimensions of the matrix. We need to traverse all the elements of the matrix in the worst case.
