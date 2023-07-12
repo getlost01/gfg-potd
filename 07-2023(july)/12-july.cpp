@@ -1,14 +1,14 @@
 //{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
-# define mod 1000000007
 
 // } Driver Code Ends
 
 class Solution {
 public:
+    long long mod = 1e9+7;
     long long powerexpo(long long a, long long n) {
-        int res = 1;
+        long long res = 1LL;
         while (n) {
             if (n & 1) {
                 res = (res % mod * a % mod) % mod;
