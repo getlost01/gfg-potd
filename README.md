@@ -21,6 +21,7 @@ The question is straightforward and involves implementing two stacks using the `
 
 
 **The visual representation illustrates the appearance of our stacks.**
+
 <img width=320 src="https://github.com/getlost01/gfg-potd/assets/79409258/0a4288d6-14b5-4132-9a66-4b5e86ff749f" />
 
 ### Time and Auxiliary Space Complexity
