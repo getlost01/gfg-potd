@@ -27,7 +27,7 @@ The question is straightforward and involves implementing two stacks using the `
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: The time complexity for all the operations (`push1`, `push2`, `pop1`, `pop2`) is `O(1)` because we are directly accessing the top elements and updating the pointers.
-- **Auxiliary Space Complexity**: `O(n)`, Since we are not utilising any extra space.
+- **Auxiliary Space Complexity**: `O(1)`, Since we are not utilising any extra space.
 
 
 ### Code (C++)
