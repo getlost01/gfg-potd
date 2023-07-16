@@ -16,12 +16,12 @@ To reverse a queue, we can use a recursive approach.
 - We'll use a helper function called `reverse` that pops the front element from the queue and recursively calls itself until the queue is empty. 
 - Then, we push the popped element back into the queue. This process continues until all elements are reversed.
 
-### Time and Auxiliary Space Complexity
+#### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: The time complexity of the `reverse` function is `O(n)`, where n is the number of elements in the queue.
 - **Auxiliary Space Complexity**: `O(n)` as we use recursion and the call stack to reverse the queue.
 
-### Code (C++)
+#### Code (C++)
 
 ```cpp
 class Solution
@@ -53,12 +53,12 @@ To reverse a queue, we can use a stack. We iterate through the input queue and p
 - Create an empty stack and iterate through the input queue and push each element of the queue onto the stack.
 - Pop elements from the stack and enqueue them back into the queue.
 
-### Time and Auxiliary Space Complexity
+#### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: `O(n)`, where n is the number of elements in the queue.
 - **Auxiliary Space Complexity**: `O(n)`, where n is the number of elements in the queue.
 
-### Code (C++)
+#### Code (C++)
 
 ```cpp
 class Solution
