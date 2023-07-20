@@ -4,54 +4,40 @@
 I have created a Git Book that contains all previous editorials for my GFG-POTD solutions. You can visit **[here](https://gl01.gitbook.io/gfg-editorials/)** to access it and refer to my previous solutions. In the future, I intend to establish a contribution flow, where others can contribute their solutions to this Git Book. I would appreciate hearing your thoughts and views on this in the [discussion section](https://github.com/getlost01/gfg-potd/discussions).
 
 ----
-### Today - 19 July 2023
-### Que - Longest Palindromic Subsequence
+### Today - 20 July 2023
+### Que - Non Repeating Character
 
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/longest-palindromic-subsequence-1612327878/1)
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/non-repeating-character-1587115620/1)
 
 ### My Approach
 
-In order to determine the length of the longest palindromic subsequence within a given string, I used the concept of the longest common subsequence. This involved finding the longest common subsequence between the original string, denoted as `A`, and its reverse, denoted as `rev`. Let's find that out using recursion and memoization.
-
-- The `check` function is a recursive auxiliary function that receives the current indices `i` and `j` of the original string `A` and the reversed string `rev`, respectively. It also takes the length `n` of the string and a 2D vector `dp` for memoization as parameters.
-- The base case of the recursion is when either `i` or `j` reaches the end of the string. In that case, the function returns 0.
-- If the result for the current indices `i` and `j` is already computed and stored in `dp`, it is directly returned.
-- If the characters at indices `i` and `j` are the same, we increment the result by 1 and recursively call the function with the incremented indices.
-- We also recursively call the function with the same `i` but incremented `j` and vice versa, and store the maximum of the three results in `dp[i][j]`.
-- Finally, the function returns the result stored in `dp[0][0]`, which represents the length of the longest palindromic subsequence.
+To find the first non-repeating character in a given string `S`, I use an array `cnt` of size 26 to count the occurrences of each character. 
+I iterate through the string once to populate the `cnt` array. Then, I traverse the string again to find the first character whose count is equal to 1, indicating it is non-repeating.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: Each recursive call reduces the problem size by 1 until `i` or `j` reaches the end of the string. Hence, the time complexity can be considered as `O(n^2)`, where `n` is the length of the string.
-- **Auxiliary Space Complexity**: Since memoization array `dp`, which is of size `n x n`. Therefore, the auxiliary space complexity is `O(n^2)`.
+- **Time Complexity**: `O(N)`, where `N` is the length of the input string `S`.
+- **Auxiliary Space Complexity**: `O(1)` (constant space) since the `cnt` array has a fixed size of `26`, which does not depend on the input.
 
 ### Code (C++)
 
 ```cpp
 class Solution {
 public:
-    int check(int i, int j, int n, string& A, string& rev, vector<vector<int>>& dp) {
-        if (i == n || j == n)
-            return 0;
+    char nonrepeatingCharacter(string S) {
+        int cnt[26] = {0};
 
-        if (dp[i][j] != -1)
-            return dp[i][j];
-
-        if (A[i] == rev[j]) {
-            dp[i][j] = 1 + check(i + 1, j + 1, n, A, rev, dp);
+        for (auto ch : S) {
+            cnt[ch - 'a']++;
         }
-        dp[i][j] = max(dp[i][j], check(i, j + 1, n, A, rev, dp));
-        dp[i][j] = max(dp[i][j], check(i + 1, j, n, A, rev, dp));
 
-        return dp[i][j];
-    }
+        for (auto ch : S) {
+            if (cnt[ch - 'a'] == 1) {
+                return ch;
+            }
+        }
 
-    int longestPalinSubseq(string A) {
-        int n = A.size();
-        string rev = A;
-        reverse(rev.begin(), rev.end());
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-        return check(0, 0, n, A, rev, dp);
+        return '$';
     }
 };
 ```
