@@ -30,47 +30,47 @@ LOL GFG made this question appear easy, but it is not that easy. Although the ta
 ### Code (C++)
 
 ```cpp
-	int totalNodes(Node *root)
-	{
-		if(!root)
-			return 0;
+int totalNodes(Node *root)
+{
+    if(!root)
+        return 0;
+        
+    return totalNodes(root->left) + totalNodes(root->right) + 1;
+}
 
-		return totalNodes(root->left) + totalNodes(root->right) + 1;
-	}
+void modifiedInorder(Node* root, Node* &prev, int mid, int &i, bool isOddSize, float &out )
+{
+    if(!root)
+        return;
+    
+    modifiedInorder(root->left, prev, mid, i, isOddSize, out );
 
-	void modifiedInorder(Node* root, Node* &prev, int mid, int &i, bool isOddSize, float &out )
-	{
-		if(!root)
-			return;
+    if(i == mid){
+        if(isOddSize)
+            out = root->data;
+        else
+            out = ((float)prev->data + (float)root->data)/2;
+    }
+    ++i;
+    prev = root;
 
-		modifiedInorder(root->left, prev, mid, i, isOddSize, out );
+    modifiedInorder(root->right, prev, mid, i, isOddSize, out);
+}
 
-		if(i == mid){
-			if(isOddSize)
-				out = root->data;
-			else
-				out = ((float)prev->data + (float)root->data)/2;
-		}
-		++i;
-		prev = root;
+float findMedian(struct Node *root)
+{
+      int n = totalNodes(root);
 
-		modifiedInorder(root->right, prev, mid, i, isOddSize, out);
-	}
+      Node* prev = NULL;
+      bool isOddSize = n%2;
+      int mid = (n/2) + 1;
+      int i = 1;
+      float out = 0;
 
-	float findMedian(struct Node *root)
-	{
-		  int n = totalNodes(root);
-
-		  Node* prev = NULL;
-		  bool isOddSize = n%2;
-		  int mid = (n/2) + 1;
-		  int i = 1;
-		  float out = 0;
-
-		  modifiedInorder(root, prev, mid, i, isOddSize, out);
-
-		  return out;
-	}
+      modifiedInorder(root, prev, mid, i, isOddSize, out);
+      
+      return out;
+}
 ```
 ### Contribution and Support
 
