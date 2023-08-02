@@ -1,11 +1,4 @@
-## GFG Problem Of The Day
-
-### 🎉 Announcement
-I have created a Git Book that contains all previous editorials for my GFG-POTD solutions. You can visit **[here](https://gl01.gitbook.io/gfg-editorials/)** to access it and refer to my previous solutions. In the future, I intend to establish a contribution flow, where others can contribute their solutions to this Git Book. I would appreciate hearing your thoughts and views on this in the [discussion section](https://github.com/getlost01/gfg-potd/discussions).
-
-----
-### Today - 02 August 2023
-### Que - Shortest Source to Destination Path
+## 02. Shortest Source to Destination Path
 
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/shortest-source-to-destination-path3544/1)
 
@@ -14,12 +7,12 @@ The problem can be found at the following link: [Question Link](https://practice
 To find the shortest path from the source (0,0) to the destination (X,Y) in a grid, we can use a Breadth-First Search (BFS) algorithm. The idea is to start from the source and explore all possible paths in the grid until we reach the destination. We keep track of the steps taken to reach each cell and return the minimum steps required to reach the destination.
 
 - Initialize a queue for BFS traversal.
-- Mark the source cell `(0,0)` as visited and enqueue it with steps = `0`.
+- Mark the source cell (0,0) as visited and enqueue it with steps = 0.
 - While the queue is not empty, do the following:
    - Dequeue a cell from the queue and extract its coordinates (x, y) and the steps taken so far.
    - If the dequeued cell is the destination (X, Y), update the result with the minimum steps obtained so far.
-   - Explore all four adjacent cells (up, down, left, right) from the current cell and enqueue the valid and unvisited cells with `steps + 1`.
-- If the destination is not reached, return `-1`, otherwise, return the minimum steps.
+   - Explore all four adjacent cells (up, down, left, right) from the current cell and enqueue the valid and unvisited cells with steps + 1.
+- If the destination is not reached, return -1, otherwise, return the minimum steps.
 
 ### Time and Auxiliary Space Complexity
 
@@ -72,13 +65,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
-
-If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+If you find this solution helpful, consider supporting us by giving a ⭐ star to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
