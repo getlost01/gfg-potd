@@ -4,70 +4,38 @@
 I have created a Git Book that contains all previous editorials for my GFG-POTD solutions. You can visit **[here](https://gl01.gitbook.io/gfg-editorials/)** to access it and refer to my previous solutions. In the future, I intend to establish a contribution flow, where others can contribute their solutions to this Git Book. I would appreciate hearing your thoughts and views on this in the [discussion section](https://github.com/getlost01/gfg-potd/discussions).
 
 ----
-### Today - 03 August 2023
-### Que - Shortest Path in Directed Acyclic Graph
+### Today - 04 August 2023
+### Que - Reverse a Stack
 
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1)
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/reverse-a-stack/1)
 
 ### My Approach
 
-To find the shortest path in a Directed Acyclic Graph (DAG), we can use a variation of Breadth-First Search `(BFS)` algorithm. First, we build a graph representation from the given edges and initialize a `vis` array to keep track of the minimum distance from the source node (node 0 in this case) to all other nodes. We'll use a queue to perform the BFS traversal.
+To reverse the stack, we can use an auxiliary queue to store the elements temporarily. Here's the step-by-step approach:
 
-- Create a `graph` representation using an adjacency list to store the nodes and their corresponding weights.
-- Initialize a queue `q` and a `vis` array to keep track of minimum distances. Set all distances to `INT_MAX` except for the source node, which is set to 0.
-- Push the source node into the queue with distance 0.
-- While the queue is not empty, perform the following steps:
-   - Dequeue a node and its distance from the queue.
-   - For each neighboring node `next` and its weight `w`, update the distance if the path through the current node is shorter than the previously recorded distance.
-   - Push the `next` node and its updated distance into the queue.
-- Convert the `vis` array. If a node has distance `INT_MAX`, set it to `-1`, as there is no path from the source to that node.
+- Create a temporary queue.
+- Pop each element from the given stack and push it into the temporary queue.
+- Pop each element from the temporary queue and push it back into the original stack.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(V + E)` time, where `V` is the number of nodes (n) and `E` is the number of edges (m).
-- **Auxiliary Space Complexity**: `O(V)`, where `V` is the number of nodes (n) to store the `vis` array and queue.
+- **Time Complexity**: `O(N)` where `N` is the number of elements in the stack.
+- **Auxiliary Space Complexity**: `O(N)` where `N` is the number of elements in the stack.
 
 ### Code (C++)
-
 ```cpp
 class Solution {
 public:
-    vector<int> shortestPath(int n, int m, vector<vector<int>>& edges) {
-        queue<pair<int, int>> q;
-        vector<int> vis(n, INT_MAX);
-
-        vector<vector<pair<int, int>>> graph(n);
-        for (auto node : edges) {
-            int s = node[0];
-            int e = node[1];
-            int w = node[2];
-            graph[s].push_back({ e, w });
+    void Reverse(stack<int> &St) {
+        queue<int> temp;
+        while (!St.empty()) {
+            temp.push(St.top());
+            St.pop();
         }
-
-        q.push({ 0, 0 });
-        vis[0] = 0;
-
-        while (!q.empty()) {
-            int node = q.front().first;
-            int weight = q.front().second;
-            q.pop();
-
-            for (auto& i : graph[node]) {
-                int next = i.first;
-                int w = i.second;
-
-                if (weight + w < vis[next])
-                    q.push({ next, weight + w });
-                vis[next] = min(vis[next], weight + w);
-            }
+        while (!temp.empty()) {
+            St.push(temp.front());
+            temp.pop();
         }
-
-        for (int i = 0; i < n; ++i) {
-            if (vis[i] == INT_MAX)
-                vis[i] = -1;
-        }
-
-        return vis;
     }
 };
 ```
