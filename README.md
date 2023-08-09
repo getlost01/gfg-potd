@@ -4,57 +4,37 @@
 I have created a Git Book that contains all previous editorials for my GFG-POTD solutions. You can visit **[here](https://gl01.gitbook.io/gfg-editorials/)** to access it and refer to my previous solutions. In the future, I intend to establish a contribution flow, where others can contribute their solutions to this Git Book. I would appreciate hearing your thoughts and views on this in the [discussion section](https://github.com/getlost01/gfg-potd/discussions).
 
 ----
-### Today - 08 August 2023
-### Que - Fraction pairs with sum 1
+### Today - 09 August 2023
+### Que - Largest Prime Factor
 
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/fraction-pairs-with-sum-1/1)
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/largest-prime-factor2601/1)
 
 ### My Approach
 
-To solve this problem, we can follow these steps:
-
-- Create a map to store simplified rational numbers, where the key is a `pair` representing the numerator and denominator, and the value is the count of occurrences.
-- For each input fraction `(num[i], den[i])`, calculate the greatest common divisor (GCD) of `num[i]` and `den[i]` using `__gcd()` function, and then insert the simplified fraction into the map after dividing numerator and denominator by gcd.
-- Iterate through the map, and for each entry `(nume, deno) -> cnt`:
-   - If `cnt` is not zero, calculate the new numerator `newNume = deno - nume` we find this required numerator in our map since by adding this numerator we can easily make your pair sum = 1.
-	   - If `nume` is equal to `newNume`, add `(cnt * (cnt - 1)) / 2` to the final result to count pairs that sum up to 1.
-	   - Otherwise, if `(newNume, deno)` exists in the map, add `cnt * mp[{newNume, deno}]` to the result and set `mp[{newNume, deno}]` to zero.
+To find the largest prime factor of a given number `n`,
+- I iterate from `2` up to the square root of `n`. 
+	- During this iteration, I repeatedly divide `n` by `i` as long as `n` is divisible by `i`, and keep track of the largest factor encountered. 
+- Finally, I return the largest factor, which is also the largest prime factor of `n`.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity** : If `n` is the number of fractions, the insertion and iteration take `O(n log n)` time due to the map operations.
-- **Auxiliary Space Complexity** : `O(n)` due to the space required for the map to store simplified fractions.
+- **Time Complexity**: The loop runs from `2` to the square root of `n`, which results in a time complexity of `O(sqrt(n))`.
+- **Auxiliary Space Complexity**: `O(1)` as I am using a constant amount of extra space to store the result.
 
 ### Code (C++)
-
 ```cpp
 class Solution {
 public:
-    int countFractions(int n, int num[], int den[]) {
-        map<pair<int, int>, int> mp;
-
-        for (int i = 0; i < n; ++i) {
-            int gcd = __gcd(num[i], den[i]);
-            ++mp[{num[i] / gcd, den[i] / gcd}];
-        }
-
-        int out = 0;
-
-        for (auto i : mp) {
-            int nume = i.first.first;
-            int deno = i.first.second;
-            int cnt = i.second;
-
-            if (cnt) {
-                int newNume = deno - nume;
-                if (nume == newNume) {
-                    out += (cnt * (cnt - 1)) / 2;
-                } else if (mp.find({newNume, deno}) != mp.end()) {
-                    out += cnt * mp[{newNume, deno}];
-                    mp[{newNume, deno}] = 0;
-                }
+    long long int largestPrimeFactor(int n) {
+        int out = 2;
+        int checkUpto = sqrt(n);
+        for (int i = 2; i <= checkUpto; ++i) {
+            while (n % i == 0) {
+                n = n / i;
+                out = max(out, i);
             }
         }
+        out = max(out, n);
         return out;
     }
 };
