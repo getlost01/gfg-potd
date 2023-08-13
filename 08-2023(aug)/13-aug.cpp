@@ -5,16 +5,14 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Solution {
   public:
     int MOD = 1e9+7;
     int nthFibonacci(int n){
-        if(n<3)
-            return n-1;
-        
         int secondLast = 0;
         int last = 1;
-        int curr;
+        int curr = 1;
         
         n = n-1;
         while(n--){
