@@ -5,6 +5,7 @@ using namespace std;
 
 // } Driver Code Ends
 
+
 class Solution{
   public:
 
@@ -43,13 +44,16 @@ class Solution{
 
         while (out.back() == '0') 
             out.pop_back();
+        
+        if(!out.size())
+            return "0";
 
         if (isNeg1 ^ isNeg2) 
             out += '-';
         
         reverse(out.begin(), out.end());
 
-        return out.size()? out: "0";
+        return out;
     }
 };
 
