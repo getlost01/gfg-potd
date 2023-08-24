@@ -87,7 +87,7 @@ class Solution{
         
         reverse(out.begin(), out.end());
 
-        return out;
+        return out.size()? out: "0";
     }
 };
 ```
