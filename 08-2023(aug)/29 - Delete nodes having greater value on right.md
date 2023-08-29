@@ -17,10 +17,13 @@ Consider the following example:
 ```js
 Input: 12 -> 15 -> 10 -> 11 -> 5 -> 6 -> 2 -> 3
 
-Starting from the right, 
-- We first encounter 3, which is greater than any number to its right, so it's kept.
-- Then, we encounter 2, which is less than 3, so it's deleted. 
-- The process continues in this manner.
+Starting from the right:
+- We first encounter 3, which is greater than any number to its right, so it is retained.
+- Then, we encounter 2, which is less than 3, so it is removed.
+- Next, we encounter 6, which is the last number greater than the previous one, 3, so it is retained.
+- Subsequently, we encounter 5, which is less than the last greater number, 6, so it is removed.
+- Following that, we encounter 11, which is greater than the last number, 6, so it is retained.
+- This process continues in the same manner.
 
 Output: 15 -> 11 -> 6 -> 3
 ```
