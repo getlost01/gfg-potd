@@ -10,13 +10,13 @@ I've used a DFS approach to point out the regions of 'O' characters that were no
 
 The steps involved in implementing this: 
 
-- I've defined two arrays, `dx` and `dy`, representing the four possible directions: up, down, left, and right.
-- Two helper functions are at play:
-   - `isValid` assesses whether a given cell resides within the matrix's boundaries.
-   - `isBoundary` evaluates whether a given cell lies on the matrix's perimeter.
-- I've implemented a recursive function, `setNotClosed`, which marks all connected 'O' characters as 'N' if they aren't enclosed (i.e., not surrounded by 'X').
-- Within the `fill` function, I traverse the entire matrix. Whenever I encounter an 'O' character on the boundary, I invoke `setNotClosed` to label all connected 'O' characters as 'N.'
-- Lastly, I iterate through the entire matrix once more. I replaced 'O' with 'X' and 'N' with 'O' to complete the transformation during this pass.
+-  I define a `dx` and `dy` array to represent the four possible directions: up, down, left, and right.
+- I create two helper functions:
+   - `isValid` checks if a given cell is within the bounds of the matrix.
+   - `isBoundary` checks if a given cell is on the boundary of the matrix.
+- I use a recursive function `setNotClosed` to mark all connected 'O' characters as 'N' if they are not closed (not surrounded by 'X').
+- In the `fill` function, I iterate through the entire matrix and whenever I encounter an 'O' on the boundary, I call `setNotClosed` to mark all connected 'O' characters as 'N'.
+- Finally, I iterate through the entire matrix again and change 'O' to 'X' and 'N' back to 'O' to complete the transformation.
 
 ### Time and Auxiliary Space Complexity
 
