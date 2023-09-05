@@ -4,10 +4,10 @@ The problem can be found at the following link: [Question Link](https://practice
 
 ### My Approach
 
-A basic question with diresct appoach:
+A basic question with a direct approach:
 
-- I'm creating an adjacency list of 2D vector to represent the graph.
-- I iterate through the given edges and add them to the adjacency list, ensuring to **add both directions** since it's an undirected graph.
+- I'm creating an adjacency list of a 2D vector to represent the graph.
+- I iterate through the given edges and `push` them to the adjacency list, ensuring to push vertices from both directions since it's an undirected graph.
 
 ### Time and Auxiliary Space Complexity
 
