@@ -30,8 +30,8 @@ class Solution
 	        vis.assign(V, 0);
             topo.clear();
 	        dfs(motherVer, adj, vis, topo);
-	        for(auto i: topo)
-	            cout<<i<<" ";
+	        // for(auto i: topo)
+	        //     cout<<i<<" ";
 	        if(topo.size() == V)
 	            return motherVer;
 	    }
