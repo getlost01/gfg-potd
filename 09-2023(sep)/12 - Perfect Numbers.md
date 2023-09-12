@@ -29,7 +29,7 @@ public:
         for (int i = 2; i <= sqrt(n); ++i) {
             if (n % i == 0) {
                 sum += i;
-                if (n % i != i)
+                if (n / i != i)
                     sum += n / i;
             }
         }
