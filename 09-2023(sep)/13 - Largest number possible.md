@@ -1,7 +1,4 @@
-## GFG Problem Of The Day
-
-### Today - 13 September 2023
-### Que - Largest number possible
+## 13. Largest number possible
 
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/largest-number-possible5028/1)
 
@@ -50,13 +47,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
