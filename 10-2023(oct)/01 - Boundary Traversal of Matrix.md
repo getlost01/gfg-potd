@@ -1,7 +1,4 @@
-## GFG Problem Of The Day
-
-### Today - 01 October 2023
-### Que - Boundary Traversal of Matrix
+## 1. Boundary Traversal of Matrix
 
 The problem of boundary traversal of a matrix can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/boundary-traversal-of-matrix-1587115620/1)
 
@@ -48,13 +45,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
-
-If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+If you find this solution helpful, consider supporting us by giving a ⭐ star to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
