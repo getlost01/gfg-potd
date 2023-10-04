@@ -1,7 +1,4 @@
-## GFG Problem Of The Day
-
-### Today - 04 October 2023
-### Que - Roman Number to Integer
+## 4. Roman Number to Integer
 
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/roman-number-to-integer3201/1)
 
@@ -41,13 +38,8 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
-
-If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+If you find this solution helpful, consider supporting us by giving a ⭐ star to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
