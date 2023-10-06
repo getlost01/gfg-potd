@@ -62,15 +62,15 @@ class Solution
     public:
     void rearrange(struct Node *odd)
     {
-        struct Node* even, * revOdd, * nextItr,* itr;
-        itr = even = odd;
-        
+        struct Node* even = odd;
+        struct Node* revOdd = NULL;
+        struct Node* itr = odd;
         while(itr){
-            nextItr = itr->next;
+            struct Node* nextItr = itr->next;
             if(nextItr){
                 even->next = itr->next->next;
                 if(even->next)
-                    even = even->next;
+                even = even->next;
                 nextItr->next = revOdd;
                 revOdd = nextItr;
             }else
