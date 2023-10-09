@@ -1,10 +1,5 @@
-## GFG Problem Of The Day
-
-### Today - 09 October 2023
-### Que - Height of Binary Tree
+## 9. Height of Binary Tree
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1)
-
-![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
 To determine the height of a binary tree, I used a recursive approach. 
@@ -28,13 +23,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
