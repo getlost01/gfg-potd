@@ -3,17 +3,19 @@
 ### Today - 10 October 2023
 ### Que - Nodes at Given Distance in Binary Tree
 
-### Problem Statement
+### Problem Statement 
+![](https://badgen.net/badge/Level/Hard/red)
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1)
 
 ### My Approach
 
 Long time back a hard question also a quiet good one to solve.
+
 The intuition for solving this problem involves using depth-first search (DFS) to first find the target node and then tracing the Kth distance from the target. Since it is a binary tree, we employ backtracking to find the Kth distance from the parent's side link.
 
 Here is what I have done:
 
-```js
+```python
 Let's take an example tree:
 
               17    
@@ -37,9 +39,9 @@ K = 3
         /     \
      [8]        22 
     /    \
-  4      [12] 
- /   \     /    \
-13   1    10    14
+  4       [12] 
+ /   \    /    \
+13   1   10    14
 
 -> Now backtrack the DFS path with decreasing Kth value.
 
@@ -47,13 +49,14 @@ K = 3
             /       \
          [20, 1]     15
         /        \
-     [8, 2]     22 
+     [8, 2]      22 
     /      \
   4        [12, 3]
- /   \      /      \
-13   1     10      14
+ /   \     /      \
+13   1    10      14
 
--> The crucial part is that while backtracking, we know if we came from the left or right child. If we came from the left child, then find all the Kth distance children from the right of the current node using DFS, and vice versa.
+-> The crucial part is that while backtracking, we know if we came from the left or right child. 
+If we came from the left child, then find all the Kth distance children from the right of the current node using DFS, and vice versa.
 
              [17, 0]    
             /       \
@@ -90,7 +93,7 @@ To achieve this, I followed these steps:
 
 ### Time and Space Complexity
 
-- **Time Complexity**: The time complexity of this solution is `O(N)`, where `N` is the number of nodes in the binary tree. This is because we perform a single DFS traversal of the tree to find the target node and trace nodes at distance `k`.
+- **Time Complexity**: The time complexity of this solution is `O(N)`, where `N` is the number of nodes in the binary tree. This is because we perform a single DFS traversal of the tree to find the target node and trace nodes at distance `k`. For sorting the `out` vector, we use the `sort` function, which has a time complexity of `O(NlogN)`.
 
 - **Auxiliary Space Complexity**: The auxiliary space complexity is `O(H)`, where `H` is the height of the binary tree. This space is used for the recursive call stack during the DFS traversal.
 
