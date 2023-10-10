@@ -5,13 +5,14 @@
 
 ### Problem Statement 
 ![](https://badgen.net/badge/Level/Hard/red)
+
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1)
 
 ### My Approach
 
-Long time back a hard question also a quiet good one to solve.
+A long time back a hard question in POTD, which is a quite good one to solve.
 
-The intuition for solving this problem involves using depth-first search (DFS) to first find the target node and then tracing the Kth distance from the target. Since it is a binary tree, we employ backtracking to find the Kth distance from the parent's side link.
+The intuition for solving this problem involves using depth-first search (DFS) to find the target node and then tracing the Kth distance from the target. Since it is a binary tree, we employ backtracking to find the Kth distance from the parent's side link.
 
 Here is what I have done:
 
