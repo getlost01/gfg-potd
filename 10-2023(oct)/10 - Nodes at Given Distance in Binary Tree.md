@@ -1,14 +1,10 @@
-## GFG Problem Of The Day
-
-### Today - 10 October 2023
-### Que - Nodes at Given Distance in Binary Tree
+## 10. Nodes at Given Distance in Binary Tree
 
 ### Problem Statement
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/nodes-at-given-distance-in-binary-tree/1)
 
 ### My Approach
 
-Long time back a hard question also a quiet good one to solve.
 The intuition for solving this problem involves using depth-first search (DFS) to first find the target node and then tracing the Kth distance from the target. Since it is a binary tree, we employ backtracking to find the Kth distance from the parent's side link.
 
 Here is what I have done:
@@ -160,13 +156,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
