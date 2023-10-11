@@ -1,13 +1,10 @@
-## GFG Problem Of The Day
-
-### Today - 11 October 2023
-### Que - Check for Balanced Tree
+## 11. Check for Balanced Tree
 
 The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1)
 
-![](https://badgen.net/badge/Level/Easy/green)
+![](https://badgen.net/badge/Level/Hard/red)
 
-### Approach
+### My Approach
 
 To check if a binary tree is balanced, I use a recursive approach. For each node, I calculate the height of its left and right subtrees, and then check if the absolute difference between these heights is less than or equal to 1. If this condition holds for all nodes in the tree, it is considered balanced.
 
@@ -49,13 +46,9 @@ public:
     }
 };
 ```
+
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
-
-If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
+If you find this solution helpful, consider supporting us by giving a ⭐ star to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
