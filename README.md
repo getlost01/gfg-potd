@@ -1,86 +1,59 @@
 ## GFG Problem Of The Day
 
-### Today - 12 October 2023
-### Que - Duplicate subtree in Binary Tree
+### Today - 13 October 2023
+### Que - Floor in BST
 
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/duplicate-subtree-in-binary-tree/1)
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/floor-in-bst/1)
 
 ![](https://badgen.net/badge/Level/Medium/yellow)
 
 ### My Approach
 
-To check if a binary tree contains a duplicate subtree of size 2 or more. It does so by checking if there are any identical subtrees within the tree.
+To find the greatest value node in the Binary Search Tree (BST) that is smaller than or equal to a given value x, you can follow these steps:
 
-Here are the steps in my approach:
-- The dupSub function does a level-order traversal of the binary tree using a queue to extract all the nodes.
-- While traversing the tree, it identifies non-leaf nodes and stores them in the nodes vector.
-- After collecting non-leaf nodes, it iterates through the nodes vector and compares each pair of nodes using the same function to check if they have the same structure and values. If a match is found, it returns true, indicating the presence of a duplicate subtree.
-- If no duplicate subtree is found during the iteration, it returns false.
-
+- Initialize a variable floorValue to -1. This variable will store the floor value as we traverse the BST.
+- Start at the root of the BST.
+- Traverse the BST while comparing the values of nodes with x and updating floorValue accordingly. Use the following rules:
+- If the current node's data is equal to x, return x as the floor value because you've found an exact match.
+- If the current node's data is less than x, update floorValue to the current node's data, as it's a potential floor value, and move to the right subtree because you are looking for a greater value.
+- If the current node's data is greater than x, move to the left subtree because you are looking for a smaller value.
+- Continue this process until you have traversed the entire BST.
+- Return floorValue as the final result.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this approach is `O(N)`, where `N` is the number of nodes in the binary tree. This is because we visit each node once to calculate its height and check the balance condition.
+- **Time Complexity**: The time complexity of this algorithm is `O(H)`, where `H` is the height of the BST. In the best case, when the tree is balanced, the height H is log(N). So, the time complexity can vary from `O(N)` in the worst case to `O(log(N))` in the best case.
 
-- **Space Complexity**: The space complexity is `O(H)`, where `H` is the height of the binary tree. In the worst case, the space complexity is `O(N + H)` for a skewed tree, and in the best case, it is `O(N)` for a balanced tree. This space is used for the recursive call stack.
+- **Space Complexity**: The space complexity of this algorithm is `O(1)`
 
 ### Code (C++)
 
 ```cpp
-bool same(Node * x, Node * y)
-{
-    if((x == nullptr) ^ (y == nullptr))
-        return 0;
-    if((x == nullptr) and (y == nullptr))
-        return 1;
-    if(x -> data != y -> data)
-        return 0;
+class Solution{
 
-    return same(x -> left, y -> left) and same(x -> right, y -> right);
-}
+public:
+    int floor(Node* root, int x) {
+        // Code here
+        int floorValue = -1;
 
-class Solution {
-  public:
-    /*This function returns true if the tree contains 
-    a duplicate subtree of size 2 or more else returns false*/
-    int dupSub(Node *root)
-    {
-        vector<Node *> nodes;
-
-        queue<Node *> q;
-        q.push(root);
-
-        while(!q.empty()){
-            Node * cur = q.front();
-            q.pop();
-
-            bool leaf = 1;
-
-            if(cur -> left != nullptr)
-            {
-                q.push(cur -> left);
-                leaf = 0;
-            }
-            if(cur -> right != nullptr)
-            {
-                q.push(cur -> right);
-                leaf = 0;
-            }
-
-            if(!leaf)
-                nodes.push_back(cur);
-        }
-
-        for(int i = 0; i < nodes.size(); i++)
+        while (root != nullptr)
         {
-            for(int j = i + 1; j < nodes.size(); j++)
+            if (root->data == x)
             {
-                if(same(nodes[i], nodes[j]))
-                    return 1;
+                return x;
+            } 
+            else if (root->data < x)
+            {
+                floorValue = root->data;
+                root = root->right;
+            }
+            else
+            {
+                root = root->left;
             }
         }
 
-        return 0;
+        return floorValue;
     }
 };
 ```
