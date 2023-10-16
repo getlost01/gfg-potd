@@ -5,10 +5,10 @@ The problem can be found at the following link: [Question Link](https://practice
 
 ### My Approach
 
-To solve this problem by first we have to identifying each island in the grid and calculating its size using Depth-First Search (DFS). 
+To solve this problem, we first have to identify each island in the grid and calculate its size using Depth-First Search (DFS). 
 - Then assign a unique identifier to each island and store the size of each island in a hashmap. 
 - Then, I iterate through the grid again and, for each water cell `0`, 
-	- I check its neighboring islands, calculate the combined size of these neighboring islands, and determine the maximum size of an island that can be created by changing this water cell to land. 
+	- I check its neighbouring islands, calculate the combined size of these neighbouring islands, and determine the maximum size of an island that can be created by changing this water cell to land. 
 	- I keep track of the maximum island size found during this process.
 
 ### Explain with example
@@ -18,9 +18,9 @@ Consider the following grid where 1 represents land and 0 represents water:
 Lets example :
 n = 5
 and grid = 1 1 0 0 0
-                1 0 0 1 1
-                0 1 0 0 1
-                1 1 0 1 1
+           1 0 0 1 1
+           0 1 0 0 1
+           1 1 0 1 1
 
 - Step 1: Identify and label the islands with unique using some id.
   2 2 0 0 0
@@ -36,9 +36,9 @@ and grid = 1 1 0 0 0
   | 4  |   3  |
   
 - Step 3: Iterate through water cells and calculate the maximum island size that can be created by changing the water cell to land.
-- For each water cell, calculate the combined size of neighboring islands and determine the maximum size. 
+- Calculate the combined size of neighbouring islands and determine the maximum size for each water cell. 
 
-Let's try some case:
+Let's try some cases:
   2  2  0 0 0
   2 [1] 0 3 3    => Island formed of size = 3 + 3 + 1 = 7
   0  4  0 0 3
