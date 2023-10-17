@@ -5,9 +5,12 @@ The problem can be found at the following link: [Question Link](https://practice
 
 ### My Approach
 
+This is the standard Floyd-Warshall graph problem for finding the transitive closure of a graph.
 - Initialize a transitive closure matrix with the given graph
 - Set all diagonal elements to 1
 - Use the Floyd-Warshall algorithm to compute the transitive closure by considering all pairs of vertices and updating the matrix based on the existence of a path between them through a third vertex.
+
+For better understanding, refer to the following video: [Floyd-Warshall Algorithm](https://www.programiz.com/dsa/floyd-warshall-algorithm)
 
 ### Time and Auxiliary Space Complexity
 
