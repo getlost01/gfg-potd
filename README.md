@@ -1,60 +1,63 @@
 ## GFG Problem Of The Day
 
-### Today - 18 October 2023
-### Que - Eventual Safe States
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/eventual-safe-states/1)
+### Today - 19 October 2023
+### Que - Level of Nodes
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/level-of-nodes-1587115620/1)
 
 ![](https://badgen.net/badge/Level/Medium/yellow)
 
 ### My Approach
 
-A node is terminal if all child nodes are terminal or having no childs. To find the eventual safe states in a directed graph, I use a depth-first search (DFS) approach. With DFS, I check all connected nodes of a current node, and if all nodes are eventually terminals, I mark this node as terminal as well.
+For any question that involves determining the level of, by intuition, we have to implement the Breadth-First Search (BFS) algorithm.
 
-We can implement this approach as follows:
+To begin, we do a BFS traversal from node 0 within the graph, seeking to determine the level of the specified node X. 
 
-- I start by iterating through each node and perform a DFS to determine if it's safe.
-- If I visit a node that has already been determined as safe, I return true.
-- If I encounter a node that is already in the process of being visited (marked as visited but not yet determined safe), I return false to avoid cycles.
-- For each edge, I recursively call the DFS function. If all edges of a node lead to safe states, I mark that node as safe.
+Here is the process:
+1. Use a queue to keep track of nodes that need visiting and a vector to record the level of each visited node.
+2. For each node visited during the BFS, explore its adjacent nodes, marking them as visited and updating their levels.
+3. Continue the BFS until all reachable nodes are visited or until the queue is empty.
+4. If the target node `X` is visited, return its level. If it remains unvisited, return `-1`.
 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: `O(V + E)`, where `V` is the number of nodes (vertices) and `E` is the number of edges in the graph.
-- **Auxiliary Space Complexity**: `O(V)`, where `V` is the number of nodes. This space is used for marking nodes as safe or not.
+- **Auxiliary Space Complexity**: `O(V)`, where `V` is the number of nodes.
 
 ### Code (C++)
 ```cpp
-class Solution {
-  public:
-    bool dfs(int i, vector<int> adj[], vector<bool>& vis, vector<bool>& safe) {
-        if (safe[i])
-            return true;
-        if (vis[i])
-            return false;
-        vis[i] = true;
+class Solution
+{
+	public:
+	int nodeLevel(int V, vector<int> adj[], int X) 
+	{
+	    vector<bool> visited(V, false);
+        vector<int> level(V, 0);
 
-        bool isSafe = true;
-        for (auto edge : adj[i]) {
-            isSafe &= dfs(edge, adj, vis, safe);
+        queue<int> q;
+        q.push(0);
+        visited[0] = true;
+
+        while (!q.empty())
+        {
+            int current = q.front();
+            q.pop();
+
+            for (int neighbor : adj[current])
+            {
+                if (!visited[neighbor])
+                {
+                    visited[neighbor] = true;
+                    level[neighbor] = level[current] + 1;
+                    q.push(neighbor);
+                }
+            }
         }
 
-        return safe[i] = isSafe;
-    }
-
-    vector<int> eventualSafeNodes(int V, vector<int> adj[]) {
-        vector<bool> safe(V, false), vis(V, false);
-        for (int i = 0; i < V; ++i) {
-            if (!vis[i])
-                dfs(i, adj, vis, safe);
-        }
-
-        vector<int> out;
-        for (int i = 0; i < V; ++i)
-            if (safe[i])
-                out.push_back(i);
-
-        return out;
-    }
+        if (visited[X])
+            return level[X];
+        else
+            return -1;
+	}
 };
 ```
 ### Contribution and Support

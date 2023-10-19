@@ -5,11 +5,15 @@ The problem can be found at the following link: [Question Link](https://practice
 
 ### My Approach
 
-- Start a BFS traversal from node 0 in the graph.
-- Use a queue to keep track of nodes to visit and a vector to store the level of each node.
-- For each node visited in the BFS, explore its adjacent nodes, and mark them as visited while updating their levels.
-- Continue the BFS until all reachable nodes are visited or until the queue is empty.
-- If the target node X is visited, return its level. If it's not visited, return -1.
+For any question that involves determining the level of, by intuition, we have to implement the Breadth-First Search (BFS) algorithm.
+
+To begin, we do a BFS traversal from node 0 within the graph, seeking to determine the level of the specified node X. 
+
+Here is the process:
+1. Use a queue to keep track of nodes that need visiting and a vector to record the level of each visited node.
+2. For each node visited during the BFS, explore its adjacent nodes, marking them as visited and updating their levels.
+3. Continue the BFS until all reachable nodes are visited or until the queue is empty.
+4. If the target node `X` is visited, return its level. If it remains unvisited, return `-1`.
 
 ### Time and Auxiliary Space Complexity
 
