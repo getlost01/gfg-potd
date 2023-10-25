@@ -1,59 +1,40 @@
 ## GFG Problem Of The Day
 
-### Today - 24 October 2023
-### Que - Palindromic Partitioning
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/palindromic-patitioning4845/1)
+### Today - 25 October 2023
+### Que - Knapsack with Duplicate Items
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1)
 
-![](https://badgen.net/badge/Level/Hard/red)
+![](https://badgen.net/badge/Level/Medium/yellow)
 
 ### My Approach
 
-I use recursion and memoization DP to find the minimum number of cuts required to partition a given string into palindromic substrings. 
-- I maintain a 2D DP array, `dp`, where `dp[i][j]` represents the minimum number of cuts needed to make the substring `str[i...j]` a palindrome. 
-- To compute `dp[i][j]`, I iterate over all possible substrings within the range `(i, j)`. 
-	- If the substring is already a palindrome, `dp[i][j]` is set to 0. 
-	- If not, I calculate `dp[i][j]` by considering all possible cuts between `i` and `j` and choose the minimum.
+Honestly, if you're not familiar with dynamic programming, I strongly recommend checking out Striver's tutorials for learning DP. He's has provided the well explaining solution for this problem. Just [click here ](https://takeuforward.org/data-structure/unbounded-knapsack-dp-23)to take a look at it.
+
+For now, I solve this knapsack problem with duplicate items using dynamic programming. Here's my approach:
+
+- Create a vector `dp` of size `W+1` and initialize all elements to 0. `dp[i]` will store the maximum value that can be obtained with a knapsack of capacity `i`.
+- Iterate through each item from `0` to `N-1`, where `N` is the number of items.
+- For each item, iterate through the weights from `wt[i]` to `W`, where `W` is the maximum knapsack capacity.
+- Update `dp[w]` by taking the maximum of its current value `dp[w]` and the value of the current item plus the value obtained by using the remaining capacity `w - wt[i]`.
+- Finally, return `dp[W]`, which will contain the maximum value that can be obtained with the given items and their weights.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(n*n)`, where n is the length of the input string `str`.
-- **Auxiliary Space Complexity**: `O(n*n)`, as we use a 2D DP array of size n x n.
+- **Time Complexity**: `O(N * W)`, where `N` is the number of items and `W` is the maximum knapsack capacity.
+- **Auxiliary Space Complexity**: `O(W)`, where `W` is the maximum knapsack capacity.
 
 ### Code (C++)
 ```cpp
 class Solution {
 public:
-    bool isPalin(int i, int j, string& s) {
-        while (i < j) {
-            if (s[i] != s[j])
-                return false;
-            ++i;
-            --j;
-        }
-        return true;
-    }
-    
-    int check(int i, int j, string& s, vector<vector<int>>& dp) {
-        if (i >= j) return 0;
-        
-        if (dp[i][j] != -1) return dp[i][j];
-        
-        if (isPalin(i, j, s)) return dp[i][j] = 0;
-        
-        int out = INT_MAX;
-        for (int k = i; k < j; ++k) {
-            if (isPalin(i, k, s)) {
-                out = min(out, 1 + check(k + 1, j, s, dp));
+    int knapSack(int N, int W, int val[], int wt[]) {
+        vector<int> dp(W + 1, 0);
+        for (int i = 0; i < N; i++) {
+            for (int w = wt[i]; w <= W; w++) {
+                dp[w] = max(dp[w], dp[w - wt[i]] + val[i]);
             }
         }
-        return dp[i][j] = out;
-    }
-    
-    int palindromicPartition(string str) {
-        int n = str.size();
-        vector<vector<int>> dp(n, vector<int>(n, -1));
-        check(0, n - 1, str, dp);
-        return check(0, n - 1, str, dp);
+        return dp[W];
     }
 };
 ```
