@@ -1,40 +1,42 @@
 ## GFG Problem Of The Day
 
-### Today - 25 October 2023
-### Que - Knapsack with Duplicate Items
-The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1)
+### Today - 26 October 2023
+### Que - Minimum Operations
+The problem can be found at the following link: [Question Link](https://practice.geeksforgeeks.org/problems/find-optimum-operation4504/1)
 
-![](https://badgen.net/badge/Level/Medium/yellow)
+![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
+In this problem, we just need to count the '0' and '1' bits in the given number 'n'. We add one for each '1' bit and perform multiple operations for all the bits.
 
-Honestly, if you're not familiar with dynamic programming, I strongly recommend checking out Striver's tutorials for learning DP. He's has provided the well explaining solution for this problem. Just [click here ](https://takeuforward.org/data-structure/unbounded-knapsack-dp-23)to take a look at it.
+To find the minimum operations for a given number `n`, I perform the following steps:
+1. Initialize a variable `out` to -1.
+2. While `n` is not zero:
+   - If `n` is odd (i.e., `n % 2` is 1), increment `out`.
+   - Divide `n` by 2.
+   - Always increment `out`.
+3. Return the value of `out`.
 
-For now, I solve this knapsack problem with duplicate items using dynamic programming. Here's my approach:
-
-- Create a vector `dp` of size `W+1` and initialize all elements to 0. `dp[i]` will store the maximum value that can be obtained with a knapsack of capacity `i`.
-- Iterate through each item from `0` to `N-1`, where `N` is the number of items.
-- For each item, iterate through the weights from `wt[i]` to `W`, where `W` is the maximum knapsack capacity.
-- Update `dp[w]` by taking the maximum of its current value `dp[w]` and the value of the current item plus the value obtained by using the remaining capacity `w - wt[i]`.
-- Finally, return `dp[W]`, which will contain the maximum value that can be obtained with the given items and their weights.
+This approach efficiently counts the minimum operations required to reach 1 from `n` by either subtracting 1 or dividing by 2.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(N * W)`, where `N` is the number of items and `W` is the maximum knapsack capacity.
-- **Auxiliary Space Complexity**: `O(W)`, where `W` is the maximum knapsack capacity.
+- **Time Complexity**: `O(log n)` - The while loop iterates until `n` becomes 0, which typically takes log base 2 of `n` steps.
+- **Auxiliary Space Complexity**: `O(1)` - The algorithm uses a constant amount of extra space.
 
 ### Code (C++)
 ```cpp
 class Solution {
 public:
-    int knapSack(int N, int W, int val[], int wt[]) {
-        vector<int> dp(W + 1, 0);
-        for (int i = 0; i < N; i++) {
-            for (int w = wt[i]; w <= W; w++) {
-                dp[w] = max(dp[w], dp[w - wt[i]] + val[i]);
-            }
+    int minOperation(int n) {
+        int out = -1;
+        while (n) {
+            if (n % 2)
+                ++out;
+            n /= 2;
+            ++out;
         }
-        return dp[W];
+        return out;
     }
 };
 ```

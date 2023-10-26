@@ -4,37 +4,36 @@ The problem can be found at the following link: [Question Link](https://practice
 ![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
+In this problem, we just need to count the '0' and '1' bits in the given number 'n'. We add one for each '1' bit and perform multiple operations for all the bits.
 
-- Create a DP array dp of size n + 1 to store the minimum number of operations to reach each number from 0 to n
-- Initialize dp[0] to 0 since it takes 0 operations to reach 0 from 0
-- Iterate from 1 to n and for each number i ->
-  - Check if i is even, update dp[i] with the minimum between dp[i] and dp[i / 2] + 1 since you can reach i by doubling the previous number
-  - Always update dp[i] with the minimum between dp[i] and dp[i - 1] + 1 since you can also reach i by adding 1 to the previous number
-- Return dp[n] as the minimum number of operations to reach n
+To find the minimum operations for a given number `n`, I perform the following steps:
+1. Initialize a variable `out` to -1.
+2. While `n` is not zero:
+   - If `n` is odd (i.e., `n % 2` is 1), increment `out`.
+   - Divide `n` by 2.
+   - Always increment `out`.
+3. Return the value of `out`.
+
+This approach efficiently counts the minimum operations required to reach 1 from `n` by either subtracting 1 or dividing by 2.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(N)`, where `N` refers to the input number
-- **Auxiliary Space Complexity**: `O(N)`, where `N` refers to the input number
+- **Time Complexity**: `O(log n)` - The while loop iterates until `n` becomes 0, which typically takes log base 2 of `n` steps.
+- **Auxiliary Space Complexity**: `O(1)` - The algorithm uses a constant amount of extra space.
 
 ### Code (C++)
 ```cpp
-class Solution
-{
+class Solution {
 public:
-    int minOperation(int n)
-    {
-        vector<int> dp(n+1, INT_MAX);
-        dp[0]=0;
-        for (int i=1;i<=n;i++)
-        {
-            if (i%2==0)
-            {
-                dp[i] = min(dp[i], dp[i/2]+1);
-            }
-            dp[i] = min(dp[i], dp[i-1]+1);
+    int minOperation(int n) {
+        int out = -1;
+        while (n) {
+            if (n % 2)
+                ++out;
+            n /= 2;
+            ++out;
         }
-        return dp[n];
+        return out;
     }
 };
 ```

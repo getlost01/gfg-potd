@@ -9,19 +9,18 @@ class Solution
 public:
     int minOperation(int n)
     {
-        vector<int> dp(n+1, INT_MAX);
-        dp[0]=0;
-        for (int i=1;i<=n;i++)
-        {
-            if (i%2==0)
-            {
-                dp[i] = min(dp[i], dp[i/2]+1);
-            }
-            dp[i] = min(dp[i], dp[i-1]+1);
+        int out = -1;
+        while(n){
+            if(n%2)
+                ++out;
+            n /= 2;
+            ++out;
         }
-        return dp[n];
+        
+        return out;
     }
 };
+
 
 //{ Driver Code Starts.
 int main()
