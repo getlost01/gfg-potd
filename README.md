@@ -1,11 +1,14 @@
 ## GFG Problem Of The Day
 
 ### Wish you a Happy Diwali 
-May this Diwali bring you new opportunities, new achievement and new dreams. Wishing you a peaceful and joyous.
-![](https://media.freewebstock.com/wishing-happy-diwali-gif.gif)
+May this Diwali bring you new opportunities, new achievements and new dreams. Wishing you a peaceful and joyous.
+
+<div align='center'>
+<img src="https://media.freewebstock.com/wishing-happy-diwali-gif.gif" height=300>
+</div>
 
 ### Today - 12 November 2023
-### Que - Check if string is rotated by two places
+### Que - Check if the string is rotated by two places
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/check-if-string-is-rotated-by-two-places-1587115620/1)
 
 ![](https://badgen.net/badge/Level/Easy/green)
