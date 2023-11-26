@@ -8,26 +8,20 @@ using namespace std;
 
 class Solution {
 public:
+    void solve(int n, vector<int>& out) {
+        out.push_back(n);
+        if (n <= 0)
+            return;
+        solve(n - 5, out);
+        out.push_back(n);
+    }
+
     vector<int> pattern(int N) {
-        if (N <= 0)
-            return {N};
-            
-        int toggle = -5;
-        int c = N;
         vector<int> out;
-        
-        do {
-            out.push_back(c);
-            c += toggle;
-            if (c <= 0)
-                toggle = -toggle;
-        } while (c != N);
-        
-        out.push_back(N);
+        solve(N, out);
         return out;
     }
 };
-
 
 
 //{ Driver Code Starts.

@@ -7,10 +7,10 @@ The problem can be found at the following link: [Question Link](https://www.geek
 ![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
-To generate this specific pattern based on a given integer `N`, 
-- I use a do-while loop to iteratively add and subtract a value (`toggle`) from `N`. 
-- I toggle the sign of `toggle` each time it goes below or equal to 0. 
-- This continues until `c` becomes equal to `N`, and I store each intermediate result in the `out` vector.
+To make this pattern, I followed a recursive technique with backtracking.
+- I kept reducing N by 5 in a loop until it got to 0 or less.
+- While doing this, I added the current N value to the output vector twice. Once before making the recursive call and once after.
+- The pattern comes from the sequence of values added to the vector.
 
 ### Time and Auxiliary Space Complexity
 
@@ -21,22 +21,17 @@ To generate this specific pattern based on a given integer `N`,
 ```cpp
 class Solution {
 public:
+    void solve(int n, vector<int>& out) {
+        out.push_back(n);
+        if (n <= 0)
+            return;
+        solve(n - 5, out);
+        out.push_back(n);
+    }
+
     vector<int> pattern(int N) {
-        if (N <= 0)
-            return {N};
-            
-        int toggle = -5;
-        int c = N;
         vector<int> out;
-        
-        do {
-            out.push_back(c);
-            c += toggle;
-            if (c <= 0)
-                toggle = -toggle;
-        } while (c != N);
-        
-        out.push_back(N);
+        solve(N, out);
         return out;
     }
 };
