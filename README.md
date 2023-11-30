@@ -1,5 +1,12 @@
 ## GFG Problem Of The Day
 
+## 200 days done ✅
+Hey, folks! Today marks my **200th** day of consistently sharing solutions on this GitHub repository. If any of my solutions, are helpful to you, please consider giving a `⭐ star` to this repo. Else, it's totally fine. I created this repo to keep me motivated and solve daily GeeksforGeeks problems consistently.
+
+<img width="250" src="https://github.com/getlost01/gfg-potd/assets/79409258/d1ec8a9b-867e-4d83-9312-6ad2da813915">
+
+---
+
 ### Today - 30 November 2023
 ### Que - Shortest path from 1 to n
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/shortest-path-from-1-to-n0156/1)
@@ -39,6 +46,6 @@ If you have a better solution or any queries / discussions related to the `Probl
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
 
-
 ![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
 ![](https://hit.yhype.me/github/profile?user_id=79409258)
+
