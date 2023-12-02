@@ -1,4 +1,4 @@
-## 01. Inorder Traversal and BST
+## 02. Inorder Traversal and BST
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/inorder-traversal-and-bst5855/1)
 
 ![](https://badgen.net/badge/Level/Easy/green)
@@ -13,7 +13,7 @@ Since it is a BST, its inorder traversal should always be a sorted array, hence 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: O(N), where N is the number elements in the array
-- **Auxiliary Space Complexity**: O(1)
+- **Auxiliary Space Complexity**: O(1), as no extra space is used.
 
 ### Code (C++)
 ```cpp
