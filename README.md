@@ -1,37 +1,40 @@
 ## GFG Problem Of The Day
 
-### Today - 14 December 2023
-### Que - Painting the Fence
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/painting-the-fence3727/1)
+### Today - 15 December 2023
+### Que - Reach the Nth point
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/reach-the-nth-point5433/1)
 
-![](https://badgen.net/badge/Level/Medium/yellow)
+![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
-I'm solving this problem using a dynamic programming approach. I maintain three variables: `same`, `diff`, and `total`. At each step, I update these variables according to the given recurrence relation. The loop iterates from 2 to n, updating the variables in each iteration.
+- Initialize num1 and num2 to 1 and mod to 1e9+7.
+- Use a loop to iteratively calculate the nth term:
+- Calculate a as the sum of num1 and num2 modulo mod.
+- Update num1 and num2 with the values of num2 and a.
+- Return the final value of num2, representing the nth term in the sequence.
 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: `O(n)` - The loop runs for n iterations.
 
-- **Auxiliary Space Complexity**: `O(1)` - The algorithm uses a constant amount of space for variables regardless of the input size.
+- **Auxiliary Space Complexity**: `O(1)`
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    long long countWays(int n, int k){
-        long mod = 1e9 + 7;
-        long same = 0;
-        long diff = k;
-        long total = same + diff;
-
-        for(int i = 2; i <= n; ++i) {
-            same = diff * 1;
-            diff = (total * (k - 1)) % mod;
-            total = same + diff;
-        }
-        return total % mod;
-    }
+class Solution
+{
+	public:
+	int nthPoint(int n)
+	{
+	    long long a=1, b=1, mod=1e9+7;
+	    for(int i=1;i<n;i++)
+	    {
+	        long long c=(a+b)%mod;
+	        a=b;
+	        b=c;
+	    }
+	    return b;
+	}
 };
 ```
 ### Contribution and Support
