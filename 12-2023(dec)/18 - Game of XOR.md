@@ -1,6 +1,6 @@
-## 18. Max Sum without Adjacents
+## 18. Game of XOR
 
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/max-sum-without-adjacents2430/1)
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/game-of-xor1541/1)
 
 ![](https://badgen.net/badge/Level/Medium/yellow)
 
