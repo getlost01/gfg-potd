@@ -5,7 +5,7 @@ The problem can be found at the following link: [Question Link](https://www.geek
 
 ### My Approach
 To traverse the anti-diagonals of the matrix, 
-- I used a helper function `fill` that starts at a given position `(i, j)` and moves diagonally up until it reaches the end of the matrix. 
+- I used a helper function `fill` that starts at a given position `(i, j)` and moves diagonally down until it reaches the border of the matrix.
 - I called this `fill` function for the `top row` and `rightmost column` to cover all the anti-diagonals.
 
 ### Time and Auxiliary Space Complexity
