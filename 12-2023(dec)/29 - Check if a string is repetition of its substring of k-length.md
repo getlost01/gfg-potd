@@ -13,10 +13,11 @@ so in this we can replace 0th index substring "ab" with 4th index substring "cd"
 ```
 
 To solve this question here are the steps:
-- First check if the length of the string is divisible by `k` or not. 
-	- If not, it's impossible to form substrings of length `k` evenly. 
-	- If it is divisible, we iterate through the string and insert substrings of length `k` into an unordered_set. 
-	- The final check is whether the size of the set is less than or equal to 2, indicating that there are only one or two unique substrings of length `k`.
+- First check if the length of the string is divisible by `k`. 
+	- If not, it's impossible to form substrings of length k evenly. 
+	- If it is divisible, we iterate through the string and maintain a count of each substring of length `k` using an unordered_map. 
+	- After counting, we iterate through the map and count how many substrings occur more than once. 
+	- The final check is whether the size of the map is less than or equal to 2 (indicating one or two unique substrings) and the count of repeated substrings is at most 1.
 
 ### Time and Auxiliary Space Complexity
 
@@ -31,11 +32,15 @@ public:
         if (n % k > 0)
             return 0;
 
-        unordered_set<string> st;
+        unordered_map<string,int> mp;
         for (int i = 0; i < n / k; ++i)
-            st.insert(s.substr(i * k, k));
+            ++mp[s.substr(i * k, k)];
+        
+        int cnt = 0;
+        for(auto i : mp)
+            cnt += i.second > 1;
 
-        return st.size() <= 2;
+        return (mp.size() <= 2 && cnt <= 1);
     }
 };
 ```
