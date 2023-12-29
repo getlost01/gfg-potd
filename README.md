@@ -12,10 +12,10 @@ This GFG question is a little unclear. In simple terms, it's asking if we can tu
 Example:
 s = "ababcdabab"
 k = 2
-so in this we can replace 0th index substring "ab" with 5th index substring "cd"
+so in this we can replace 0th index substring "ab" with 4th index substring "cd"
 ```
 
-To solve this question here are steps:
+To solve this question here are the steps:
 - First check if the length of the string is divisible by `k` or not. 
 	- If not, it's impossible to form substrings of length `k` evenly. 
 	- If it is divisible, we iterate through the string and insert substrings of length `k` into an unordered_set. 
