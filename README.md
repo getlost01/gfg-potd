@@ -1,5 +1,26 @@
 ## GFG Problem Of The Day
 
+---
+
+### Year-End Gratitude
+🎉 Wishing you a fantastic New Year's Eve! 🎉 
+
+As we say goodbye to 2023, I just want to say a big thank you to all of you who visited my GFG POTD repo in the last `7 months`. Your daily presence has been a constant source of motivation to do consistently POTD. Thanks a ton! 🙏
+
+## Highlights 
+
+Over the past seven months, I've been sharing my daily GFG POTD solutions. It's been great to see some of you share your solutions and even contribute to the repo. With an average of `600` daily views, this journey has been absolutely fantastic! 🌟
+
+<img width="540" src="https://github.com/getlost01/gfg-potd/assets/79409258/4a83e6af-9e3c-498b-8468-92b7a6be3123">
+
+Awesome achievements, right? Your interest fueled my dedication. Massive shoutout to all coders and learners! Your support means a lot.
+
+Excited for `2024` and more coding adventures. Feel free to comment or share ideas.
+
+**Wishing you a `HAPPY NEW YEAR - 2024` in advance. Hope the journey continues! 🚀**
+
+---
+
 ### Today - 31 December 2023
 ### Que - New Year Resolution
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/good-by-2023/1)
