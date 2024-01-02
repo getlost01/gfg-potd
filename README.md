@@ -1,57 +1,50 @@
 ## GFG Problem Of The Day
 
-**Wishing you a joyous and prosperous NEW YEAR - 2024! May this year bring plenty of opportunities into your life. 🚀**
-
----
-
-### Today - 01 January 2024
-### Que - Array Pair Sum Divisibility Problem
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/array-pair-sum-divisibility-problem3257/1)
+### Today - 02 January 2024
+### Que - Largest Sum Subarray of Size at least K
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/largest-sum-subarray-of-size-at-least-k3121/1)
 
 ![](https://badgen.net/badge/Level/Medium/yellow)
 
 ### My Approach
-I approached this problem by counting the occurrences of each element's remainder when divided by `k`. Then, I checked whether pairs of remainders that should sum up to `k` have the same frequency. 
-
-- Check if the size of the input array is even; return false if not.
-- Count the occurrences of each remainder when divided by `k`.
-- Compare the frequencies of remainders at positions `l` and `r` where `l` starts from 1 and `r` starts from `k-1` and moves towards each other.
-  - If frequencies don't match, return false.
-- Check the middle element (if `k` is odd) and the remainder `0`.
-  - If either of them has an odd frequency, return false.
-- If all checks pass, return true.
+I solve the problem using a sliding window approach.
+- Initialize a vector `pre` of length `n` to store the prefix sum of the input array.
+- Calculate the prefix sum and store it in the `pre` vector.
+- Initialize sum with the sum of the first `k` elements and ans with the same value.
+- Iterate from `k to n`, and in each iteration:
+  - Calculate the sum of the subarray ending at index i.
+  - Update sum with the maximum of the current sum and the sum of the previous k elements plus the current element.
+  - Update ans with the maximum of the current sum and the previous ans.
+- Return the final value of ans as the result.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity** : O(n), where n is the size of the input vector.
-- **Auxiliary Space Complexity** : O(k), where k is the input parameter.
+- **Time Complexity** : `O(n)`, where n is the size of the input vector.
+- **Auxiliary Space Complexity** : `O(n)`, where n is the size of the pre vector.
 
 ### Code (C++)
 ```cpp
 class Solution {
 public:
-    bool canPair(vector<int> nums, int k) {
-        if(nums.size() % 2 != 0)
-            return false;
-            
-        vector<int> cnt(k, 0);
-        
-        for(auto i: nums)
-            ++cnt[i % k];
-        
-        int l = 1, r = k - 1;
-        
-        while(l < r){
-            if(cnt[l] != cnt[r])
-                return false;
-            ++l;
-            --r;
+    long long int maxSumWithK(long long int a[], long long int n, long long int k) 
+    {
+        vector<long long int> pre(n, 0);
+        pre[0] = a[0];
+
+        for (int i = 1; i < n; ++i)
+            pre[i] = pre[i - 1] + a[i];
+
+        long long int sum = pre[k - 1];
+        long long int ans = sum;
+
+        for (int i = k; i < n; i++) 
+        {
+            long long int cur = pre[i] - pre[i - k];
+            sum = max(cur, sum + a[i]);
+            ans = max(ans, sum);
         }
-        
-        if((l == r && cnt[l] % 2 != 0) || cnt[0] % 2 != 0)
-            return false;
-        
-        return true;
+
+        return ans;
     }
 };
 ```
