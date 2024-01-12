@@ -1,47 +1,49 @@
 ## GFG Problem Of The Day
 
-### Today - 10 January 2024
-### Que - Longest subarray with sum divisible by K
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/longest-subarray-with-sum-divisible-by-k1259/1)
+### Today - 12 January 2024
+### Que - Reverse First K elements of Queue
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/reverse-first-k-elements-of-queue/1)
 
-![](https://badgen.net/badge/Level/Medium/yellow)
+![](https://badgen.net/badge/Level/Easy/green)
 
 ### My Approach
-I approached this problem using a hashmap to store the remainder of the cumulative sum when divided by `k`. The key idea is to find two indices with the same remainder to get a subarray whose sum is divisible by `k`.
-- I initialized a hashmap `mp` with an initial entry of {0, -1}, indicating that the sum 0 is seen at index -1.
-- I iterated through the array, updating the cumulative sum and calculating the remainder when divided by `k`.
-- To handle negative remainders, I added `k` to the remainder if it was negative.
-- If the remainder was already in the hashmap, I updated the maximum subarray length `out` by comparing it with the difference between the current index and the index stored in the hashmap for that remainder. Otherwise, I added a new entry in the hashmap.
-- The final result is the length of the longest subarray with a sum divisible by `k`.
+- Initialize an empty stack temp and an empty queue ans.
+- Loop through the first 'k' elements of the input queue 'q'.
+  - Push each element onto the stack 'temp'.
+  - Remove each element from the front of the queue using q.pop().
+- Pop elements from the stack and enqueue them into the 'ans' queue, effectively reversing the order of the first 'k' elements.
+- Enqueue the remaining elements from the original queue 'q' into the 'ans' queue, maintaining their original order.
+- Return the modified 'ans' queue.
 
 ### Time and Auxiliary Space Complexity
-- **Time Complexity**: `O(n)`, where n is the size of the array. The algorithm processes each element of the array once.
-- **Auxiliary Space Complexity**: `O(min(n, k))`, where `n` is the size of the array. The hashmap `mp` stores at most `min(n, k)` entries.
+- **Time Complexity**: `O(N)`, where N is the total number of elements in the queue
+- **Auxiliary Space Complexity**: `O(N)`, where N is the total number of elements in the queue
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    int longSubarrWthSumDivByK(int arr[], int n, int k) {
-        unordered_map<int, int> mp;
-        mp[0] = -1;
-        
-        int out = 0, sum = 0;
-        
-        for (int i = 0; i < n; i++) {
-            sum += arr[i];
-            int rem = sum % k;
-            
-            if (rem < 0)
-                rem += k;
-            
-            if (mp.find(rem) != mp.end())
-                out = max(out, i - mp[rem]);
-            else
-                mp[rem] = i;
+class Solution
+{
+    public:
+    queue<int> modifyQueue(queue<int> q, int k)
+    {
+        stack<int>temp;
+        queue<int>ans;
+        for (int i=0;i<k;i++)
+        {
+            temp.push(q.front());
+            q.pop();
         }
-        
-        return out;
+        while (!temp.empty())
+        {
+            ans.push(temp.top());
+            temp.pop();
+        }
+        while (!q.empty())
+        {
+            ans.push(q.front());
+            q.pop();
+        }
+        return ans;
     }
 };
 ```
