@@ -1,50 +1,47 @@
 ## GFG Problem Of The Day
 
-### Today - 12 January 2024
-### Que - Reverse First K elements of Queue
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/reverse-first-k-elements-of-queue/1)
+### Today - 13 January 2024
+### Que - Insertion Sort for Singly Linked List
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/insertion-sort-for-singly-linked-list/1)
 
-![](https://badgen.net/badge/Level/Easy/green)
+![](https://badgen.net/badge/Level/Medium/yellow)
 
 ### My Approach
-- Initialize an empty stack temp and an empty queue ans.
-- Loop through the first 'k' elements of the input queue 'q'.
-  - Push each element onto the stack 'temp'.
-  - Remove each element from the front of the queue using q.pop().
-- Pop elements from the stack and enqueue them into the 'ans' queue, effectively reversing the order of the first 'k' elements.
-- Enqueue the remaining elements from the original queue 'q' into the 'ans' queue, maintaining their original order.
-- Return the modified 'ans' queue.
+- Traverse the linked list and store each node's data in a vector.
+- Use the sort function to sort the vector containing the linked list data.
+- Traverse the linked list again and update each node's data with the sorted values from the vector.
+- Return the modified linked list.
 
 ### Time and Auxiliary Space Complexity
-- **Time Complexity**: `O(N)`, where N is the total number of elements in the queue
-- **Auxiliary Space Complexity**: `O(N)`, where N is the total number of elements in the queue
+- **Time Complexity**: `O(NlogN)`, where N is the number of nodes in the linked list
+- **Auxiliary Space Complexity**: `O(N)`, where n is the number of nodes in the linked list.
 
 ### Code (C++)
 ```cpp
 class Solution
 {
     public:
-    queue<int> modifyQueue(queue<int> q, int k)
+    Node* insertionSort(struct Node* head_ref)
     {
-        stack<int>temp;
-        queue<int>ans;
-        for (int i=0;i<k;i++)
+        vector<int>ans;
+        Node* temp=head_ref;
+        while (temp!=nullptr)
         {
-            temp.push(q.front());
-            q.pop();
+            ans.push_back(temp->data);
+            temp=temp->next;
         }
-        while (!temp.empty())
+        sort(ans.begin(), ans.end());
+        temp=head_ref;
+        int i=0;
+        while (temp!=nullptr)
         {
-            ans.push(temp.top());
-            temp.pop();
+            temp->data=ans[i];
+            i++;
+            temp=temp->next;
         }
-        while (!q.empty())
-        {
-            ans.push(q.front());
-            q.pop();
-        }
-        return ans;
+        return head_ref;
     }
+    
 };
 ```
 
