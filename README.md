@@ -1,57 +1,60 @@
 ## GFG Problem Of The Day
 
-### Today - 18 January 2024
-### Que - Water the plants
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/water-the-plants--170646/1)
+### Today - 19 January 2024
+### Que - Top k numbers in a stream
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/top-k-numbers3425/1)
 
 ![](https://badgen.net/badge/Level/Medium/yellow)
 
-### My Approach
-I am using a greedy approach to find the minimum number of sprinklers needed to water all the plants, here is the approach.
-- For each plant, determine the range it can be watered. This is done by considering the plant's position and its sprinkler range.
-- Update a vector `range` to store the maximum rightmost position each position can be watered.
-- Traverse the plants and count the number of sprinklers needed based on the updated `range` vector. 
-	- Also check, If any position is not covered by any sprinkler, return -1. 
-	- Otherwise, count the number of sprinklers needed to water all the plants.
+### Question Issue
+I think there may be an issue with today's question, as incorrect answers are being generated for some test cases.
 
-### Time and Auxiliary Space Complexity
-
-- **Time Complexity:** The algorithm has a time complexity of `O(N*max(gallery[i]))`, where N is the number of plants, and max(gallery[i]) is the range of water sprinkler.
-- **Auxiliary Space Complexity:** The algorithm uses `O(N)` extra space to store the `range` vector.
-
-### Code (C++)
-
-```cpp
-class Solution {
-public:
-    int min_sprinklers(int gallery[], int n)
-    {
-        vector<int> range(n, -1);
-
-        for(int i = 0; i < n ; ++i){
-            int l = max(0, i - gallery[i]);
-            int r = min(n - 1, i + gallery[i]);
-            for(int j = l; j <= r; ++j){
-                range[j] = max(range[j], r);
-            }
-        }
-        
-        int count = 0, last = -1;
-
-        for (int i = 0; i < n; ++i) {
-            if (range[i] == -1) {
-                return -1;
-            }
-
-            if (i > last) {
-                ++count;
-                last = range[i];
-            }
-        }
-        return count;
-    }
-};
+Here's an example illustrating the problem:
 ```
+Input: 
+6 3
+1 10 3 1 0 9
+
+Your Output: 
+1
+1 10
+1 3 10
+1 3 10
+0 3 10
+3 9 10
+
+Expected Output: 
+1
+1 10
+1 3 10
+1 3 10
+1
+1
+```
+```
+For Input: 
+4 5
+3 4 0 0
+Your Code's output is: 
+3
+3 4
+0 3 4
+0 3 4
+It's Correct output is: 
+3
+3 4
+
+
+```
+Upon closer inspection, it seems that the constraints provided are as follows:
+
+```
+1 ≤ N ≤ 10^4
+1 ≤ K ≤ 10^2
+1 ≤ a[i] ≤ 10^2 
+```
+
+However, in the test case, they use `a[i]` with a value of `0`. This contradicts the given constraints. It's possible that the test case is not aligned with the specified constraints.
 
 ### Contribution and Support
 
