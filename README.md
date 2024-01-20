@@ -1,14 +1,15 @@
 ## GFG Problem Of The Day
 
+### 🌟 Woohoo! Huge congrats, guys! 🎉 
+> This repo hit a whopping `1Lakh` views in the last 6 months, averaging 600-900 views daily. 
+
+> 🚀 Amazing achievement! 🥳
+
 ### Today - 20 January 2024
 ### Que - Distribute candies in a binary tree
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/distribute-candies-in-a-binary-tree/1)
 
 ![](https://badgen.net/badge/Level/Hard/red)
-
-### 🌟 Woohoo! Huge congrats, guys! 🎉 
-> This repo hit a whopping `1Lakh` views in the last 6 months, averaging 600-900 views daily. 
-> 🚀 Amazing achievement! 🥳
 
 ### My Approach
 
