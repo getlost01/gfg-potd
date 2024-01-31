@@ -1,4 +1,4 @@
-## 31. LCS of three strings
+## 31. Insert and Search in a Trie
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/lcs-of-three-strings0028/1)
 
 ### My Approach
