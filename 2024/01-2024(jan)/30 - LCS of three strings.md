@@ -1,6 +1,8 @@
 ## 30. LCS of three strings
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/lcs-of-three-strings0028/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 I have used dynamic programming to solve this problem. I created a 3D array `dp` to store the length of the Longest Common Subsequence (LCS) of substrings of A, B, and C. The recurrence relation is based on comparing characters at each position. If the characters are equal, I update the length based on the LCS of the substrings without these characters. The final answer is stored in `dp[n1][n2][n3]`, representing the LCS of the entire strings A, B, and C.
 
