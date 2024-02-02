@@ -1,6 +1,8 @@
 ## 29. Count digit groupings of a number
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/count-digit-groupings-of-a-number1520/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 - I use a recursive approach where I start iterating through the string from left to right.
 - For each digit, I add it to the current sum, and if the sum becomes greater than or equal to the current target sum, I recursively call the function with the updated parameters.
