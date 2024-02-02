@@ -2,6 +2,8 @@
 
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/shortest-prime-path--141631/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 
 - Create a sieve of Eratosthenes to efficiently check for prime numbers.
