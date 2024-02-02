@@ -1,6 +1,8 @@
 ## 24. Is it a tree ?
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/is-it-a-tree/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 - Check if the difference between the number of nodes (n) and edges (m) is exactly 1. If not, it's not a tree.
 - Initialize a vector `vis` to keep track of visited nodes.
