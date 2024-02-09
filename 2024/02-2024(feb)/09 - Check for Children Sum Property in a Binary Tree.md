@@ -28,8 +28,6 @@ The problem can be found at the following link: [Question Link](https://www.geek
 ```cpp
 class Solution{
     public:
-    //Function to check whether all nodes of a tree have the value 
-    //equal to the sum of their child nodes.
     int isSumProperty(Node *root)
     {
         if (root==NULL)
@@ -45,7 +43,7 @@ class Solution{
             
         if (root->data==leftSum+rightSum && isSumProperty(root->left) && isSumProperty(root->right))
             return 1;
-        else return 0;
+        return 0;
     }
 };
 ```

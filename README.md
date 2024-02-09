@@ -1,49 +1,52 @@
 ## GFG Problem Of The Day
 
-### Today - 08 February 2024
-### Que - Check if all leaves are at the same level
+### Today - 09 February 2024
+### Que - Check for Children Sum Property in a Binary Tree
 
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/leaf-at-same-level/1)
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/children-sum-parent/1)
 
 ### My Approach
 
-To solve this problem, I utilize a breadth-first search (BFS) approach. I traverse the tree level by level using a queue. While traversing, I keep track of the level of each leaf node encountered. If at any point I encounter a leaf node with a different level than the previously encountered leaf nodes, I return false indicating that not all leaves are at the same level. Otherwise, if all leaf nodes are found at the same level, I return true.
+1. Base Cases:
+- If the root is NULL, return 1.
+- If the root is a leaf, return 1.
+
+2. Calculate Left and Right Sums:
+- Initialize leftSum and rightSum to 0.
+- If the left child exists, set leftSum to its data.
+- If the right child exists, set rightSum to its data.
+
+3. Check Sum Property:
+- Check if the data of the current node equals the sum of leftSum and rightSum.
+- Recursively check the sum property for the left and right subtrees.
+- Return 1 if all conditions are met; otherwise, return 0.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this solution is `O(n)`, where `n` is the number of nodes in the binary tree. 
+- **Time Complexity**: The time complexity of this solution is `O(N)`, where `N` is the number of nodes in the binary tree. 
   
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(n)`, where `n` is the number of nodes in the binary tree. This is because we are using a queue to perform a level-order traversal of the tree.
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(H)`, where `H` is the height of the binary tree.
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    bool check(Node *root)
+class Solution{
+    public:
+    int isSumProperty(Node *root)
     {
-        queue<pair<Node*, int>> q; 
-        q.push({root,0});
-        int firstLeaf = -1;
-        
-        while(!q.empty()){
-            auto node = q.front().first;
-            int lvl = q.front().second;
-            q.pop();
+        if (root==NULL)
+            return 1;
+        if (root->left==NULL && root->right==NULL)
+            return 1;
             
-            if(!node->left && !node->right)
-            {
-                if(firstLeaf == -1)
-                    firstLeaf = lvl;
-                else if(firstLeaf != lvl) 
-                    return false;
-            }
-            ++lvl;
-            if(node->left) 
-                q.push({node->left, lvl});
-            if(node->right) 
-                q.push({node->right, lvl});
-        }
-        return true;
+        int leftSum=0, rightSum=0;
+        if (root->left!=NULL)
+            leftSum=root->left->data;
+        if (root->right!=NULL)
+            rightSum=root->right->data;
+            
+        if (root->data==leftSum+rightSum && isSumProperty(root->left) && isSumProperty(root->right))
+            return 1;
+        return 0;
     }
 };
 ```
