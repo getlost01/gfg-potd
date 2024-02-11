@@ -1,6 +1,8 @@
 ## 27. Brackets in Matrix Chain Multiplication
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/brackets-in-matrix-chain-multiplication1024/1)
 
+![](https://badgen.net/badge/Level/Hard/red)
+
 ### My Approach
 
 I implemented the matrix chain multiplication using dynamic programming with bottom-up tabulation. The steps are as follows:

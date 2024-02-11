@@ -5,6 +5,8 @@
 
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/children-sum-parent/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 
 1. Base Cases:

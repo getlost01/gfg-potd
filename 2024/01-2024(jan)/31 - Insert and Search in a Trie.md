@@ -1,6 +1,8 @@
 ## 31. Insert and Search in a Trie
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/lcs-of-three-strings0028/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 - For both `insert` and `search` functions, I'm using recursion to traverse the trie based on the characters of the input key.
 - In the `insert` function, if a character node is not present in the current TrieNode, I create a new node for that character and continue the insertion.

@@ -1,6 +1,8 @@
 ## 02. Implement Atoi
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/implement-atoi/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 I have implemented the Atoi function using a simple iteration through the input string. Here's a breakdown of the steps:
 

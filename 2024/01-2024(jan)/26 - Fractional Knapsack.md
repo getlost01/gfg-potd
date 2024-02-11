@@ -1,6 +1,8 @@
 ## 26. Fractional Knapsack
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 - I implemented a greedy strategy to maximize the value per weight.
 - I sorted the items in descending order based on their value-to-weight ratios.

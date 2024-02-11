@@ -1,6 +1,8 @@
 ## 22. Paths from root with a specified sum
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/paths-from-root-with-a-specified-sum/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 - I used a recursive approach to traverse the tree and find paths with the specified sum.
 - For each node, I added its value to the current sum and checked if it equals the target sum.

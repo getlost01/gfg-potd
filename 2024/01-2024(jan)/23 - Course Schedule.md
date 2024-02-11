@@ -1,6 +1,8 @@
 ## 23. Course Schedule
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/course-schedule/1)
 
+![](https://badgen.net/badge/Level/Medium/yellow)
+
 ### My Approach
 I am using a topological sorting approach to find the order of courses. The idea is to first create a directed graph representing the prerequisite relationships between courses. Then, I calculate the in-degree (number of incoming edges) for each course. Starting with the courses that have no prerequisites (in-degre e = 0), I use a queue to perform a topological sort.
 
