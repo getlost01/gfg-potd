@@ -2,12 +2,9 @@
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/sum-of-leaf-nodes-in-bst/1)
 
 ### My Approach
-- Implement a recursive function to traverse the BST in an inorder fashion (left, root, right).
-- During the traversal, check if the current node is a leaf node (both left and right children are nullptr).
-- If it's a leaf node, add its data value to the sum (ans).
-- Recursively call the function on the left and right subtrees.
-- Initialize the sum (ans) to zero before starting the traversal.
-- Return the final sum after the traversal.
+- If the root is null, it returns 0.
+- If the root has no left and right children (i.e., it's a leaf node), it returns the value of that node.
+- Otherwise, it recursively calls itself on the left and right subtrees and returns the sum of the results.
 
 ### Time and Auxiliary Space Complexity
 
@@ -16,26 +13,17 @@ The problem can be found at the following link: [Question Link](https://www.geek
 
 ### Code (C++)
 ```cpp
-class Solution
-{
-    public:
-        int ans=0;
-        void func(Node* root)
-        {
-            if (root!=nullptr)
-            {
-                func(root->left);
-                if (!root->right && !root->left)
-                    ans+=root->data;
-                func(root->right);
-            }
-        }
-        int sumOfLeafNodes(Node *root )
-        {
-            ans=0;
-            func(root);
-            return ans;
-        }
+class Solution {
+public:
+    int sumOfLeafNodes(Node *root) {
+        if (!root)
+            return 0;
+        
+        if (!root->left && !root->right)
+            return root->data;
+        
+        return sumOfLeafNodes(root->left) + sumOfLeafNodes(root->right);
+    }
 };
 ```
 

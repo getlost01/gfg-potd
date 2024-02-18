@@ -27,34 +27,21 @@ int search(Node *r, int num);
 
 
 // } Driver Code Ends
-/* The structure of Node
-struct Node{
-    int data;
-    Node *left,*right;
-}; */
-
 
 class Solution
 {
     public:
-        int ans=0;
-        void func(Node* root)
-        {
-            if (root!=nullptr)
-            {
-                func(root->left);
-                if (!root->right && !root->left)
-                    ans+=root->data;
-                func(root->right);
-            }
-        }
-        int sumOfLeafNodes(Node *root )
-        {
-            ans=0;
-            func(root);
-            return ans;
+        int sumOfLeafNodes(Node *root ){
+            if(!root)
+                return 0;
+            
+            if(!root->left && !root->right)
+                return root->data;
+            
+            return sumOfLeafNodes(root->left) + sumOfLeafNodes(root->right);
         }
 };
+
 
 //{ Driver Code Starts.
 
