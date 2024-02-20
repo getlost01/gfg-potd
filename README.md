@@ -1,52 +1,42 @@
 ## GFG Problem Of The Day
 
-### Today - 19 February 2024
-### Que - Game with String
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/game-with-string4100/1)
+### Today - 20 February 2024
+### Que - Word Break
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/word-break1352/1)
 
 ### My Approach
-
-The problem is about playing a game with a given string where the goal is to minimize the string's value. We count the frequency of each character in the string and repeatedly remove the most frequent character k times. Then, we calculate the sum of squares of the remaining frequencies, which represents the value of the resulting string.
-
-- We first count the frequency of each character in the string using an unordered map.
-- We use a priority queue to store the frequencies of characters. This allows us to easily remove the most frequent character each time.
-- We repeatedly remove the most frequent character k times and update the priority queue accordingly.
-- After the removal process, we calculate the value of the resulting string by summing the squares of the remaining frequencies.
+- In this problem, we want to determine if a given string A can be segmented into one or more words from a provided dictionary B.
+- We define a recursive function `can` that checks whether a substring starting at index `i` in string A can be segmented into words from the dictionary.
+- The function iterates through each word in the dictionary and checks if it matches the substring starting at index `i` in A.
+- If a match is found, we recursively call the `can` function with the updated index `i + str.size()` to check the remaining substring.
+- If the end of the string is reached (`i == A.size()`), we return true indicating that the entire string A can be segmented into words from the dictionary.
+- If no match is found, we return false.
+- Finally, we call the `can` function with an initial index of 0 to start the recursive process and return its result.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of the solution is `O(n + k log m)`, where n is the length of the string, k is the given integer, and m is the number of unique characters in the string. 
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(m)`, where m is the number of unique characters in the string, due to the usage of the unordered map and priority queue.
+- **Time Complexity**: The time complexity of the `can` function is O(N * M), where N is the length of string A and M is the maximum length of words in the dictionary.
+- **Auxiliary Space Complexity**: The space complexity is `O(N)`, where `N` is the length of string A, due to the recursive calls that consume stack space.
 
 ### Code (C++)
-
 ```cpp
 class Solution {
 public:
-    int minValue(string s, int k){
-        unordered_map<char,int> mp;
-        for(auto i: s){
-            ++mp[i];
+    bool can(int i, string& A, vector<string> & B){
+        if(i == A.size())
+            return true;
+            
+        for(auto str: B){
+            if(str.size() <= (A.size() - i) && A.substr(i, str.size()) == str){
+                if(can(i + str.size(), A, B))
+                    return true;
+            }
         }
         
-        priority_queue<int> pq;
-        for(auto i: mp)
-            pq.push(i.second);
-        
-        while(k--){
-            int t = pq.top();
-            pq.pop();
-            --t;
-            if(t) pq.push(t);
-        }
-        
-        int out = 0;
-        while(!pq.empty()){
-            out += pq.top() * pq.top();
-            pq.pop();
-        }
-        
-        return out;
+        return false;
+    }
+    int wordBreak(string A, vector<string> &B) {
+       return can(0,A,B);
     }
 };
 ```

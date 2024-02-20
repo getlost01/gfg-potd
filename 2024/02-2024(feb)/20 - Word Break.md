@@ -2,47 +2,38 @@
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/word-break1352/1)
 
 ### My Approach
-
-- Create an unordered_set dict from the vector B for efficient word lookup.
-- Create a dynamic programming array dp of size n + 1, where n is the length of string A.
-- Initialize dp[0] to true since an empty string is always considered segmented.
-- Iterate over each character in string A from 1 to n.
-- For each index i, iterate over the substring from 0 to i-1 (denoted by index j).
-- Check if the substring A[j:i] is present in the dictionary (dict) and if dp[j] is also true.
-- If both conditions are met, set dp[i] to true, indicating that the substring A[0:i-1] can be segmented.
-- If dp[n] is true, return 1, indicating that the entire string can be segmented, otherwise, return 0.
+- In this problem, we want to determine if a given string A can be segmented into one or more words from a provided dictionary B.
+- We define a recursive function `can` that checks whether a substring starting at index `i` in string A can be segmented into words from the dictionary.
+- The function iterates through each word in the dictionary and checks if it matches the substring starting at index `i` in A.
+- If a match is found, we recursively call the `can` function with the updated index `i + str.size()` to check the remaining substring.
+- If the end of the string is reached (`i == A.size()`), we return true indicating that the entire string A can be segmented into words from the dictionary.
+- If no match is found, we return false.
+- Finally, we call the `can` function with an initial index of 0 to start the recursive process and return its result.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(len(A)^2)` due to the nested loops iterating over substrings.
-- **Auxiliary Space Complexity**: `O(len(A))` for the dynamic programming array dp and `O(len(B))` for the unordered_set dict.
+- **Time Complexity**: The time complexity of the `can` function is O(N * M), where N is the length of string A and M is the maximum length of words in the dictionary.
+- **Auxiliary Space Complexity**: The space complexity is `O(N)`, where `N` is the length of string A, due to the recursive calls that consume stack space.
 
 ### Code (C++)
-
 ```cpp
-class Solution
-{
+class Solution {
 public:
-    int wordBreak(string A, vector<string> &B)
-    {
-        unordered_set<string>dict(B.begin(), B.end());
-        int n=A.length();
-        vector<bool>dp(n+1, false);
-        dp[0]=true;
-        for (int i=1;i<=n;i++)
-        {
-            for (int j=0;j<i;j++)
-            {
-                if (dp[j] && dict.find(A.substr(j, i-j))!=dict.end())
-                {
-                    dp[i]=true;
-                    break;
-                }
+    bool can(int i, string& A, vector<string> & B){
+        if(i == A.size())
+            return true;
+            
+        for(auto str: B){
+            if(str.size() <= (A.size() - i) && A.substr(i, str.size()) == str){
+                if(can(i + str.size(), A, B))
+                    return true;
             }
         }
-        if (dp[n])
-            return 1;
-        else return 0;
+        
+        return false;
+    }
+    int wordBreak(string A, vector<string> &B) {
+       return can(0,A,B);
     }
 };
 ```
