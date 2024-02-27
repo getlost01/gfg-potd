@@ -1,47 +1,30 @@
 ## GFG Problem Of The Day
 
-### Today - 26 February 2024
-### Que - Power Set
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/power-set4302/1)
+### Today - 27 February 2024
+### Que - Play With OR
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/play-with-or5515/1)
 
 ### My Approach
-- We use a recursive function to generate all possible subsequences of the given string.
-- At each step of recursion, we have two choices: either include the current character in the subsequence or exclude it.
-- We recursively call the function with the next index and both choices.
-- We store all generated subsequences in a vector.
-- Finally, we sort the vector to ensure lexicographically sorted output.
+- Iterate through the given array from index 0 to n-2.
+- For each index i, perform a bitwise OR operation between arr[i] and arr[i+1].
+- Update the value at arr[i] with the result of the OR operation.
+- Continue this process until the second-to-last element of the array.
+- Return the modified array.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(2^N * N)`, where `N` is the length of the input string. This is because there are `2^N` subsets, and for each subset, there can be up to N characters.
-- **Auxiliary Space Complexity**: `O(2^N * N)`, the space required to store all subsets.
+- **Time Complexity**: `O(N)`, where N is the length of the array.
+- **Auxiliary Space Complexity**: `O(1)`
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    vector<string> out;
-    string curr;
-    
-    void subSeq(int i, string &s) {
-        if (i == s.size()) {
-            if (curr.size())
-                out.push_back(curr);
-            return;
-        }
-        
-        curr.push_back(s[i]);
-        subSeq(i + 1, s);
-        curr.pop_back();
-        subSeq(i + 1, s);
+int* game_with_number(int arr[], int n)
+{
+    for(int i = 0 ; i < n - 1; ++i){
+        arr[i] |= arr[i+1];
     }
-    
-    vector<string> AllPossibleStrings(string s) {
-        subSeq(0, s);
-        sort(out.begin(), out.end());
-        return out;
-    }
-};
+    return arr;
+}
 ```
 
 ### Contribution and Support
