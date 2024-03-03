@@ -5,8 +5,8 @@ using namespace std;
 
 
 // } Driver Code Ends
-//User function template for C++
-bool func(string a, string b)
+
+bool func(string& a, string& b)
 {
     return a+b > b+a;
 }
@@ -15,10 +15,10 @@ public:
 	string printLargest(int n, vector<string> &arr)
 	{
 	    sort(arr.begin(), arr.end(), func);
-        string result;
-        for (const string &s : arr)
-            result+=s;
-        return result;
+        string out;
+        for (auto s : arr)
+            out+=s;
+        return out;
 	}
 };
 
