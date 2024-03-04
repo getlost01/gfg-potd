@@ -1,38 +1,30 @@
 ## GFG Problem Of The Day
 
-### Today - 03 March 2024
-### Que - Largest Number formed from an Array
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/largest-number-formed-from-an-array1117/1)
+### Today - 04 March 2024
+### Que - Swap the array elements
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/need-some-change/1)
 
 ### My Approach
-- I Defined a custom comparison function func that compares two strings a and b based on their concatenation in different orders (a + b vs. b + a).
-- The goal is to arrange the strings in a way that concatenating them results in the largest possible number.
-- Use the sort function to sort the array of strings (arr) in descending order based on the custom comparison function func.
-- This step ensures that the strings are arranged to form the largest number when concatenated.
-- Concatenate the sorted strings to form the final result.
-- Return the concatenated string as the output.
+- Iterate through the array from index 0 to n - 2.
+- Swap the elements at index i and i+2 using bitwise XOR.
+- Repeat until the end of the array is reached.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(NlogN)`, where N is the number of strings in the array.
-- **Auxiliary Space Complexity**: `O(N)`, where N is the number of strings in the array.
+- **Time Complexity**: O(n), where n is the size of the array.
+- **Auxiliary Space Complexity**: O(1), as no extra space is used.
 
 ### Code (C++)
 ```cpp
-bool func(string& a, string& b)
-{
-    return a+b > b+a;
-}
-class Solution{
+class Solution {
 public:
-	string printLargest(int n, vector<string> &arr)
-	{
-	    sort(arr.begin(), arr.end(), func);
-        string out;
-        for (auto s : arr)
-            out+=s;
-        return out;
-	}
+    void swapElements(int arr[], int n) {
+        for (int i = 0; i < n - 2; ++i) {
+            arr[i] = arr[i] ^ arr[i + 2];
+            arr[i + 2] = arr[i] ^ arr[i + 2];
+            arr[i] = arr[i] ^ arr[i + 2];
+        }
+    }
 };
 ```
 
