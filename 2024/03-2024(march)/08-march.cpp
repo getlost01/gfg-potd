@@ -27,6 +27,9 @@ public:
         for(auto i: cnt)
             if(i.second == nin)
                 ++cnin;
+        if (cnin == 1 && nin == 1){
+            return 1;
+        }
             
         return cnt.size() - cnin <= 1;
     }
