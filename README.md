@@ -1,47 +1,43 @@
 ## GFG Problem Of The Day
 
-### Today - 08 March 2024
-### Que - Check if frequencies can be equal
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/check-frequencies4211/1)
+### Today - 09 March 2024
+### Que - Find the N-th character
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-the-n-th-character5925/1)
 
 ### My Approach
-- I iterate through the given string and count the frequency of each character using an unordered_map.
-- I find the minimum and maximum frequencies among all characters.
-- I check if the difference between the maximum and minimum frequencies is more than 1. If it is, return 0 (false).
-- I count the number of characters having the minimum frequency.
-- I check if the difference between the total number of unique characters and the number of characters with the minimum frequency is at most 1. If it is, return 1 (true), indicating that frequencies can be made equal.
+- Initialize a variable len to store the length of the input string s.
+- Use a loop to iterate r times for the specified number of iterations.
+- In each iteration : 
+  - Create a temporary string temp and copy the content of the original string s.
+  - Use another loop to traverse each character in the original string s.
+  - Update each character based on the following logic :
+    - If the corresponding character in temp at position j/2 is '0', set s[j] to '0' + (j % 2).
+    - Otherwise, set s[j] to '1' - (j % 2).
+- After completing all iterations, the desired character is at index n in the final string s.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity** : O`(N)`, where N is the length of the input string.
-- **Auxiliary Space Complexity** : At most, 26 unique characters can be used, resulting in a time complexity of `O(26)`
+- **Time Complexity** : `O(r*|s|)`, as there are two nested loops.
+- **Auxiliary Space Complexity** : `O(|s|)`, as the temporary string temp is of the same length as the input string.
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    bool sameFreq(string s)
+class Solution{
+  public:
+    char nthCharacter(string s, int r, int n)
     {
-        unordered_map<char,int> cnt;
-        for(auto i: s)
-            cnt[i]++;
-        
-        int nin, nax;
-        nin = nax = cnt[s[0]];
-        
-        for(auto i: cnt){
-            nin = min(nin, i.second);
-            nax = max(nax, i.second);
-            if(nax - nin > 1)
-                return 0;
+        int len=s.length();
+        for (int i=0;i<r;i++)
+        {
+            string temp=s;
+            for (int j=0;j<len;j++)
+            {
+                if (temp[j/2]=='0')
+                    s[j]='0'+(j%2);
+                else s[j]='1'-(j%2);
+            }
         }
-        
-        int cnin = 0;
-        for(auto i: cnt)
-            if(i.second == nin)
-                ++cnin;
-            
-        return cnt.size() - cnin <= 1;
+        return s[n];
     }
 };
 ```
