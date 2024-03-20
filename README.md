@@ -1,48 +1,52 @@
 ## GFG Problem Of The Day
 
-### Today - 18 March 2024
-### Que - Level order traversal
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/level-order-traversal/1)
+### Today - 20 March 2024
+### Que - Sum of nodes on the longest path from root to leaf node
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1)
 
 ### My Approach
-- I performed a level order traversal of the binary tree using BFS approach.
-- We start by pushing the root node into the queue.
-- Then, we iterate while the queue is not empty:
-    - Pop the front node from the queue and push its data into the output vector.
-    - If the popped node has a left child, push it into the queue.
-    - If the popped node has a right child, push it into the queue.
-- Repeat until all nodes are traversed.
+- Implement Depth First Search (DFS) to traverse the binary tree.
+- At each node, calculate the sum and length of the longest path from the root to a leaf node.
+- Maintain a pair of integers representing the sum and length of the longest path encountered so far.
+- Compare the longest paths from the left and right subtrees. If they have the same length, choose the path with the maximum sum.
+- Update the sum and length of the current longest path based on the chosen subtree.
+- Recursively compute the sum and length for each subtree.
+- Finally, return the sum of nodes along the longest path from the root to any leaf node.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the binary tree. This is because we visit each node once.
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the number of nodes in the binary tree.
+- **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the binary tree.
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(H)`, where H is the height of the binary tree
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    vector<int> levelOrder(Node* root) {
-        queue<Node*> q;
-        vector<int> out;
-        
-        if(root == nullptr)
-            return out;
-        
-        q.push(root);
-        
-        while(!q.empty()) {
-            auto front = q.front();
-            q.pop();
-            out.push_back(front->data);
-            
-            if(front->left)
-                q.push(front->left);
-            if(front->right)
-                q.push(front->right);
+class Solution
+{
+    public:
+    function<pair<int,int>(Node *)>dfs=[&](Node* node)->pair<int,int>
+    {
+        if(!node)
+            return {0, 0};
+        pair<int,int>left=dfs(node->left);
+        pair<int,int>right=dfs(node->right);
+        pair<int,int>ans;
+        if(left.second>right.second)
+            ans=left;
+        else if(right.second>left.second)
+            ans=right;
+        else
+        {
+            ans.first=max(left.first, right.first);
+            ans.second=left.second;
         }
-        
-        return out;
+        ans.first+=(node->data);
+        ans.second++;
+        return ans;
+    };
+    
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        return dfs(root).first;
     }
 };
 ```
