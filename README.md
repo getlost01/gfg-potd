@@ -1,52 +1,64 @@
 ## GFG Problem Of The Day
 
-### Today - 20 March 2024
-### Que - Sum of nodes on the longest path from root to leaf node
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/sum-of-the-longest-bloodline-of-a-tree/1)
+### Today - 21 March 2024
+### Que - ZigZag Tree Traversal
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/zigzag-tree-traversal/1)
 
 ### My Approach
-- Implement Depth First Search (DFS) to traverse the binary tree.
-- At each node, calculate the sum and length of the longest path from the root to a leaf node.
-- Maintain a pair of integers representing the sum and length of the longest path encountered so far.
-- Compare the longest paths from the left and right subtrees. If they have the same length, choose the path with the maximum sum.
-- Update the sum and length of the current longest path based on the chosen subtree.
-- Recursively compute the sum and length for each subtree.
-- Finally, return the sum of nodes along the longest path from the root to any leaf node.
+- Initialize an empty vector ans to store the zigzag traversal result.
+- Check if the root is null. If so, return the empty ans vector.
+- Use a queue q to perform level order traversal.
+- Start by pushing the root node into the queue.
+- Initialize a boolean variable left to true to control the direction of traversal.
+- While the queue is not empty :
+  - Get the size of the queue to process nodes at the current level.
+  - Create a temporary vector vec to store node values at the current level.
+  - Iterate through the nodes at the current level.
+    - Dequeue a node from the front of the queue.
+    -  the index to insert the node value based on the traversal direction.
+    - Store the node value at the determined index in vec.
+    - If the dequeued node has left or right child, enqueue them.
+  - Toggle the value of left to switch the direction for the next level.
+  - Append the values stored in vec to the result vector ans.
+- Return the result vector ans containing the zigzag traversal of the tree.
 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the binary tree.
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(H)`, where H is the height of the binary tree
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the maximum number of nodes at any level of the tree.
 
 ### Code (C++)
 ```cpp
-class Solution
-{
+class Solution{
     public:
-    function<pair<int,int>(Node *)>dfs=[&](Node* node)->pair<int,int>
+    //Function to store the zig zag order traversal of tree in a list.
+    vector<int>ans;
+    vector <int> zigZagTraversal(Node* root)
     {
-        if(!node)
-            return {0, 0};
-        pair<int,int>left=dfs(node->left);
-        pair<int,int>right=dfs(node->right);
-        pair<int,int>ans;
-        if(left.second>right.second)
-            ans=left;
-        else if(right.second>left.second)
-            ans=right;
-        else
+        if (root==nullptr)
+            return ans;
+        queue<Node*> q;
+        q.push(root);
+        bool left=true;
+        while (!q.empty())
         {
-            ans.first=max(left.first, right.first);
-            ans.second=left.second;
+            int size=q.size();
+            vector<int>vec(size);
+            for (int i=0;i<size;i++)
+            {
+                Node* temp=q.front();
+                q.pop();
+                int ind=left ? i : (size-1-i);
+                vec[ind]=temp->data;
+                if (temp->left)
+                    q.push(temp->left);
+                if (temp->right)
+                    q.push(temp->right);
+            }
+            left=!left;
+            ans.insert(ans.end(), vec.begin(), vec.end());
         }
-        ans.first+=(node->data);
-        ans.second++;
         return ans;
-    };
-    
-    int sumOfLongRootToLeafPath(Node *root)
-    {
-        return dfs(root).first;
     }
 };
 ```
