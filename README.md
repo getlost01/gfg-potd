@@ -1,63 +1,45 @@
 ## GFG Problem Of The Day
 
-### Today - 21 March 2024
-### Que - ZigZag Tree Traversal
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/zigzag-tree-traversal/1)
+### Today - 22 March 2024
+### Que - Diagonal sum in binary tree
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/diagonal-sum-in-binary-tree/1)
 
 ### My Approach
-- Initialize an empty vector ans to store the zigzag traversal result.
-- Check if the root is null. If so, return the empty ans vector.
-- Use a queue q to perform level order traversal.
-- Start by pushing the root node into the queue.
-- Initialize a boolean variable left to true to control the direction of traversal.
-- While the queue is not empty :
-  - Get the size of the queue to process nodes at the current level.
-  - Create a temporary vector vec to store node values at the current level.
-  - Iterate through the nodes at the current level.
-    - Dequeue a node from the front of the queue.
-    -  the index to insert the node value based on the traversal direction.
-    - Store the node value at the determined index in vec.
-    - If the dequeued node has left or right child, enqueue them.
-  - Toggle the value of left to switch the direction for the next level.
-  - Append the values stored in vec to the result vector ans.
-- Return the result vector ans containing the zigzag traversal of the tree.
+- Define a function diagonalSum that takes the root of a binary tree as input.
+- Initialize an empty vector ans to store diagonal sums.
+- Implement a Depth-First Search (DFS) function dfs using a lambda function:
+  - Traverse the tree recursively.
+  - Maintain the current diagonal level.
+  - At each node:
+    - Update the sum of the current diagonal level in ans.
+    - Recur for the left child with cur + 1 as the diagonal level.
+    - Recur for the right child with the same diagonal level cur.
+- Invoke dfs with the root node and diagonal level 0.
+- Return the ans vector containing diagonal sums.
 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the binary tree.
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the maximum number of nodes at any level of the tree.
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the number of nodes in the binary tree.
 
 ### Code (C++)
 ```cpp
-class Solution{
-    public:
-    //Function to store the zig zag order traversal of tree in a list.
-    vector<int>ans;
-    vector <int> zigZagTraversal(Node* root)
+class Solution {
+  public:
+    vector<int> diagonalSum(Node* root)
     {
-        if (root==nullptr)
-            return ans;
-        queue<Node*> q;
-        q.push(root);
-        bool left=true;
-        while (!q.empty())
+        vector<int> ans;
+        function<void(Node *, int)> dfs = [&](Node * node, int cur)
         {
-            int size=q.size();
-            vector<int>vec(size);
-            for (int i=0;i<size;i++)
-            {
-                Node* temp=q.front();
-                q.pop();
-                int ind=left ? i : (size-1-i);
-                vec[ind]=temp->data;
-                if (temp->left)
-                    q.push(temp->left);
-                if (temp->right)
-                    q.push(temp->right);
-            }
-            left=!left;
-            ans.insert(ans.end(), vec.begin(), vec.end());
-        }
+            if(!node)
+                return;
+            if(cur==ans.size())
+                ans.push_back(node -> data);
+            else ans[cur] += node -> data;
+            dfs(node->left, cur+1);
+            dfs(node->right, cur);
+        };
+        dfs(root, 0);
         return ans;
     }
 };
