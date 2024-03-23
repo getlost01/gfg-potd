@@ -1,46 +1,43 @@
 ## GFG Problem Of The Day
 
-### Today - 22 March 2024
-### Que - Diagonal sum in binary tree
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/diagonal-sum-in-binary-tree/1)
+### Today - 23 March 2024
+### Que - Fibonacci series up to Nth term
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/fibonacci-series-up-to-nth-term/1)
 
 ### My Approach
-- Define a function diagonalSum that takes the root of a binary tree as input.
-- Initialize an empty vector ans to store diagonal sums.
-- Implement a Depth-First Search (DFS) function dfs using a lambda function:
-  - Traverse the tree recursively.
-  - Maintain the current diagonal level.
-  - At each node:
-    - Update the sum of the current diagonal level in ans.
-    - Recur for the left child with cur + 1 as the diagonal level.
-    - Recur for the right child with the same diagonal level cur.
-- Invoke dfs with the root node and diagonal level 0.
-- Return the ans vector containing diagonal sums.
+- Initialize an empty vector vec to store the Fibonacci series.
+- Initialize variables n1 and n2 with initial Fibonacci values.
+- If n is 0, push n1 into vec and return vec.
+- If n is 1, push both n1 and n2 into vec and return vec.
+- For i starting from 2 up to n, calculate the next Fibonacci number by adding the last two elements of vec, take modulo mod, and push it into vec.
+- Return the vec vector containing the Fibonacci series.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the binary tree.
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the number of nodes in the binary tree.
+- **Time Complexity**: The time complexity of this approach is `O(N)`, because it iterates N times to generate the Fibonacci series.
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(N)`, where N is the user input.
 
 ### Code (C++)
 ```cpp
 class Solution {
   public:
-    vector<int> diagonalSum(Node* root)
+    const int mod=1e9+7;
+    vector<int> Series(int n)
     {
-        vector<int> ans;
-        function<void(Node *, int)> dfs = [&](Node * node, int cur)
+        vector<int>vec;
+        int n1=0, n2=1;
+        vec.push_back(n1);
+        if (n==0)
+            return vec;
+        vec.push_back(n2);
+        if (n==1)
+            return vec;
+        for (int i=2;i<=n;i++)
         {
-            if(!node)
-                return;
-            if(cur==ans.size())
-                ans.push_back(node -> data);
-            else ans[cur] += node -> data;
-            dfs(node->left, cur+1);
-            dfs(node->right, cur);
-        };
-        dfs(root, 0);
-        return ans;
+            int num=(vec[i-1]+vec[i-2])%mod;
+            vec.push_back(num);
+        }
+        return vec;
     }
 };
 ```
