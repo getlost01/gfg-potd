@@ -1,4 +1,4 @@
-## 22. Fibonacci series up to Nth term
+## 23. Fibonacci series up to Nth term
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/fibonacci-series-up-to-nth-term/1)
 
 ### My Approach
