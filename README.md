@@ -1,39 +1,34 @@
 ## GFG Problem Of The Day
 
-### Today - 29 March 2024
-### Que - Euler Circuit in an Undirected Graph
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/euler-circuit-in-a-directed-graph/1)
+### Today - 30 March 2024
+### Que - Minimum element in BST
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1)
 
 ### My Approach
-- Create an unordered map deg to store the degree of each vertex.
-- Iterate through each vertex i from 0 to v-1:
-  - Set the degree of vertex i as the size of its adjacency list.
-- Iterate through each key-value pair (vertex, degree) in the deg map:
-  - Check if the degree of the vertex is odd:
-    - If it's odd, return false as an Euler circuit cannot exist.
-- If no odd degree vertices are found, return true indicating that an Euler circuit exists.
+- Start from the root node.
+- Traverse towards the left child of the current node until a leaf node is reached (the node with no left child).
+- Return the value of the leaf node, which represents the minimum value in the binary search tree.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(V + E)`, where `V` is the number of vertices and E is the number of edges.
-- **Auxiliary Space Complexity**: `O(V)`, where `V` is the number of vertices.
+- **Time Complexity**: `O(H)`, where `H` is the height of the binary search tree.
+- **Auxiliary Space Complexity**: `O(1)`, since the space used is independent of the input size.
 
 ### Code (C++)
 ```cpp
 class Solution {
-public:
-	bool isEularCircuitExist(int v, vector<int>adj[]){
-	    unordered_map<int, int>deg;
-        for (int i=0;i<v;i++) 
-            deg[i]=adj[i].size();
-        for (auto& kv : deg)
+public:   
+    int minValue(Node* root)
+    {
+        if (!root)
+            return -1;
+        if (root->left)
         {
-            if (kv.second%2!=0)
-                return false;
+            root=root->left;
+            minValue(root);
         }
-        return true;
-	}
-
+        else return root->data;
+    }
 };
 ```
 
