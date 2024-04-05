@@ -50,26 +50,30 @@ at this starting pointer updates
 
 class Solution{
   public:
-    int countSubArrayProductLessThanK(const vector<int>& a, int n, long long k) {
-        int out = 0;
-        int i = 0, j = 0;
-        long long currProd = 1;
-        
-        while(i < n && j < n) {
-            currProd *= a[j];
-            
-            while(currProd >= k && i < j) {
-                currProd /= a[i];
-                i++;
+    long long countSubArrayProductLessThanK(const vector<int>& a, int n, long long k) {
+        long long p = 1;
+        long long res = 0;
+        for (int start = 0, end = 0; end < n; end++) {
+    
+            // Move right bound by 1 step. Update the product.
+            p *= a[end];
+    
+            // Move left bound so guarantee that p is again
+            // less than k.
+            while (start < end && p >= k) p /= a[start++];
+    
+            // If p is less than k, update the counter.
+            // Note that this is working even for (start == end):
+            // it means that the previous window cannot grow
+            // anymore and a single array element is the only
+            // addendum.
+            if (p < k) {
+                int len = end - start + 1;
+                res += len;
             }
-            
-            if(currProd < k)
-                out += j - i + 1;
-                
-            j++;
         }
-        return out;
-
+    
+        return res;
     }
 };
 
