@@ -1,43 +1,32 @@
 ## GFG Problem Of The Day
 
-### Today - 09 April 2024
-### Que - Minimum Points To Reach Destination
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/minimum-points-to-reach-destination0540/1)
+### Today - 10 April 2024
+### Que - Party of Couples
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/alone-in-couple5507/1)
 
 ### My Approach
-- We will use dynamic programming to solve this problem. 
-- We initialize a 2D DP array `dp` of size `m x n`, where `dp[i][j]` represents the minimum points required to reach the destination starting from `(i, j)`.
-- We start from the bottom-right corner and move upwards and leftwards, calculating the minimum points required at each cell to reach the destination.
-- At each cell `(i, j)`, we calculate `dp[i][j]` using the formula: `dp[i][j] = max(1, min(dp[i+1][j], dp[i][j+1]) - points[i][j])`.
-- We return `dp[0][0]` which represents the minimum points required to reach the destination starting from the top-left corner.
+- Initialize a variable ans to 0.
+- Iterate through the array arr using a loop.
+- For each element in the array, perform bitwise XOR operation with ans.
+- After iterating through all elements, ans will contain the single element occurring only once in the array.
+- Return ans.
 
 ### Time and Auxiliary Space Complexity
-
-- **Time Complexity**: The time complexity of this approach is `O(m * n)`, where m is the number of rows and n is the number of columns in the `points` matrix.
-
-- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(m * n)` due to the dynamic programming matrix `dp`.
+- **Time Complexity**: The time complexity of this approach is `O(N)`, where `N` is the number of elements in the array
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(1)` because the algorithm uses a constant amount of extra space.
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    int minPoints(int m, int n, vector<vector<int>>& points) {
-        vector<vector<int>> dp(m, vector<int>(n, 0));
-        dp[m - 1][n - 1] = max(1, 1 - points[m - 1][n - 1]);
-
-        for (int i = m - 2; i >= 0; --i)
-            dp[i][n - 1] = max(1, dp[i + 1][n - 1] - points[i][n - 1]);
-
-        for (int i = n - 2; i >= 0; --i)
-            dp[m - 1][i] = max(1, dp[m - 1][i + 1] - points[m - 1][i]);
-
-        for (int i = m - 2; i >= 0; --i) {
-            for (int j = n - 2; j >= 0; --j) {
-                dp[i][j] = max(1, min(dp[i + 1][j], dp[i][j + 1]) - points[i][j]);
-            }
+class Solution{
+    public:
+    int findSingle(int n, int arr[])
+    {
+        int ans=0;
+        for (int i=0;i<n;i++)
+        {
+            ans^=arr[i];
         }
-
-        return dp[0][0];
+        return ans;
     }
 };
 ```
