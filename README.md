@@ -1,17 +1,29 @@
 ## GFG Problem Of The Day
 
-### Today - 13 April 2024
-### Que - Reverse Bits
+### Today - 14 April 2024
+### Que - Xoring and Clearing
 
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/reverse-bits3556/1)
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/xoring-and-clearing/1)
 
 ### My Approach
 
-For this problem, I'm using a straightforward approach. I iterate through each bit of the given number `x`. In each iteration, I extract the least significant bit of `x` using the bitwise AND operator (`x & 1`). I add this bit to the result variable `out`. Then, I left shift `out` by one bit to make space for the next bit. Finally, I right shift `x` by one bit to move to the next bit position. I repeat this process for 31 iterations, as we are considering the 32-bit representation of `x` (assuming a 32-bit integer).
+- For printArr function:
+  - Iterate through the array from index 0 to n-1.
+  - Print each element of the array followed by a space.
+  - Print a newline character after printing all elements.
+
+- For setToZero function:
+  - Iterate through the array from index 0 to n-1.
+  - Set each element in the array to zero using direct assignment.
+ 
+- For xor1ToN function:
+  - Iterate through the array from index 0 to n-1.
+  - For each element at index i, perform a bitwise XOR operation with i.
+  - Update the element in the array with the result of the XOR operation.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: O(1) - Since the number of iterations (31) is fixed and independent of the input size.
+- **Time Complexity**: `O(N)`, where `N` is the size of the array.
 - **Auxiliary Space Complexity**: O(1) - No extra space is used; the space complexity remains constant.
 
 ### Code (C++)
@@ -19,14 +31,26 @@ For this problem, I'm using a straightforward approach. I iterate through each b
 ```cpp
 class Solution {
   public:
-    long long reversedBits(long long x) {
-        long long out = 0;
-        for(int i = 0; i < 31; ++i)
-            out += x & 1,
-            out <<= 1,
-            x >>= 1;
-            
-        return out;
+    void printArr(int n, int arr[])
+    {
+        // Your code for printing array here
+        for (int i=0;i<n;i++)
+            cout<<arr[i]<<" ";
+        cout<<endl;
+    }
+
+    void setToZero(int n, int arr[])
+    {
+        // Use memset to set arr to zero
+        for (int i=0;i<n;i++)
+            arr[i]=0;
+    }
+
+    void xor1ToN(int n, int arr[])
+    {
+        // Xor arr[i]^i
+        for (int i=0;i<n;i++)
+            arr[i]^=i;
     }
 };
 ```
