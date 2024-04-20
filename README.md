@@ -1,36 +1,74 @@
 ## GFG Problem Of The Day
 
-### Today - 19 April 2024
-### Que - Find missing in second array
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/in-first-but-second5423/1)
+### Today - 20 April 2024
+### Que - Union of Two Sorted Arrays
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1)
 
 ### My Approach
-- We create an unordered set to store all elements of array b.
-- Then, we iterate through array a. For each element in a, if it's not present in set b, we push it into the output vector.
-- Finally, we return the output vector containing the missing elements.
+- Initialize two pointers, p1 and p2, to traverse arr1 and arr2 respectively. Also, initialize an empty vector vec to store the union.
+- While both p1 and p2 are within their respective array bounds:
+  - Compare the elements at arr1[p1] and arr2[p2].
+  - If arr1[p1] is less than arr2[p2], add arr1[p1] to the union vector if it's not already present.
+  - If arr1[p1] is greater than arr2[p2], add arr2[p2] to the union vector if it's not already present.
+  - If both elements are equal, add either one to the union vector if it's not already present, and move both pointers.
+  - Increment the pointers accordingly.
+- After the above process, there might be remaining elements in either arr1 or arr2.
+- Traverse any remaining elements in arr1 and arr2, adding them to the union vector if they're not already present.
+- Return the vector vec containing the union of the two arrays.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: O(n + m), where n is the size of array a and m is the size of array b.
-- **Auxiliary Space Complexity**: O(m), where m is the size of array b.
+- **Time Complexity**: `O(n + m)`, where `n` is the size of array arr1 and `m` is the size of array arr2.
+- **Auxiliary Space Complexity**: `O(n + m)`, where `n` is the size of array arr1 and `m` is the size of array arr2.
 
 ### Code (C++)
 ```cpp
-class Solution {
-public:
-    vector<int> findMissing(int a[], int b[], int n, int m) 
-    { 
-        unordered_set<int> s;
-        vector<int> out;
-        for(int i = 0; i < m; ++i) 
-            s.insert(b[i]); 
-            
-        for(int i = 0; i < n; ++i) 
-            if(!s.count(a[i])) 
-                out.push_back(a[i]);
-                
-        return out;
-    } 
+class Solution
+{
+    public:
+    //arr1,arr2 : the arrays
+    // n, m: size of arrays
+    //Function to return a list containing the union of the two arrays. 
+    vector<int> findUnion(int arr1[], int arr2[], int n, int m)
+    {
+        vector<int>vec;
+        int p1=0, p2=0;
+        while (p1<n && p2<m)
+        {
+            if (arr1[p1]<arr2[p2])
+            {
+                if (vec.empty() || vec.back()!=arr1[p1])
+                    vec.push_back(arr1[p1]);
+                p1++;
+            }
+            else if (arr1[p1]>arr2[p2])
+            {
+                if (vec.empty() || vec.back()!=arr2[p2])
+                    vec.push_back(arr2[p2]);
+                p2++;
+            }
+            else
+            {
+                if (vec.empty() || vec.back()!=arr1[p1])
+                    vec.push_back(arr1[p1]);
+                p1++;
+                p2++;
+            }
+        }
+        while (p1 < n)
+        {
+            if (vec.empty() || vec.back()!=arr1[p1])
+                vec.push_back(arr1[p1]);
+            p1++;
+        }
+        while (p2 < m)
+        {
+            if (vec.empty() || vec.back()!=arr2[p2])
+                vec.push_back(arr2[p2]);
+            p2++;
+        }
+        return vec;
+    }
 };
 ```
 
