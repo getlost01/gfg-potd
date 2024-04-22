@@ -1,73 +1,34 @@
 ## GFG Problem Of The Day
 
-### Today - 20 April 2024
-### Que - Union of Two Sorted Arrays
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1)
+### Today - 22 April 2024
+### Que - Row with minimum number of 1's
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/row-with-minimum-number-of-1s5430/1)
+
+### Note: 
+##### Due to constant travelling, I am unable to provide the solution for next 4-5 days, so if anyone is interested in contributing, please create a PR with the solution and I will merge it as soon as possible. Thank you for your support.
 
 ### My Approach
-- Initialize two pointers, p1 and p2, to traverse arr1 and arr2 respectively. Also, initialize an empty vector vec to store the union.
-- While both p1 and p2 are within their respective array bounds:
-  - Compare the elements at arr1[p1] and arr2[p2].
-  - If arr1[p1] is less than arr2[p2], add arr1[p1] to the union vector if it's not already present.
-  - If arr1[p1] is greater than arr2[p2], add arr2[p2] to the union vector if it's not already present.
-  - If both elements are equal, add either one to the union vector if it's not already present, and move both pointers.
-  - Increment the pointers accordingly.
-- After the above process, there might be remaining elements in either arr1 or arr2.
-- Traverse any remaining elements in arr1 and arr2, adding them to the union vector if they're not already present.
-- Return the vector vec containing the union of the two arrays.
+To find the row with the minimum number of 1's, I traverse through each row, calculating the sum of each row. If the sum of the current row is less than the sum of the previous minimum row, update the minimum row index.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(n + m)`, where `n` is the size of array arr1 and `m` is the size of array arr2.
-- **Auxiliary Space Complexity**: `O(n + m)`, where `n` is the size of array arr1 and `m` is the size of array arr2.
+- **Time Complexity** : O(n * m)
+- **Auxiliary Space Complexity** : O(1)
 
 ### Code (C++)
+
 ```cpp
-class Solution
-{
-    public:
-    //arr1,arr2 : the arrays
-    // n, m: size of arrays
-    //Function to return a list containing the union of the two arrays. 
-    vector<int> findUnion(int arr1[], int arr2[], int n, int m)
-    {
-        vector<int>vec;
-        int p1=0, p2=0;
-        while (p1<n && p2<m)
-        {
-            if (arr1[p1]<arr2[p2])
-            {
-                if (vec.empty() || vec.back()!=arr1[p1])
-                    vec.push_back(arr1[p1]);
-                p1++;
-            }
-            else if (arr1[p1]>arr2[p2])
-            {
-                if (vec.empty() || vec.back()!=arr2[p2])
-                    vec.push_back(arr2[p2]);
-                p2++;
-            }
-            else
-            {
-                if (vec.empty() || vec.back()!=arr1[p1])
-                    vec.push_back(arr1[p1]);
-                p1++;
-                p2++;
-            }
+class Solution {
+public:
+    int minRow(int n, int m, vector<vector<int>> a) {
+        int out = 0;
+        for(int i = 0; i < n; ++i){
+            for(int j = 1; j < m; ++j)
+                a[i][j] += a[i][j-1];
+            if(a[out].back() > a[i].back())
+                out = i;
         }
-        while (p1 < n)
-        {
-            if (vec.empty() || vec.back()!=arr1[p1])
-                vec.push_back(arr1[p1]);
-            p1++;
-        }
-        while (p2 < m)
-        {
-            if (vec.empty() || vec.back()!=arr2[p2])
-                vec.push_back(arr2[p2]);
-            p2++;
-        }
-        return vec;
+        return out + 1;
     }
 };
 ```
