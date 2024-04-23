@@ -1,34 +1,36 @@
 ## GFG Problem Of The Day
 
-### Today - 22 April 2024
-### Que - Row with minimum number of 1's
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/row-with-minimum-number-of-1s5430/1)
-
-### Note: 
-##### Due to constant travelling, I am unable to provide the solution for next 4-5 days, so if anyone is interested in contributing, please create a PR with the solution and I will merge it as soon as possible. Thank you for your support.
+### Today - 23 April 2024
+### Que - Rohan's Love for Matrix
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/rohans-love-for-matrix4723/1)
 
 ### My Approach
-To find the row with the minimum number of 1's, I traverse through each row, calculating the sum of each row. If the sum of the current row is less than the sum of the previous minimum row, update the minimum row index.
+- Initialize two variables prev1 and prev2 to store the values of the first and second elements of the matrix respectively.
+- Iterate from 2 to n to calculate the nth power of the matrix.
+- Inside the loop, calculate the next element curr of the matrix as the sum of the previous two elements (prev1 and prev2) modulo 1000000007.
+- Update prev1 and prev2 with the values of prev2 and curr respectively.
+- After the loop, return the value of prev2, which represents the first element of the resulting matrix an.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity** : O(n * m)
-- **Auxiliary Space Complexity** : O(1)
+- **Time Complexity** : `O(N)`
+- **Auxiliary Space Complexity** : `O(1)`
 
 ### Code (C++)
 
 ```cpp
 class Solution {
-public:
-    int minRow(int n, int m, vector<vector<int>> a) {
-        int out = 0;
-        for(int i = 0; i < n; ++i){
-            for(int j = 1; j < m; ++j)
-                a[i][j] += a[i][j-1];
-            if(a[out].back() > a[i].back())
-                out = i;
+  public:
+    int firstElement(int n)
+    {
+        int prev1=0, prev2=1;
+        for (int i=2;i<=n;i++)
+        {
+            int curr=(prev1+prev2)%1000000007;
+            prev1=prev2;
+            prev2=curr;
         }
-        return out + 1;
+        return prev2;
     }
 };
 ```
