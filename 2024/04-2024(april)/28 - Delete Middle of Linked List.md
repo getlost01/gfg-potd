@@ -1,8 +1,5 @@
-## GFG Problem Of The Day
-
-### Today - 28 April 2024
-### Que - Delete Middle of Linked List
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/delete-middle-of-linked-list/1)
+## 23. Delete Middle of Linked List
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/rohans-love-for-matrix4723/1)
 
 ### My Approach
 - Initialize a temporary pointer temp pointing to the head of the linked list and a variable count to 0.
@@ -51,12 +48,6 @@ class Solution{
 
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
-![](https://hit.yhype.me/github/profile?user_id=79409258)
-
