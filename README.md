@@ -1,15 +1,19 @@
 ## GFG Problem Of The Day
 
-### Today - 23 April 2024
-### Que - Rohan's Love for Matrix
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/rohans-love-for-matrix4723/1)
+### Today - 28 April 2024
+### Que - Delete Middle of Linked List
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/delete-middle-of-linked-list/1)
 
 ### My Approach
-- Initialize two variables prev1 and prev2 to store the values of the first and second elements of the matrix respectively.
-- Iterate from 2 to n to calculate the nth power of the matrix.
-- Inside the loop, calculate the next element curr of the matrix as the sum of the previous two elements (prev1 and prev2) modulo 1000000007.
-- Update prev1 and prev2 with the values of prev2 and curr respectively.
-- After the loop, return the value of prev2, which represents the first element of the resulting matrix an.
+- Initialize a temporary pointer temp pointing to the head of the linked list and a variable count to 0.
+- Traverse the linked list using a while loop until temp becomes nullptr.
+- Increment the count variable for each node encountered.
+- Check if count is less than or equal to 1, if true, return NULL indicating an empty or single-node list.
+- Reset temp to point to the head of the list.
+- Calculate the index of the middle node by dividing count by 2 and storing it in mid.
+- Traverse the list again until mid - 1 becomes 0, updating temp to point to the middle node.
+- Update the next pointer of the node before the middle node to skip the middle node, effectively removing it from the list.
+- Return the head of the modified linked list.
 
 ### Time and Auxiliary Space Complexity
 
@@ -19,18 +23,28 @@ The problem can be found at the following link: [Question Link](https://www.geek
 ### Code (C++)
 
 ```cpp
-class Solution {
-  public:
-    int firstElement(int n)
+class Solution{
+    public:
+    Node* deleteMid(Node* head)
     {
-        int prev1=0, prev2=1;
-        for (int i=2;i<=n;i++)
+        Node* temp=head;
+        int count=0;
+        while (temp!=nullptr)
         {
-            int curr=(prev1+prev2)%1000000007;
-            prev1=prev2;
-            prev2=curr;
+            count++;
+            temp=temp->next;
         }
-        return prev2;
+        if (count<=1)
+            return NULL;
+        temp=head;
+        int mid=count/2;
+        while(mid-1>0)
+        {
+            temp=temp->next;
+            mid--;
+        }
+        temp->next=temp->next->next;
+        return head;
     }
 };
 ```
