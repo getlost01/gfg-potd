@@ -1,4 +1,4 @@
-## 23. Delete Middle of Linked List
+## 28. Delete Middle of Linked List
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/rohans-love-for-matrix4723/1)
 
 ### My Approach
