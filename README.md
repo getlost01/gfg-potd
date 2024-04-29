@@ -1,49 +1,53 @@
 ## GFG Problem Of The Day
 
-### Today - 28 April 2024
-### Que - Delete Middle of Linked List
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/delete-middle-of-linked-list/1)
+### Today - 29 April 2024
+### Que - Remove every kth node
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/remove-every-kth-node/1)
 
 ### My Approach
-- Initialize a temporary pointer temp pointing to the head of the linked list and a variable count to 0.
-- Traverse the linked list using a while loop until temp becomes nullptr.
-- Increment the count variable for each node encountered.
-- Check if count is less than or equal to 1, if true, return NULL indicating an empty or single-node list.
-- Reset temp to point to the head of the list.
-- Calculate the index of the middle node by dividing count by 2 and storing it in mid.
-- Traverse the list again until mid - 1 becomes 0, updating temp to point to the middle node.
-- Update the next pointer of the node before the middle node to skip the middle node, effectively removing it from the list.
-- Return the head of the modified linked list.
+- Traverse the linked list while keeping track of the count of nodes visited (a) and a counter b initialized to 1.
+- At each step, check if b * K equals a. If it does, skip the current node and increment b.
+- Otherwise, add the data of the current node to a vector.
+- After traversing the entire linked list, if the vector is empty, return nullptr since all nodes need to be deleted.
+- Otherwise, traverse the linked list again and replace the data of each node with the corresponding data from the vector until the end is reached.
 
 ### Time and Auxiliary Space Complexity
 
 - **Time Complexity** : `O(N)`
-- **Auxiliary Space Complexity** : `O(1)`
+- **Auxiliary Space Complexity** : `O(N)`
 
 ### Code (C++)
 
 ```cpp
-class Solution{
+class Solution {
     public:
-    Node* deleteMid(Node* head)
+    Node* deleteK(Node *head,int K)
     {
+        vector<int>vec;
         Node* temp=head;
-        int count=0;
-        while (temp!=nullptr)
+        int a=0, b=1;
+        while (temp)
         {
-            count++;
+            ++a;
+            if (b*K==a)
+            {
+                b++;
+                temp=temp->next;
+                continue;
+            }
+            vec.push_back(temp->data);
             temp=temp->next;
         }
-        if (count<=1)
-            return NULL;
+        if (vec.size()==0)
+            return nullptr;
         temp=head;
-        int mid=count/2;
-        while(mid-1>0)
+        for (int i=0;i<vec.size();i++)
         {
-            temp=temp->next;
-            mid--;
+            temp->data=vec[i];
+            if (i==vec.size()-1)
+                temp->next=nullptr;
+            else temp=temp->next;
         }
-        temp->next=temp->next->next;
         return head;
     }
 };
