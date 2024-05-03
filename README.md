@@ -1,54 +1,49 @@
 ## GFG Problem Of The Day
 
-### Today - 29 April 2024
-### Que - Remove every kth node
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/remove-every-kth-node/1)
+### Today - 3 May 2024
+### Que - K distance from root
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/k-distance-from-root/1)
 
 ### My Approach
-- Traverse the linked list while keeping track of the count of nodes visited (a) and a counter b initialized to 1.
-- At each step, check if b * K equals a. If it does, skip the current node and increment b.
-- Otherwise, add the data of the current node to a vector.
-- After traversing the entire linked list, if the vector is empty, return nullptr since all nodes need to be deleted.
-- Otherwise, traverse the linked list again and replace the data of each node with the corresponding data from the vector until the end is reached.
+- If root is null, return.
+- If k equals 0, push the data of the current root node into the ans vector and return.
+- Recursively call traverse function for the left child of root with k-1.
+- Recursively call traverse function for the right child of root with k-1.
+- Clear the ans vector.
+- Call traverse function with the root node and distance k.
+- Return the ans vector containing nodes at distance k from the root.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity** : `O(N)`
-- **Auxiliary Space Complexity** : `O(N)`
+- **Time Complexity**: `O(N)`, where `N` is the number of nodes in the tree.
+- **Auxiliary Space Complexity**: `O(H)`, where `H` is the height of the tree.
 
 ### Code (C++)
-
 ```cpp
-class Solution {
+class Solution
+{
     public:
-    Node* deleteK(Node *head,int K)
+    // function should print the nodes at k distance from root
+    vector<int> ans;
+
+    void traverse(struct Node *root, int k)
     {
-        vector<int>vec;
-        Node* temp=head;
-        int a=0, b=1;
-        while (temp)
+        if(!root)
+            return;
+        if(k == 0)
         {
-            ++a;
-            if (b*K==a)
-            {
-                b++;
-                temp=temp->next;
-                continue;
-            }
-            vec.push_back(temp->data);
-            temp=temp->next;
+            ans.push_back(root->data);
+            return;
         }
-        if (vec.size()==0)
-            return nullptr;
-        temp=head;
-        for (int i=0;i<vec.size();i++)
-        {
-            temp->data=vec[i];
-            if (i==vec.size()-1)
-                temp->next=nullptr;
-            else temp=temp->next;
-        }
-        return head;
+        traverse(root->left, k-1);
+        traverse(root->right, k-1);
+    }
+
+    vector<int> Kdistance(struct Node *root, int k) 
+    {
+        ans.clear();
+        traverse(root, k);
+        return ans;
     }
 };
 ```
