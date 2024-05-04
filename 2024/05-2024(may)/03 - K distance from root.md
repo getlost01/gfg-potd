@@ -1,7 +1,4 @@
-## GFG Problem Of The Day
-
-### Today - 3 May 2024
-### Que - K distance from root
+## 03. K distance from root
 The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/k-distance-from-root/1)
 
 ### My Approach
@@ -50,12 +47,6 @@ class Solution
 
 ### Contribution and Support
 
-I always encourage contributors to participate in the discussion forum for this repository.
-
-If you have a better solution or any queries / discussions related to the `Problem of the Day` solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
+For discussions, questions, or doubts related to this solution, please visit our [discussion section](https://github.com/getlost01/gfg-potd/discussions). We welcome your input and aim to foster a collaborative learning environment.
 
 If you find this solution helpful, consider supporting us by giving a `⭐ star` to the [getlost01/gfg-potd](https://github.com/getlost01/gfg-potd) repository.
-
-![Total number of repository visitors](https://komarev.com/ghpvc/?username=gl01potdgfg&color=blue&&label=Visitors)
-![](https://hit.yhype.me/github/profile?user_id=79409258)
-
