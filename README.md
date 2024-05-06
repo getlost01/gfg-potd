@@ -1,51 +1,50 @@
 ## GFG Problem Of The Day
 
-### Today - 3 May 2024
-### Que - K distance from root
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/k-distance-from-root/1)
+### Today - 6 May 2024
+### Que - Print all nodes that don't have sibling
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/print-all-nodes-that-dont-have-sibling/1)
 
 ### My Approach
-- If root is null, return.
-- If k equals 0, push the data of the current root node into the ans vector and return.
-- Recursively call traverse function for the left child of root with k-1.
-- Recursively call traverse function for the right child of root with k-1.
-- Clear the ans vector.
-- Call traverse function with the root node and distance k.
-- Return the ans vector containing nodes at distance k from the root.
+- The function noSibling initializes a global vector vec to store the data of nodes that have no siblings.
+- It calls the recursive function func to traverse the binary tree in an in-order manner and populate vec with the data of nodes that meet the criteria of having no sibling.
+- Within func, if a node has no sibling, its data is pushed into vec.
+- After traversal, if vec is empty, it means there are no nodes without siblings, so it adds -1 to vec.
+- Finally, it sorts vec in ascending order (if there are elements other than -1) and returns it.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(N)`, where `N` is the number of nodes in the tree.
-- **Auxiliary Space Complexity**: `O(H)`, where `H` is the height of the tree.
+- **Time Complexity**: `O(NlogN)`, where `N` is the number of nodes in the tree.
+- **Auxiliary Space Complexity**: `O(N)`, due to the recursive calls.
 
 ### Code (C++)
 ```cpp
-class Solution
+vector<int>vec;
+
+void func(Node* node)
 {
-    public:
-    // function should print the nodes at k distance from root
-    vector<int> ans;
-
-    void traverse(struct Node *root, int k)
+    if (node)
     {
-        if(!root)
-            return;
-        if(k == 0)
-        {
-            ans.push_back(root->data);
-            return;
-        }
-        traverse(root->left, k-1);
-        traverse(root->right, k-1);
+        func(node->left);
+        if (node->left && !node->right)
+            vec.push_back(node->left->data);
+        else if (!node->left && node->right)
+            vec.push_back(node->right->data);
+        func(node->right);
     }
+}
 
-    vector<int> Kdistance(struct Node *root, int k) 
+vector<int> noSibling(Node* node)
+{
+    vec.clear();
+    func(node);
+    if (vec.empty())
     {
-        ans.clear();
-        traverse(root, k);
-        return ans;
+        vec.push_back(-1);
+        return vec;
     }
-};
+    sort(vec.begin(), vec.end());
+    return vec;
+}
 ```
 
 ### Contribution and Support
