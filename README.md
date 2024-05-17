@@ -1,43 +1,41 @@
 ## GFG Problem Of The Day
 
-### Today - 7 May 2024
-### Que - Reverse Level Order Traversal
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/reverse-level-order-traversal/1)
+### Today - 17 May 2024
+### Que - Find Pair Given Difference
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-pair-given-difference1559/1)
 
 ### My Approach
-For this problem, I've used a queue to perform a level-order traversal starting from the root node. However, instead of adding elements to the result vector in the order they are encountered, I've stored them in a temporary vector for each level. After processing each level, I've inserted the elements of that level into the beginning of the result vector, effectively reversing the order of levels.
+- The input array arr is sorted to facilitate the two-pointer technique.
+- Use two pointers low and high. Initialize low to 0 and high to 1.
+- Use a while loop to traverse the array with the condition low < n and high < n.
+- If the absolute difference between the elements at high and low is equal to x, return 1 (indicating a pair is found).
+- If the absolute difference is less than x, increment the high pointer to increase the difference.
+- If the absolute difference is greater than x, increment the low pointer to decrease the difference.
+- If no such pair is found by the end of the loop, return -1.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this approach is `O(N)`, where N is the number of nodes in the tree.
-- **Auxiliary Space Complexity**: The auxiliary space complexity is O(N), where N is the number of nodes in the tree. This is because we use a queue to store nodes, and in the worst case, the queue can contain all nodes at the last level of the tree.
+- **Time Complexity**: The time complexity of this approach is `O(NlogN)`, where N is the number of elements in the array.
+- **Auxiliary Space Complexity**: The auxiliary space complexity is `O(1)`.
 
 ### Code (C++)
 
 ```cpp
 class Solution {
-public:
-    vector<int> reverseLevelOrder(Node *root) {
-        vector<int> out;
-
-        queue<Node*> q;
-        q.push(root);
-
-        while (!q.empty()) {
-            int sz = q.size();
-            vector<int> lvl;
-            while (sz--) {
-                Node* node = q.front();
-                q.pop();
-                lvl.push_back(node->data);
-                
-                if (node->left) q.push(node->left);
-                if (node->right) q.push(node->right);
-            }
-            out.insert(out.begin(), lvl.begin(), lvl.end());
+  public:
+    int findPair(int n, int x, vector<int> &arr)
+    {
+        sort(arr.begin(), arr.end());
+        int low=0, high=1;
+        while (low<n && high<n)
+        {
+            if (abs(arr[high]-arr[low])==x)
+                return 1;
+            else if (abs(arr[high]-arr[low])<x)
+                high++;
+            else low++;
         }
-
-        return out;
+        return -1;
     }
 };
 ```
