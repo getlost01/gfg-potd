@@ -1,41 +1,43 @@
 ## GFG Problem Of The Day
 
-### Today - 17 May 2024
-### Que - Find Pair Given Difference
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-pair-given-difference1559/1)
+### Today - 18 May 2024
+### Que - Find the Highest number
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-the-highest-number2259/1)
 
 ### My Approach
-- The input array arr is sorted to facilitate the two-pointer technique.
-- Use two pointers low and high. Initialize low to 0 and high to 1.
-- Use a while loop to traverse the array with the condition low < n and high < n.
-- If the absolute difference between the elements at high and low is equal to x, return 1 (indicating a pair is found).
-- If the absolute difference is less than x, increment the high pointer to increase the difference.
-- If the absolute difference is greater than x, increment the low pointer to decrease the difference.
-- If no such pair is found by the end of the loop, return -1.
+- Initialize size as the size of the input vector a.
+- Set low to 0 and high to size - 1.
+- Enter a while loop that continues as long as low <= high.
+- Calculate mid as (low + high) / 2.
+- If a[mid] is greater than a[mid-1] and a[mid+1], return a[mid].
+- If a[mid] is greater than a[mid-1] but less than a[mid+1], set low to mid + 1.
+- Otherwise, set high to mid - 1.
+- If no peak element is found, return a[size - 1].
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: The time complexity of this approach is `O(NlogN)`, where N is the number of elements in the array.
+- **Time Complexity**: The time complexity of this approach is `O(logN)`, where N is the number of elements in the array.
 - **Auxiliary Space Complexity**: The auxiliary space complexity is `O(1)`.
 
 ### Code (C++)
 
 ```cpp
 class Solution {
-  public:
-    int findPair(int n, int x, vector<int> &arr)
+public:
+    int findPeakElement(vector<int>& a) 
     {
-        sort(arr.begin(), arr.end());
-        int low=0, high=1;
-        while (low<n && high<n)
+        int size=a.size();
+        int low=0, high=size-1;
+        while (low<=high)
         {
-            if (abs(arr[high]-arr[low])==x)
-                return 1;
-            else if (abs(arr[high]-arr[low])<x)
-                high++;
-            else low++;
+            int mid=(low+high)/2;
+            if (a[mid]>a[mid-1] && a[mid]>a[mid+1])
+                return a[mid];
+            else if (a[mid]>a[mid-1] && a[mid]<a[mid+1])
+                low=mid+1;
+            else high=mid-1;
         }
-        return -1;
+        return a[size-1];
     }
 };
 ```
