@@ -1,18 +1,19 @@
 ## GFG Problem Of The Day
 
-### Today - 18 May 2024
-### Que - Find the Highest number
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-the-highest-number2259/1)
+### Today - 19 May 2024
+### Que - Find the closest number
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/find-the-closest-number5513/1)
 
 ### My Approach
-- Initialize size as the size of the input vector a.
-- Set low to 0 and high to size - 1.
-- Enter a while loop that continues as long as low <= high.
-- Calculate mid as (low + high) / 2.
-- If a[mid] is greater than a[mid-1] and a[mid+1], return a[mid].
-- If a[mid] is greater than a[mid-1] but less than a[mid+1], set low to mid + 1.
-- Otherwise, set high to mid - 1.
-- If no peak element is found, return a[size - 1].
+- Check if k is greater than the largest element in arr, return the largest element.
+- Check if k is less than the smallest element in arr, return the smallest element.
+- Initialize low to 0 and high to n-1.
+- Use binary search :
+  - Calculate mid as low + (high - low) / 2.
+  - If arr[mid] equals k, return arr[mid].
+  - If arr[mid] is greater than k, set ans1 to the absolute difference between arr[mid] and k, adjust high.
+  - If arr[mid] is less than k, set ans2 to the absolute difference between arr[mid] and k, adjust low.
+- Compare ans1 and ans2, return the closest value between arr[high] and arr[low].
 
 ### Time and Auxiliary Space Complexity
 
@@ -22,23 +23,36 @@ The problem can be found at the following link: [Question Link](https://www.geek
 ### Code (C++)
 
 ```cpp
-class Solution {
-public:
-    int findPeakElement(vector<int>& a) 
-    {
-        int size=a.size();
-        int low=0, high=size-1;
+class Solution{
+    public:
+    int findClosest( int n, int k, int arr[]) 
+    { 
+        if (k>arr[n-1])
+            return arr[n-1];
+        if (k<arr[0])
+            return arr[0];
+        int low=0, high=n-1, ans1, ans2, ans;
         while (low<=high)
         {
-            int mid=(low+high)/2;
-            if (a[mid]>a[mid-1] && a[mid]>a[mid+1])
-                return a[mid];
-            else if (a[mid]>a[mid-1] && a[mid]<a[mid+1])
+            int mid=low+((high-low)/2);
+            if (arr[mid]==k)
+                return arr[mid];
+            else if (arr[mid]>k)
+            {
+                ans1=abs(arr[mid]-k);
+                high=mid-1;
+            }
+            else
+            {
+                ans2=abs(arr[mid]-k);
                 low=mid+1;
-            else high=mid-1;
+            }
         }
-        return a[size-1];
-    }
+        if (ans1>ans2)
+            ans=arr[high];
+        else ans=arr[low];
+        return ans;
+    } 
 };
 ```
 
