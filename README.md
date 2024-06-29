@@ -1,42 +1,42 @@
 ## GFG Problem Of The Day
 
-### Today - 03 June 2024
-### Que - Trail of ones
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/trail-of-ones3242/1)
+### Today - 29 June 2024
+### Que - Identical Linked Lists
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/identical-linked-lists/1)
 
 ### My Approach
-- Initialize `mod` to (10^9 + 7) to handle large numbers and prevent overflow.
-- Initialize `out` to 1, which will store the number of valid sequences of ones.
-- Initialize `x` to 0 and `y` to 1, representing the number of valid sequences ending in a single one or two consecutive ones respectively.
-- Iterate from 3 to `n`:
-  - Update `out` to `(out * 2 + x + y) % mod` to include new sequences formed by appending "0" or "1" to previous valid sequences.
-  - Temporarily store the current value of `x` in `z`.
-  - Update `x` to the current value of `y`.
-  - Update `y` to `(x + z) % mod`, maintaining the count of sequences ending in two consecutive ones.
-- Return the final value of `out`.
+- Initialize two pointers, head1 and head2, to the heads of the two linked lists.
+- Iterate through both lists simultaneously:
+  - Compare the data of the nodes pointed to by head1 and head2.
+  - If the data in the current nodes are equal, move head1 and head2 to the next nodes.
+  - If the data in the current nodes are not equal, return 0 (lists are not identical).
+- After exiting the loop, check if either head1 or head2 is not NULL:
+  - If either list is not fully traversed, return 0 (lists are not identical).
+  - If both lists are fully traversed and all nodes matched, return 1 (lists are identical).
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `(O(n))`, since we iterate from 3 to `n`.
-- **Auxiliary Space Complexity**: `(O(1))`, as we use a constant amount of extra space regardless of the input size.
+- **Time Complexity**: `O(N)`, Where `N` is the length of the shorter linked list
+- **Auxiliary Space Complexity**: `O(1)`, as the function uses a constant amount of extra space regardless of the input size
 
 ### Code (C++)
+
 ```cpp
-class Solution {
-public:
-    int numberOfConsecutiveOnes(int n) {
-        int mod = 1e9 + 7;
-        long out = 1;
-        int x = 0, y = 1;
-        for (int i = 3; i <= n; ++i) {
-            out = (out * 2 + x + y) % mod;
-            int z = x;
-            x = y;
-            y = (x + z) % mod;
+bool areIdentical(struct Node *head1, struct Node *head2)
+{
+    while (head1!=NULL && head2!=NULL)
+    {
+        if (head1->data==head2->data)
+        {
+            head1=head1->next;
+            head2=head2->next;
         }
-        return out;
+        else return 0;
     }
-};
+    if (head1!=NULL || head2!=NULL)
+        return 0;
+    return 1;
+}
 ```
 
 ### Contribution and Support
