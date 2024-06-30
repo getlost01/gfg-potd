@@ -1,42 +1,74 @@
 ## GFG Problem Of The Day
 
-### Today - 29 June 2024
-### Que - Identical Linked Lists
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/identical-linked-lists/1)
+### Today - 30 June 2024
+### Que - Delete node in Doubly Linked List
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1)
 
 ### My Approach
-- Initialize two pointers, head1 and head2, to the heads of the two linked lists.
-- Iterate through both lists simultaneously:
-  - Compare the data of the nodes pointed to by head1 and head2.
-  - If the data in the current nodes are equal, move head1 and head2 to the next nodes.
-  - If the data in the current nodes are not equal, return 0 (lists are not identical).
-- After exiting the loop, check if either head1 or head2 is not NULL:
-  - If either list is not fully traversed, return 0 (lists are not identical).
-  - If both lists are fully traversed and all nodes matched, return 1 (lists are identical).
+- Check if the list is empty:
+  - If head_ref is nullptr, return nullptr.
+- If the node to be deleted is the head (i.e., x == 1):
+  - Store the current head node in temp.
+  - Move temp to the next node.
+  - Delete the current head node.
+  - Set temp->prev to nullptr.
+  - Return temp as the new head of the list.
+- If the node to be deleted is not the head:
+  - Initialize temp to head_ref.
+  - Traverse the list to the xth node using a while loop.
+  - Store the previous node (temp->prev) in tempprev.
+  - If temp->next is not nullptr (i.e., the node to be deleted is not the last node):
+    - Store the next node (temp->next) in tempnext.
+    - Link tempprev->next to tempnext.
+    - Link tempnext->prev to tempprev.
+  - If temp->next is nullptr (i.e., the node to be deleted is the last node):
+    - Set tempprev->next to nullptr.
+  - Delete the node pointed to by temp.
+  - Return head_ref.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(N)`, Where `N` is the length of the shorter linked list
-- **Auxiliary Space Complexity**: `O(1)`, as the function uses a constant amount of extra space regardless of the input size
+- **Time Complexity**: `O(M)`, where `N` is the position x of the node to be deleted
+- **Auxiliary Space Complexity**: `O(1)`, as the function uses a constant amount of extra space regardless of the input size.
 
 ### Code (C++)
 
 ```cpp
-bool areIdentical(struct Node *head1, struct Node *head2)
+class Solution
 {
-    while (head1!=NULL && head2!=NULL)
+    public:
+    Node* deleteNode(Node *head_ref, int x)
     {
-        if (head1->data==head2->data)
+        if (head_ref==nullptr)
+            return nullptr;
+        if (x==1)
         {
-            head1=head1->next;
-            head2=head2->next;
+            Node* temp=head_ref;
+            temp=temp->next;
+            delete head_ref;
+            temp->prev=nullptr;
+            return temp;
         }
-        else return 0;
+        Node* temp=head_ref;
+        while (x>1)
+        {
+            temp=temp->next;
+            x--;
+        }
+        Node* tempprev=nullptr;
+        tempprev=temp->prev;
+        if (temp->next!=nullptr)
+        {
+            Node* tempnext=nullptr;
+            tempnext=temp->next;
+            tempprev->next=tempnext;
+            tempnext->prev=tempprev;
+        }
+        else tempprev->next=nullptr;
+        delete temp;
+        return head_ref;
     }
-    if (head1!=NULL || head2!=NULL)
-        return 0;
-    return 1;
-}
+};
 ```
 
 ### Contribution and Support
