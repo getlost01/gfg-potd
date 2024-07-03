@@ -1,72 +1,57 @@
 ## GFG Problem Of The Day
 
-### Today - 30 June 2024
-### Que - Delete node in Doubly Linked List
-The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1)
+### Today - 3 July 2024
+### Que - Remove all occurences of duplicates in a linked list
+The problem can be found at the following link: [Question Link](https://www.geeksforgeeks.org/problems/remove-all-occurences-of-duplicates-in-a-linked-list/1)
 
 ### My Approach
-- Check if the list is empty:
-  - If head_ref is nullptr, return nullptr.
-- If the node to be deleted is the head (i.e., x == 1):
-  - Store the current head node in temp.
-  - Move temp to the next node.
-  - Delete the current head node.
-  - Set temp->prev to nullptr.
-  - Return temp as the new head of the list.
-- If the node to be deleted is not the head:
-  - Initialize temp to head_ref.
-  - Traverse the list to the xth node using a while loop.
-  - Store the previous node (temp->prev) in tempprev.
-  - If temp->next is not nullptr (i.e., the node to be deleted is not the last node):
-    - Store the next node (temp->next) in tempnext.
-    - Link tempprev->next to tempnext.
-    - Link tempnext->prev to tempprev.
-  - If temp->next is nullptr (i.e., the node to be deleted is the last node):
-    - Set tempprev->next to nullptr.
-  - Delete the node pointed to by temp.
-  - Return head_ref.
+- Create an unordered map mp to count the occurrences of each value in the linked list.
+- Traverse the linked list using a pointer temp and update the map with the count of each node's data.
+- Create a dummy node that points to the head of the linked list. This helps in handling edge cases where the head node might need to be removed.
+- Initialize a pointer prev to the dummy node.
+- Reset temp to the head of the linked list.
+- Traverse the linked list again using temp.
+- For each node, check the count of its data in the map:
+- If the count is greater than 1, it means the node is a duplicate, so update the next pointer of prev to skip the current node (temp).
+- If the count is 1, move the prev pointer to the current node (temp).
+- Move the temp pointer to the next node.
+- Set new_head to the next of the dummy node.
+- Delete the dummy node to free up memory.
+- Return new_head, which is the head of the modified linked list with duplicates removed.
 
 ### Time and Auxiliary Space Complexity
 
-- **Time Complexity**: `O(M)`, where `N` is the position x of the node to be deleted
-- **Auxiliary Space Complexity**: `O(1)`, as the function uses a constant amount of extra space regardless of the input size.
+- **Time Complexity**: `O(N)`, where `N` is the number of nodes in the linked list.
+- **Auxiliary Space Complexity**: `O(N)`, where `N` is the number of nodes in the linked list.
 
 ### Code (C++)
 
 ```cpp
-class Solution
-{
-    public:
-    Node* deleteNode(Node *head_ref, int x)
+class Solution {
+  public:
+    Node* removeAllDuplicates(struct Node* head)
     {
-        if (head_ref==nullptr)
-            return nullptr;
-        if (x==1)
+        unordered_map<int, int>mp;
+        Node* temp=head;
+        while (temp)
         {
-            Node* temp=head_ref;
+            mp[temp->data]++;
             temp=temp->next;
-            delete head_ref;
-            temp->prev=nullptr;
-            return temp;
         }
-        Node* temp=head_ref;
-        while (x>1)
+        Node* dummy=new Node(0);
+        dummy->next=head;
+        Node* prev=dummy;
+        temp=head;
+        while (temp)
         {
+            if (mp[temp->data]>1)
+                prev->next=temp->next;
+            else prev=temp;
             temp=temp->next;
-            x--;
         }
-        Node* tempprev=nullptr;
-        tempprev=temp->prev;
-        if (temp->next!=nullptr)
-        {
-            Node* tempnext=nullptr;
-            tempnext=temp->next;
-            tempprev->next=tempnext;
-            tempnext->prev=tempprev;
-        }
-        else tempprev->next=nullptr;
-        delete temp;
-        return head_ref;
+        Node* new_head=dummy->next;
+        delete dummy;
+        return new_head;
     }
 };
 ```
